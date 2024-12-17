@@ -2,7 +2,7 @@ import logo from "../../img/logo.png";
 import React from 'react';
 import { FiX } from "react-icons/fi";
 import './Login.css';
-import Form from "../../components/Form/index.tsx";
+import Form from "../../components/Form";
 
 const Login = () => {
   return (

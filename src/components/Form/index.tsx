@@ -1,4 +1,5 @@
 import React, { useState } from "react";
+import Logo from "../../img/logo.png";
 import "./Form.css"; 
 
 interface FormState {
@@ -27,9 +28,11 @@ const Form: React.FC = () => {
 
   return (
     <div className="container">
+      <div className="container__img">
+        <img src={Logo} alt="Logo"/>
+      </div>
       <form className="form" onSubmit={handleSubmit}>
         <div className="form-group">
-          <label htmlFor="email">E-mail:</label>
           <input
             type="email"
             id="email"
@@ -41,7 +44,6 @@ const Form: React.FC = () => {
           />
         </div>
         <div className="form-group">
-          <label htmlFor="password">Senha:</label>
           <input
             type="password"
             id="password"
@@ -52,9 +54,11 @@ const Form: React.FC = () => {
             required
           />
         </div>
-        <button type="submit" className="submit-button">
-          Continuar
-        </button>
+        <div className="submit-container">
+          <button type="submit" className="submit-button">
+            Continuar
+          </button>
+        </div>
       </form>
     </div>
   );
