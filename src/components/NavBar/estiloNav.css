@@ -1,0 +1,47 @@
+/* Estilo da navbar */
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+    background-color: #ff0000;
+    color: #ffffff;
+    border-radius: 0 0 20px 20px;
+    height: 150px;
+  }
+  
+  .navbar img {
+    width: 6%;
+    cursor: pointer;
+  }
+  
+  .nav-links {
+    display: flex;
+    gap: 100px;
+    list-style: none;
+  }
+  
+  .nav-links a {
+    color: #ffffff;
+    text-decoration: none;
+    font-size: 2.5em;
+    
+  }
+  
+  .nav-links a:hover {
+    color: #000000;
+  }
+  .login {
+    width: 10%;
+    display: flex;
+    justify-content: center;
+    border: none;
+    background-color: #ff000000;
+  
+    cursor: pointer;
+    
+  }
+  .login img {
+    width: 100%;
+  }
+  

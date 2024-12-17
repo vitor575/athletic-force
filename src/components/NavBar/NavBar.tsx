@@ -1,9 +1,17 @@
 import React from "react";
 import Logo from "../../img/logo.png";
 import user from "../../img/user.png";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import './estiloNav.css'
 
 function Navbar() {
+  const navigate = useNavigate();
+
+  const handleNavigate = () => {
+    navigate("/login"); // Caminho para onde você quer navegar
+  }
+
+
   return (
     <nav className="navbar">
       <img src={Logo} alt="logo" />
@@ -22,11 +30,11 @@ function Navbar() {
           <Link to="/modalidades">Modalidades</Link>
         </li>
         <li>
-          <Link to="/contato">Contato</Link>
+          <Link to="/login">Contato</Link>
         </li>
       </ul>
 
-      <button className="login">
+      <button className="login" onClick={handleNavigate}>
         <img src={user} alt="logo" />
       </button>
     </nav>

@@ -6,7 +6,7 @@ import Sobre from './pages/Sobre/index.tsx';
 import Treino from './pages/Treino/index.tsx';
 import Modalidades from './pages/Modalidade/index.tsx';
 import Login from './pages/Login/index.tsx';
-import "./styles.css";
+
 
 function App() {
   return (
