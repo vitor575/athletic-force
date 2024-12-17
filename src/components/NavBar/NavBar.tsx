@@ -1,7 +1,7 @@
 import Logo from "../../img/logo.png";
 import user from "../../img/user.png";
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import './estiloNav.css'
 import BootstrapModal from "../Modal";
 import Form from "../Modal/Form";
@@ -10,8 +10,10 @@ function Navbar() {
 
   const [isModalOpen, setModalOpen] = useState(false);
 
+  const local = useLocation();
+
   return (
-    <nav className="navbar">
+    <nav className={local.pathname === "/clientHome" ? "navbar-off" : "navbar"}>
       <img src={Logo} alt="logo" />
 
       <ul className="nav-links">

@@ -7,9 +7,12 @@ import Treino from './pages/Treino';
 import Modalidades from './pages/Modalidade';
 import Login from './pages/Login';
 import Contato from "./pages/Contato";
+import ClientHome from "./pages/ClientHome/indes";
+
 
 
 function App() {
+
   return (
     <div className="App">
       <Router>
@@ -22,6 +25,7 @@ function App() {
             <Route path="/modalidades" element={<Modalidades />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/login" element={<Login />} />
+            <Route path="/clientHome" element={<ClientHome />} />
           </Routes>
         </main>
       </Router>
