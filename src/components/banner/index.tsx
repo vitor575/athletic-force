@@ -12,15 +12,21 @@ const Banner = () => {
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 4000);
+    }, 5000);
 
-    return () => clearInterval(interval); 
+    return () => clearInterval(interval);
   }, [images.length]);
 
-
   return (
-    <div className="banner">
-      <img src={images[currentIndex]} alt={`Banner ${currentIndex + 1}`} />
+    <div className="banner-container">
+      <div
+        className="banner-slider"
+        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+      >
+        {images.map((image, index) => (
+          <img key={index} src={image} alt={`Banner ${index + 1}`} />
+        ))}
+      </div>
     </div>
   );
 };

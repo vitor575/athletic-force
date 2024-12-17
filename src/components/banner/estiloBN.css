@@ -1,18 +1,25 @@
-.banner {
-  position: absolute;
-  top: 130px;
-  overflow: hidden;
-}
 
-.banner img {
+.banner-container {
   width: 100%;
-  height: auto;
+  overflow: hidden; 
+  position: relative;
   border-radius: 10px;
-  top: 0;
-  left: 0;
-  transition: opacity 6s ease-in-out; /* Efeito de fade */
+  position: relative;
+  top: 160px;
 }
 
-.banner img.active {
-    opacity: 1;
+
+.banner-slider {
+  display: flex;
+  transition: transform 2s ease-in-out; 
+  width: 100%; 
+  height: 100%;
+}
+
+
+.banner-slider img {
+  width: 100%; 
+  height: 100%; 
+  object-fit: cover; 
+  border-radius: 10px; 
 }

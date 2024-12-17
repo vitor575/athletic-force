@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import './estiloNav.css'
 import BootstrapModal from "../Modal";
-import Form from "../Form";
+import Form from "../Modal/Form";
 
 function Navbar() {
 

@@ -61,12 +61,15 @@
     color: white;
     border: none;
     border-radius: 5px;
-    font-size: 16px;
+    font-size: 20px;
     cursor: pointer;
   }
   
   .submit-button:hover {
-    background-color: #0056b3;
+    background-color: #f52b2b;
+    transform: scale(1.1);
+    transition: 300ms;
+
   }
 
   .submit-container {

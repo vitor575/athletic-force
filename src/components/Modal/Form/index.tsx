@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import Logo from "../../img/logo.png";
+import Logo from "../../../img/logo.png";
 import "./Form.css"; 
 
 interface FormState {
