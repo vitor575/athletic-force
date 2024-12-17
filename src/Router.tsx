@@ -6,6 +6,7 @@ import Sobre from './pages/Sobre/index.tsx';
 import Treino from './pages/Treino/index.tsx';
 import Modalidades from './pages/Modalidade/index.tsx';
 import Login from './pages/Login/index.tsx';
+import Contato from "./pages/Contato/index.tsx";
 
 
 function App() {
@@ -19,6 +20,7 @@ function App() {
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/treino" element={<Treino />} />
             <Route path="/modalidades" element={<Modalidades />} />
+            <Route path="/contato" element={<Contato />} />
             <Route path="/login" element={<Login />} />
           </Routes>
         </main>

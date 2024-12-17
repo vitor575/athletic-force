@@ -30,7 +30,7 @@ function Navbar() {
           <Link to="/modalidades">Modalidades</Link>
         </li>
         <li>
-          <Link to="/login">Contato</Link>
+          <Link to="/contato">Contato</Link>
         </li>
       </ul>
 

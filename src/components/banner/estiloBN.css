@@ -1,0 +1,18 @@
+.banner {
+  position: absolute;
+  top: 130px;
+  overflow: hidden;
+}
+
+.banner img {
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  top: 0;
+  left: 0;
+  transition: opacity 6s ease-in-out; /* Efeito de fade */
+}
+
+.banner img.active {
+    opacity: 1;
+}
