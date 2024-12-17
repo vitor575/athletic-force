@@ -1,12 +1,12 @@
 import React from "react";
-import Navbar from "./components/NavBar/NavBar.tsx";
+import Navbar from "./components/NavBar/NavBar"
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './pages/Home/index.tsx';
-import Sobre from './pages/Sobre/index.tsx';
-import Treino from './pages/Treino/index.tsx';
-import Modalidades from './pages/Modalidade/index.tsx';
-import Login from './pages/Login/index.tsx';
-import Contato from "./pages/Contato/index.tsx";
+import Home from './pages/Home';
+import Sobre from './pages/Sobre';
+import Treino from './pages/Treino';
+import Modalidades from './pages/Modalidade';
+import Login from './pages/Login';
+import Contato from "./pages/Contato";
 
 
 function App() {

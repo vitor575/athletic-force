@@ -1,16 +1,14 @@
-import React from "react";
 import Logo from "../../img/logo.png";
 import user from "../../img/user.png";
-import { Link, useNavigate } from "react-router-dom";
+import React, { useState } from "react";
+import { Link } from "react-router-dom";
 import './estiloNav.css'
+import BootstrapModal from "../Modal";
+import Form from "../Form";
 
 function Navbar() {
-  const navigate = useNavigate();
 
-  const handleNavigate = () => {
-    navigate("/login"); // Caminho para onde você quer navegar
-  }
-
+  const [isModalOpen, setModalOpen] = useState(false);
 
   return (
     <nav className="navbar">
@@ -34,9 +32,19 @@ function Navbar() {
         </li>
       </ul>
 
-      <button className="login" onClick={handleNavigate}>
+      <button className="login" onClick={() => setModalOpen(!isModalOpen)}>
         <img src={user} alt="logo" />
       </button>
+
+      <BootstrapModal
+        isOpen={isModalOpen}
+        onClose={() => setModalOpen(false)}
+        title="Login"
+        size="lg" 
+      >
+        <Form />
+      </BootstrapModal>
+    
     </nav>
   );
 }

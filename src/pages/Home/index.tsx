@@ -1,5 +1,5 @@
 import React from 'react';
-import Banner from '../../components/banner/index.tsx';
+import Banner from '../../components/banner/';
 
 const Home = () => {
   return (
