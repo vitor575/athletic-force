@@ -1,11 +1,11 @@
 import React from "react";
-import Navbar from "./components/NavBar.tsx";
+import Navbar from "./components/NavBar/NavBar.tsx";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Home from './components/pages/Home.tsx';
-import Sobre from './components/pages/Sobre.tsx';
-import Treino from './components/pages/Treino.tsx';
-import Modalidades from './components/pages/Modalidade.tsx';
-import Contato from './components/pages/Contato.tsx';
+import Home from './pages/Home/index.tsx';
+import Sobre from './pages/Sobre/index.tsx';
+import Treino from './pages/Treino/index.tsx';
+import Modalidades from './pages/Modalidade/index.tsx';
+import Login from './pages/Login/index.tsx';
 import "./styles.css";
 
 function App() {
@@ -19,7 +19,7 @@ function App() {
             <Route path="/sobre" element={<Sobre />} />
             <Route path="/treino" element={<Treino />} />
             <Route path="/modalidades" element={<Modalidades />} />
-            <Route path="/contato" element={<Contato />} />
+            <Route path="/login" element={<Login />} />
           </Routes>
         </main>
       </Router>

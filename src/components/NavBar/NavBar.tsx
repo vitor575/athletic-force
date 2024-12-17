@@ -1,6 +1,6 @@
 import React from "react";
-import Logo from "./img/3.png";
-import user from "./img/user.png";
+import Logo from "../../img/logo.png";
+import user from "../../img/user.png";
 import { Link } from "react-router-dom";
 
 function Navbar() {
@@ -25,7 +25,7 @@ function Navbar() {
           <Link to="/contato">Contato</Link>
         </li>
       </ul>
-      
+
       <button className="login">
         <img src={user} alt="logo" />
       </button>

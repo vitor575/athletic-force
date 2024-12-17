@@ -1,12 +1,12 @@
 import React from 'react';
 
-function Sobre () {
+const Treino = () => {
   return (
     <div>
-      <h1>Sobre</h1>
+      <h1>Treino</h1>
       
     </div>
   );
 };
 
-export default Sobre;
+export default Treino;
