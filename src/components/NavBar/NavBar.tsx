@@ -1,7 +1,7 @@
 import Logo from "../../img/logo.png";
 import user from "../../img/user.png";
 import React, { useState } from "react";
-import { Link, useLocation } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import "./estiloNav.css";
 import BootstrapModal from "../Modal";
 import Form from "../Modal/Form";
@@ -11,24 +11,15 @@ function Navbar() {
 
   const local = useLocation();
 
-
   return (
     <nav className={local.pathname === "/clientHome" ? "navbar-off" : "navbar"}>
       <img src={Logo} alt="logo" />
 
       <ul className="nav-links">
-        <li>
-          <Link to="/">Home</Link>
-        </li>
-        <li>
-          <Link to="/sobre">Sobre Nós</Link>
-        </li>
-        <li>
-          <Link to="/modalidades">Modalidades</Link>
-        </li>
-        <li>
-          <Link to="/contato">Contato</Link>
-        </li>
+        <a href="#home">Home</a>
+        <a href="#sobre">Sobre</a>
+        <a href="#services">Serviços</a>
+        <a href="#contact">Contato</a>
       </ul>
 
       <button className="login" onClick={() => setModalOpen(!isModalOpen)}>
