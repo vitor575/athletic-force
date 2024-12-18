@@ -33,9 +33,9 @@ const ClientHome = () => {
                 </div>
             </div>
             <div className="cards-container">
-                <Card titulo="Cronograma de treinos" imagem={Calendario} />
-                <Card titulo="Pagamentos pendentes" imagem={Pagamento} />
-                <Card titulo="Configuração da conta" imagem={Configuracao} />
+                <Card titulo="Cronograma de treinos" imagem={Calendario} destino="/clientHome"/>
+                <Card titulo="Pagamentos pendentes" imagem={Pagamento} destino="/clientHome/pagamentos"/>
+                <Card titulo="Configuração da conta" imagem={Configuracao} destino="/clientHome"/>
             </div>
         </main>
     )

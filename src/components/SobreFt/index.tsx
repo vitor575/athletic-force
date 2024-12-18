@@ -38,4 +38,4 @@ const SobreFT = () => {
   );
 };
 
-export default SobreFT;
+export default SobreFT

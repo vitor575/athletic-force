@@ -1,12 +1,14 @@
 import React from "react";
 import "./Cards.css";
+import { Link } from "react-router-dom";
 
 interface CardProps  {
     titulo : string,
-    imagem : string
+    imagem : string,
+    destino : string
 }
 
-const Card = ({titulo, imagem}: CardProps) => {
+const Card = ({titulo, imagem, destino}: CardProps) => {
 
     return(
         <div className="card-container">
@@ -17,7 +19,7 @@ const Card = ({titulo, imagem}: CardProps) => {
                 <p>{titulo}</p>
             </div>
             <div className="card-button">
-                <button>acessar</button>
+                <Link to={destino} className="navegacao">Acessar</Link>
             </div>
         </div>
     )
