@@ -5,7 +5,7 @@ import "./ClientHome.css";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import Card from "../../components/CardsCliente";
+import CardCliente from "../../components/CardsCliente";
 import Calendario from '../../img/calendario.png';
 import Pagamento from '../../img/pagamento.png';
 import Configuracao from '../../img/configuracao.png';
@@ -33,9 +33,9 @@ const ClientHome = () => {
                 </div>
             </div>
             <div className="cards-container">
-                <Card titulo="Cronograma de treinos" imagem={Calendario} destino="/clientHome"/>
-                <Card titulo="Pagamentos pendentes" imagem={Pagamento} destino="/clientHome/pagamentos"/>
-                <Card titulo="Configuração da conta" imagem={Configuracao} destino="/clientHome"/>
+                <CardCliente titulo="Cronograma de treinos" imagem={Calendario} destino="/clientHome"/>
+                <CardCliente titulo="Pagamentos pendentes" imagem={Pagamento} destino="/clientHome/pagamentos"/>
+                <CardCliente titulo="Configuração da conta" imagem={Configuracao} destino="/clientHome"/>
             </div>
         </main>
     )

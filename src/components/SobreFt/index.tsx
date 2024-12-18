@@ -19,6 +19,8 @@ const SobreFT = () => {
         start: "top 800px",
         end: "bottom 900px",
         scrub: true,
+        
+      
       },
     });
     return () => {
@@ -27,7 +29,7 @@ const SobreFT = () => {
   }, []);
 
   return (
-    <div className="imagem-container">
+    <div className="imagem-container" >
       <img
         src={Sobre}
         alt="imagem da caixa do sobre"

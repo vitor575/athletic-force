@@ -1,11 +1,10 @@
 .imagem-container {
-  position: relative;
-  top: 150px;
   margin: 50px;
   display: flex;
   justify-content: center;
   align-items: center;
   width: 95%;
+  margin-bottom: 5%;
 }
 
 .imagem-container img {

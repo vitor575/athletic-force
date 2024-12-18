@@ -18,7 +18,7 @@ function Navbar() {
       <ul className="nav-links">
         <a href="#home">Home</a>
         <a href="#sobre">Sobre</a>
-        <a href="#services">Serviços</a>
+        <a href="#treinadores">Treinadores</a>
         <a href="#contact">Contato</a>
       </ul>
 

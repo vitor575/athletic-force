@@ -8,7 +8,7 @@ interface CardProps  {
     destino : string
 }
 
-const Card = ({titulo, imagem, destino}: CardProps) => {
+const CardCliente = ({titulo, imagem, destino}: CardProps) => {
 
     return(
         <div className="card-container">
@@ -25,4 +25,4 @@ const Card = ({titulo, imagem, destino}: CardProps) => {
     )
 }
 
-export default Card;;
+export default CardCliente;
