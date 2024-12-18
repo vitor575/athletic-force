@@ -7,14 +7,14 @@ const CardPagamento = () => {
             <div className="container-info">
                 <p>Pendente</p>
                 <div className="vencimento-container">
-                    <p>Vence em 20/11</p>
+                    <h4>Vence em 20/11</h4>
                     <p>Fatura de setembro</p>
                 </div>
             </div>
             <div className="valor-container">
                 <div className="valor">
-                    <p>R$100,00</p>
-                    <button>pagar</button>
+                    <p><span>R$</span>100,00</p>
+                    <button className="pay">pagar</button>
                 </div>
             </div>
         </div>

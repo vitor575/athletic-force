@@ -5,7 +5,7 @@ interface BootstrapModalProps {
   onClose: () => void;
   title: string;
   children: React.ReactNode;
-  size?: 'sm' | 'lg' | 'xl'; // Adicionando prop de tamanho
+  size?: 'sm' | 'lg' | 'xl';
 }
 
 const BootstrapModal: FC<BootstrapModalProps> = ({ isOpen, onClose, title, children, size }) => {
