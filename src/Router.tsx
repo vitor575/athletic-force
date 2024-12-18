@@ -7,6 +7,7 @@ import Modalidades from './pages/Modalidade';
 import Login from './pages/Login';
 import Contato from "./pages/Contato";
 import ClientHome from "./pages/ClientHome/indes";
+import Pagamento from "./pages/Pagamento";
 
 
 
@@ -20,11 +21,11 @@ function App() {
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/sobre" element={<Sobre />} />
-            
             <Route path="/modalidades" element={<Modalidades />} />
             <Route path="/contato" element={<Contato />} />
             <Route path="/login" element={<Login />} />
             <Route path="/clientHome" element={<ClientHome />} />
+            <Route path="/clientHome/pagamentos" element={<Pagamento />} />
           </Routes>
         </main>
       </Router>

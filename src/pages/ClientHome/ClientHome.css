@@ -7,7 +7,7 @@
     display: flex;
     justify-content: space-between;
     width: 100vw;
-    padding: 1rem;
+    padding: 1rem 3rem;
     height: 33%;
 };
 
@@ -66,8 +66,8 @@
 }
 
 .cards-container {
-    height: 45vh;
-    margin: 4rem;
+    height: 50vh;
+    margin: 5rem 4rem;
     display: flex;
     align-items: center;
     justify-content: center;

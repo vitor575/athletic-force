@@ -12,7 +12,7 @@
     width: 20%;
 }
 
-.card-button button {
+.navegacao {
     background-color: #fa0000;
     color: white;
     border: none;
@@ -20,4 +20,5 @@
     font-size: 1.7rem;
     padding: 0.8rem 1.5rem;
     margin: 40px 0 0 0;
+    text-decoration: none;
 }
