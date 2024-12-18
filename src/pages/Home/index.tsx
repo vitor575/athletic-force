@@ -5,10 +5,10 @@ import SobreFT from '../../components/SobreFt';
 
 const Home = () => {
   return (
-    <div>
+    <main>
       <Banner/>
       <SobreFT/>
-    </div>
+    </main>
   );
 };
 

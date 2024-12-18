@@ -5,7 +5,7 @@ import "./ClientHome.css";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import Card from "../../components/Cards";
+import Card from "../../components/CardsCliente";
 import Calendario from '../../img/calendario.png';
 import Pagamento from '../../img/pagamento.png';
 import Configuracao from '../../img/configuracao.png';
