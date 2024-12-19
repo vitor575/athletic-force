@@ -22,7 +22,7 @@ const CardsHome = ({ imagem, titulo, descricao }: CardProps) => {
         start: "top 900px",
         end: "bottom 900px",
         scrub: true,
-        markers: true
+        
       },
     });
     return () => {
