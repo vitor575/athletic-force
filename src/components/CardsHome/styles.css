@@ -9,16 +9,24 @@
 }
 .container-cx {
   border: none;
-  box-shadow: 0px 4px 60px rgba(0, 0, 0, 0.253);
+  background: #ffffff;
+  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
   padding: 30px;
   text-align: center;
   border-radius: 20px;
 }
-.cardHome-image img{
-    object-fit: cover;
-    border-radius: 20px;
+.cardHome-image img {
+  object-fit: cover;
+  border-radius: 20px;
 }
-
+.container-cx:hover{
+  transition: 2s;
+  box-shadow: 0px 4px 60px rgba(255, 40, 40, 0.973)
+}
+.container-cx:hover img {
+  transform: scale(1.02); 
+  transition: 600ms; 
+}
 .cardHome-titulo {
   font-weight: 600;
   font-size: 2.1em;
@@ -38,6 +46,3 @@
 .cardHome-text {
   font-size: 1.1em;
 }
-
-
-
