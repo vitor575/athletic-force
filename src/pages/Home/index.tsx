@@ -6,6 +6,7 @@ import trainer1 from "../../img/kayk.jpg";
 import trainer2 from "../../img/isabela.jpg";
 import trainer3 from "../../img/max.jpg";
 
+
 const Home = () => {
   return (
     <main>
@@ -16,7 +17,7 @@ const Home = () => {
         <SobreFT />
       </section>
       <section id="treinadores">
-        <CardsHome  imagem={trainer1} titulo="Jeferson" descricao="Personal trainer de 10 anos na Zenfit "/>
+        <CardsHome  imagem={trainer1} titulo="Jeferson" descricao="Personal trainer de 10 anos na Zenfit"/>
         <CardsHome  imagem={trainer2} titulo="Felipe" descricao="Personal trainer a mais de 5 anos na Zenfit"/>
         <CardsHome  imagem={trainer3} titulo="Matheus" descricao="Personal trainer a mais de 8 anos na ZenFit "/>
       </section>

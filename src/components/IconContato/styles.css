@@ -1,0 +1,18 @@
+.links-contact {
+    display: flex;
+    justify-content: space-evenly;
+    margin: 20px 0 10px;
+}
+
+.links-contact svg {
+    color: rgb(255, 0, 0);
+    height: 50px;
+    width: 50px;
+    cursor: pointer;
+}
+
+.links-contact svg:hover {
+    transition: 800ms;
+    transform: translate(1.05);
+    color: rgb(255, 50, 50);
+}
