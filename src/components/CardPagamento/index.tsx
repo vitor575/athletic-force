@@ -14,7 +14,7 @@ const CardPagamento = () => {
             <div className="valor-container">
                 <div className="valor">
                     <p><span>R$</span>100,00</p>
-                    <button className="pay">pagar</button>
+                    <button className="pay">Pagar</button>
                 </div>
             </div>
         </div>

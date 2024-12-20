@@ -1,5 +1,5 @@
 import React from "react";
-import Banner from "../../components/banner";
+import Banner from "../../components/Banner";
 import SobreFT from "../../components/SobreFt";
 import CardsHome from "../../components/CardsHome";
 import trainer1 from "../../img/kayk.jpg";
