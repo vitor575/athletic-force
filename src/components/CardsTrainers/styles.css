@@ -6,11 +6,12 @@
 }
 .cardHome-container {
   opacity: 0;
+  z-index: 99999;
 }
 .container-cx {
   border: none;
   background: #ffffff;
-  box-shadow: 20px 20px 60px #bebebe, -20px -20px 60px #ffffff;
+  box-shadow: 0px 4px 60px rgba(177, 177, 177, 0.973);
   padding: 30px;
   text-align: center;
   border-radius: 20px;

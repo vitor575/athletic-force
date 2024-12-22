@@ -1,10 +1,11 @@
 import React from "react";
-import Banner from "../../components/Banner";
+import Banner from "../../components/banner";
 import SobreFT from "../../components/SobreFt";
-import CardsHome from "../../components/CardsHome";
+import CardsHome from "../../components/CardsTrainers";
 import trainer1 from "../../img/kayk.jpg";
 import trainer2 from "../../img/isabela.jpg";
 import trainer3 from "../../img/max.jpg";
+import Contato from "../../components/Contato";
 
 
 const Home = () => {
@@ -20,6 +21,9 @@ const Home = () => {
         <CardsHome  imagem={trainer1} titulo="Jeferson" descricao="Personal trainer de 10 anos na Zenfit"/>
         <CardsHome  imagem={trainer2} titulo="Felipe" descricao="Personal trainer a mais de 5 anos na Zenfit"/>
         <CardsHome  imagem={trainer3} titulo="Matheus" descricao="Personal trainer a mais de 8 anos na ZenFit "/>
+      </section>
+      <section id="contato">
+        <Contato/>
       </section>
     </main>
   );

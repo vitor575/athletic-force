@@ -17,9 +17,9 @@ function Navbar() {
 
       <ul className="nav-links">
         <a href="#home">Home</a>
-        <a href="#sobre">Sobre</a>
+        <a href="#sobre">Sobre </a>
         <a href="#treinadores">Treinadores</a>
-        <a href="#contact">Contato</a>
+        <a href="#contato">Contato</a>
       </ul>
 
       <button className="login" onClick={() => setModalOpen(!isModalOpen)}>

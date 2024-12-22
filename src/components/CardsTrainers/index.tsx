@@ -42,7 +42,7 @@ const CardsHome = ({ imagem, titulo, descricao }: CardHomeProps) => {
         <div className="cardHome-text">
           <p>{descricao}</p>
         </div>
-        <div>
+        <div className="buttons">
           <IconContato/>
         </div>
       </div>

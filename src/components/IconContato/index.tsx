@@ -2,20 +2,26 @@ import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
-import "./styles.css"
+import "./styles.css";
 
 const IconContato = () => {
   return (
     <main>
       <ul className="links-contact">
         <li>
-          <FaWhatsapp />
+          <a href="#sdadasda">
+            <FaWhatsapp />
+          </a>
         </li>
         <li>
-          <FaFacebook />
+          <a href="#sdadadas">
+            <FaFacebook />
+          </a>
         </li>
         <li>
-          <FaInstagram />
+          <a href="#dadasdada">
+            <FaInstagram />
+          </a>
         </li>
       </ul>
     </main>

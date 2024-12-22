@@ -1,0 +1,143 @@
+
+.imagem-contato {
+  width: 100%;
+  position: relative;
+  top: -85px;
+  object-fit: cover;
+  opacity: 0;
+}
+
+.imagem-contato img {
+  width: 100%;
+  object-fit: cover;
+}
+.logo {
+    width: 42%;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    
+}
+
+.logo img {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    animation: imgLogo 4s ease-in-out infinite;
+}
+@keyframes imgLogo {
+    0% {
+      transform: translateY(0);
+    }
+  
+    50% {
+      transform: translateY(-25px);
+    }
+  
+    100% {
+      transform: translateY(0);
+    }
+  }
+.nomecontato {
+  display: flex;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 3.5em;
+  color: #ff0000;
+  margin: 7px 0px;
+}
+
+.nomecontato span {
+  white-space: nowrap;
+  overflow: hidden;
+  display: inline-block;
+  text-transform: uppercase;
+  background: linear-gradient(20deg, #fff, #ff0000);
+  background-size: 400% 100%;
+  animation: degrade 1500ms linear infinite alternate;
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  outline: none;
+  margin-left: 15px;
+}
+@keyframes degrade {
+  0% {
+    background-position-x: 0%;
+  }
+
+  100% {
+    background-position: 300%;
+  }
+}
+.container-contact {
+  padding: 20px;
+  border-radius: 20px;
+  background-color: rgb(255, 255, 255);
+  box-shadow: 0px 4px 60px rgba(177, 177, 177, 0.973);
+  display: flex;
+  width: 80%;
+  margin: 0 auto;
+  position: relative;
+  top: -200px;
+  opacity: 0;
+}
+.formulario {
+  width: 50%;
+  display: flex;
+  justify-content: space-evenly;
+  flex-direction: column;
+  gap: 20px;
+}
+
+#ipunt {
+  transform: translateX(300px);
+}
+
+.forms {
+  width: 100%;
+}
+.forms2 {
+  display: flex;
+  gap: 20px;
+}
+textarea {
+    resize: none;
+    border: 1px solid #b6b6b6;
+    border-radius: 7px;
+    height: 150px;
+    padding: 20px 0px 0px 15px;
+}
+
+input:focus {
+    border-color: #ff0000;
+    outline: none;
+}
+textarea:focus {
+    border-color: #ff0000;
+    outline: none;
+
+}
+
+
+.submit {
+    display: flex;
+    justify-content: end;
+
+}
+
+.submit button {
+    border: none;
+    padding: 12px;
+    border-radius: 7px;
+    color: #fff;
+    background-color: #ff0000;
+    font-weight: bold;
+    box-shadow: 0px 4px 60px rgba(255, 255, 255, 0.973);
+}
+
+.submit button:hover {
+    background-color: #ff4242;
+    transform: scale(1.05);
+    transition: 100ms;
+    
+}

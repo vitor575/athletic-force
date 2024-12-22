@@ -26,6 +26,7 @@ const Form: React.FC = () => {
     console.log("Dados enviados:", formState);
   };
 
+  
   return (
     <div className="container">
       <div className="container__img">
