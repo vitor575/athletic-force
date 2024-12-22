@@ -7,7 +7,7 @@ import trainer2 from "../../img/isabela.jpg";
 import trainer3 from "../../img/max.jpg";
 import Contato from "../../components/Contato";
 import Footer from "../../components/Footer";
-import CronogramaTreino from "../CronogramaTreino";
+
 
 
 const Home = () => {
