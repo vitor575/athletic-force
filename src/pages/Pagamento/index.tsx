@@ -2,6 +2,8 @@ import React from "react";
 import "./Pagamento.css";
 import CardPagamento from "../../components/CardPagamento";
 import CardAssinatura from "../../components/CardAssinatura";
+import { FaSignOutAlt } from "react-icons/fa";
+import { useNavigate } from "react-router-dom";
 
 const Pagamento = () => {
     const planos = [
@@ -10,8 +12,17 @@ const Pagamento = () => {
         "Plano ultra R$180,00",
     ];
 
+    const navigate = useNavigate();
+
+    const handleExit = () => {
+        navigate("/clientHome");
+    };
+
     return (
         <main className="pagamento-container">
+            <button className="exit-button" onClick={handleExit}>
+                <FaSignOutAlt /> Sair
+            </button>
             <div className="card-pay-container">
                 <h1>Detalhes do Pagamento</h1>
                 <CardPagamento />

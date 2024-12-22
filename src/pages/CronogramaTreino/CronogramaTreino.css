@@ -1,0 +1,81 @@
+
+.cronograma-container {
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 2rem;
+    background-color: #f7f7f7;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center; 
+    align-items: center;
+  }
+  
+.cronograma-container > h1 {
+    font-size: 4.5rem;
+    color: red;
+    margin-bottom: 2rem;
+    margin-top: -2rem; 
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    font-weight: bold;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  }
+  
+  .cronograma-tabela {
+    width: 90%;
+    height: 70%;
+    border-collapse: collapse;
+    background: white;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  .cronograma-tabela th, .cronograma-tabela td {
+    border: 1px solid #ccc;
+    padding: 1.5rem;
+    text-align: center;
+    font-size: 1.2rem;
+  }
+  
+  .cronograma-tabela th {
+    background-color: red;
+    color: white;
+    font-size: 1.5rem;
+  }
+  
+  .horario {
+    background-color: #e6e6e6;
+    font-weight: bold;
+  }
+  
+  .atividade-preenchida {
+    background-color: #ffebd8;
+    color: #333;
+  }
+  
+  .atividade-vazia {
+    background-color: #f9f9f9;
+  }
+  
+  .exit-button {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background-color: red;
+    color: white;
+    border: none;
+    padding: 0.8rem 1.2rem;
+    border-radius: 0.5rem;
+    font-size: 1rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    text-decoration: none;
+  }
+  
+  .exit-button:hover {
+    background-color: darkred;
+  }
+  
