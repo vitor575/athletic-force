@@ -19,8 +19,8 @@ const CardsTraineres = ({ imagem, titulo, descricao }: CardHomeProps) => {
       opacity: 1,
       scrollTrigger: {
         trigger: ".container-cx",
-        start: "top 900px",
-        end: "bottom 900px",
+        start: "top 700px",
+        end: "bottom 600px",
         scrub: true,
       },
     });

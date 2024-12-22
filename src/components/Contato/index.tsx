@@ -30,8 +30,8 @@ const Contato: React.FC = () => {
       opacity: 1,
       scrollTrigger: {
         trigger: ".formulario",
-        start: "top 950px",
-        end: "bottom 900px",
+        start: "top 600px",
+        end: "bottom 700px",
         scrub: true,
       },
     });
