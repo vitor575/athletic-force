@@ -5,6 +5,7 @@ import Home from './pages/Home';
 import Login from './components/Login';
 import ClientHome from "./pages/ClientHome/indes";
 import Pagamento from "./pages/Pagamento";
+import CronogramaTreino from "./pages/CronogramaTreino";
 
 
 
@@ -20,6 +21,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/clientHome" element={<ClientHome />} />
             <Route path="/clientHome/pagamentos" element={<Pagamento />} />
+            <Route path="/clientHome/cronograma" element={<CronogramaTreino />} />
           </Routes>
         </main>
       </Router>
