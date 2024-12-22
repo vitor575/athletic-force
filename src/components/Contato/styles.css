@@ -2,7 +2,7 @@
 .imagem-contato {
   width: 100%;
   position: relative;
-  top: -85px;
+  top: -150px;
   object-fit: cover;
   opacity: 0;
 }
@@ -78,7 +78,7 @@
   width: 80%;
   margin: 0 auto;
   position: relative;
-  top: -200px;
+  top: -325px;
   opacity: 0;
 }
 .formulario {

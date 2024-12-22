@@ -15,8 +15,8 @@ const FotoContato = () => {
       opacity: 1,
       scrollTrigger: {
         trigger: ".imagemlogocontato",
-        start: "top 800px",
-        end: "bottom 1000px",
+        start: "top 1000px",
+        end: "bottom 1200px",
         scrub: true,
       },
     });

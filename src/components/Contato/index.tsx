@@ -1,38 +1,26 @@
+import React, { useState, useLayoutEffect } from "react";
 import FotoContato from "./fotoContato";
 import "./styles.css";
 import logocontato from "../../img/logo.png";
-import React, { useState } from "react";
-import { useLayoutEffect } from "react";
 import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger"
-
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Contato: React.FC = () => {
-  const [numeroTel, setNumeroTel] = useState("");
+  const [formContatoState, setFormContato] = useState({
+    nome: "",
+    email: "",
+    numero: "",
+    textmensage: "",
+  });
 
-  const [letrasvalor, setLetrasvalor] = useState('');
-
-  const indentificadorLetras = (e: React.ChangeEvent<HTMLInputElement>) => {
-    // Permite apenas letras
-    const inputValueLetras = e.target.value.replace(/[^a-zA-Z]/g, ''); // Remove tudo que não é letra
-    setLetrasvalor(inputValueLetras);
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
+    const { name, value } = e.target;
+    setFormContato({ ...formContatoState, [name]: value });
   };
 
-
-  const indentificadorNumero = (e: React.ChangeEvent<HTMLInputElement>) => {
-    let mascaraNum = e.target.value.replace(/\D/g, "");
-
-    if (mascaraNum.length > 2) {
-      mascaraNum = mascaraNum.replace(/^(\d{2})(\d{5})(\d{4}).*/, "($1) $2-$3");
-    }
-    if (mascaraNum.length > 6) {
-      mascaraNum = mascaraNum.replace(/^(\d{2})(\d{4})(\d{0,4})/, "($1) $2-$3");
-    }
-    if (mascaraNum.length > 2 && mascaraNum.length <= 6) {
-      mascaraNum = mascaraNum.replace(/^(\d{2})(\d{0,5})/, "($1) $2");
-    }
-
-    setNumeroTel(mascaraNum);
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    console.log("Dados enviados:", setFormContato);
   };
 
   useLayoutEffect(() => {
@@ -42,18 +30,14 @@ const Contato: React.FC = () => {
       opacity: 1,
       scrollTrigger: {
         trigger: ".formulario",
-        start: "top 800px",
+        start: "top 950px",
         end: "bottom 900px",
         scrub: true,
-    
       },
     });
 
-    return () => {
-      gsap.killTweensOf(".container-contact");
-    };
+    return () => gsap.killTweensOf(".container-contact");
   }, []);
-
 
   return (
     <main>
@@ -64,45 +48,50 @@ const Contato: React.FC = () => {
         <div className="logo">
           <img src={logocontato} alt="logocontato" className="animacao" />
         </div>
-        <form action="" className="formulario">
+        <form className="formulario" onSubmit={handleSubmit}>
           <div className="nomecontato">
             CONTATO COM<span>ZENFIT</span>
           </div>
-          <div className="forms" >
+          <div className="forms">
             <input
               type="text"
-              id="name"
-              name="name"
-              value={letrasvalor}
-              onChange={indentificadorLetras}
+              id="nome"
+              name="nome"
+              value={formContatoState.nome}
+              onChange={handleChange}
               placeholder="Digite seu Nome :"
               required
             />
           </div>
-          <div className="forms2" >
+          <div className="forms2">
             <input
               type="email"
               id="email"
               name="email"
               placeholder="Digite seu E-mail :"
+              value={formContatoState.email}
+              onChange={handleChange}
               required
             />
             <input
               type="text"
-              id="number"
-              name="number"
+              id="numero"
+              name="numero"
               placeholder="(00) 00000-0000"
               required
-              value={numeroTel}
-              onChange={indentificadorNumero}
+              value={formContatoState.numero}
+              onChange={handleChange}
             />
           </div>
           <textarea
-            name="caixatexto"
+            name="textmensage"
             placeholder="Deixe sua mensagem :"
+            value={formContatoState.textmensage}
+            onChange={handleChange}
+            required
           ></textarea>
-          <div className="submit" >
-            <button>Enviar mensagem</button>
+          <div className="submit">
+            <button type="submit">Enviar mensagem</button>
           </div>
         </form>
       </div>

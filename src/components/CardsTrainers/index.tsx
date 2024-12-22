@@ -1,6 +1,5 @@
 import React from "react";
 import "./styles.css";
-
 import { useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -12,7 +11,7 @@ interface CardHomeProps {
   descricao: string;
 }
 
-const CardsHome = ({ imagem, titulo, descricao }: CardHomeProps) => {
+const CardsTraineres = ({ imagem, titulo, descricao }: CardHomeProps) => {
   useLayoutEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
 
@@ -50,4 +49,4 @@ const CardsHome = ({ imagem, titulo, descricao }: CardHomeProps) => {
   );
 };
 
-export default CardsHome;
+export default CardsTraineres;

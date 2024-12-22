@@ -109,6 +109,9 @@ section {
 #sobre  {
   padding: 35px;
 }
+#contato {
+  height: 900px;
+}
 
 body {
   line-height: 1;
