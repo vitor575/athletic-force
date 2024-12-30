@@ -5,8 +5,15 @@ import logocontato from "../../img/logo.png";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 
+interface FormContact {
+  email: string;
+  nome: string;
+  numero: string;
+  textmensage: string;
+}
+
 const Contato: React.FC = () => {
-  const [formContatoState, setFormContato] = useState({
+  const [formContatoState, setFormContato] = useState<FormContact>({
     nome: "",
     email: "",
     numero: "",
@@ -20,7 +27,7 @@ const Contato: React.FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Dados enviados:", setFormContato);
+    console.log("Dados enviados:", formContatoState);
   };
 
   useLayoutEffect(() => {
