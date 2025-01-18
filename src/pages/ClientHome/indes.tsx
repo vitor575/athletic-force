@@ -40,7 +40,7 @@ const ClientHome = () => {
                 </div>
             </div>
             <div className="cards-container">
-                <CardCliente titulo="Cronograma de treinos" imagem={Calendario} destino="/clientHome/cronograma"/>
+                <CardCliente titulo="Cronograma de treinos" imagem={Calendario} destino="/clientHome/cronograma/Segunda-feira"/>
                 <CardCliente titulo="Pagamentos pendentes" imagem={Pagamento} destino="/clientHome/pagamentos"/>
                 <CardCliente titulo="Configuração da conta" imagem={Configuracao} destino="/clientHome"/>
             </div>

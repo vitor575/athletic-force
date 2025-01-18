@@ -4,12 +4,11 @@ import { useAppSelector } from '../../store';
 import { useParams } from 'react-router-dom';
 
 const Treino = () => {
-
+    const {dia} = useParams();   
+    
     const treinos = useAppSelector((state) => state.treinos.treinos); 
-
-    const {dia} = useParams();
-
     const treinoDoDia = treinos.filter((treino) => treino.diaSemana === dia);
+    
 
   return (
     <section className='treino-container'>
