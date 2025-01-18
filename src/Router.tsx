@@ -6,6 +6,7 @@ import Login from './components/Login';
 import ClientHome from "./pages/ClientHome/indes";
 import Pagamento from "./pages/Pagamento";
 import CronogramaTreino from "./pages/CronogramaTreino";
+import Treino from "./components/Treino";
 
 
 
@@ -21,7 +22,10 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/clientHome" element={<ClientHome />} />
             <Route path="/clientHome/pagamentos" element={<Pagamento />} />
-            <Route path="/clientHome/cronograma" element={<CronogramaTreino />} />
+            <Route path="/clientHome/cronograma" element={<CronogramaTreino />} >
+              <Route path="/clientHome/cronograma/:dia" element={<Treino />} />
+            </Route>
+            
           </Routes>
         </main>
       </Router>

@@ -1,81 +1,84 @@
+.cronograma {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  min-height: 100vh;
+  padding: 2rem;
+  background-color: #f5f5f5; 
+}
 
 .cronograma-container {
-    font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 2rem;
-    background-color: #f7f7f7;
-    height: 100vh;
-    display: flex;
+  background-color: #e6e5e5; 
+  display: flex;
+  flex-direction: column;
+  gap: 6rem;
+  width: 70%;
+  min-width: 70%; 
+  min-height: 40rem; 
+  padding: 2rem;
+  border-radius: 20px;
+  border: 2px solid #d3d3d3; /* Cinza claro para uma borda sutil */
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.semana-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  background-color: #ffffff; 
+  padding: 2rem 3rem;
+  border-radius: 30px;
+  border: 2px solid #ff6b6b; 
+  box-shadow: 0 6px 15px rgba(255, 107, 107, 0.2);
+}
+
+.semana-container h1 {
+  font-size: 2.2rem;
+  font-weight: bold;
+  color: #2c3e50; 
+}
+
+.semana-container button {
+  font-size: 36px;
+  border: none;
+  background-color: #ff6b6b;
+  color: #ffffff; 
+  padding: 0.8rem 1.2rem;
+  cursor: pointer;
+  border-radius: 50%;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.semana-container button:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 10px rgba(255, 107, 107, 0.3);
+}
+
+.semana-container button:active {
+  transform: scale(1.05);
+}
+
+.outlet-container {
+  background-color: #FFFFFF; 
+  padding: 2rem;
+  min-height: 20rem;
+  width: 100%;
+  border-radius: 20px;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.05);
+  border: 1px solid #e0e0e0; 
+}
+
+@media (max-width: 768px) {
+  .semana-container {
     flex-direction: column;
-    justify-content: center; 
-    align-items: center;
+    gap: 1.5rem;
   }
-  
-.cronograma-container > h1 {
-    font-size: 4.5rem;
-    color: red;
-    margin-bottom: 2rem;
-    margin-top: -2rem; 
-    text-transform: uppercase;
-    letter-spacing: 0.1em;
-    font-weight: bold;
-    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+
+  .semana-container h1 {
+    font-size: 1.8rem;
   }
-  
-  .cronograma-tabela {
-    width: 90%;
-    height: 70%;
-    border-collapse: collapse;
-    background: white;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+
+  .semana-container button {
+    font-size: 30px;
   }
-  
-  .cronograma-tabela th, .cronograma-tabela td {
-    border: 1px solid #ccc;
-    padding: 1.5rem;
-    text-align: center;
-    font-size: 1.2rem;
-  }
-  
-  .cronograma-tabela th {
-    background-color: red;
-    color: white;
-    font-size: 1.5rem;
-  }
-  
-  .horario {
-    background-color: #e6e6e6;
-    font-weight: bold;
-  }
-  
-  .atividade-preenchida {
-    background-color: #ffebd8;
-    color: #333;
-  }
-  
-  .atividade-vazia {
-    background-color: #f9f9f9;
-  }
-  
-  .exit-button {
-    position: absolute;
-    top: 1rem;
-    right: 1rem;
-    background-color: red;
-    color: white;
-    border: none;
-    padding: 0.8rem 1.2rem;
-    border-radius: 0.5rem;
-    font-size: 1rem;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
-    text-decoration: none;
-  }
-  
-  .exit-button:hover {
-    background-color: darkred;
-  }
-  
+}

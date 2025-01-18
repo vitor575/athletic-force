@@ -1,62 +1,42 @@
-import React from "react";
-import { useNavigate } from 'react-router-dom';
-import { FaSignOutAlt } from 'react-icons/fa';
+import React, { useState } from "react";
+import { Outlet, useNavigate } from 'react-router-dom';
 import "./CronogramaTreino.css";
-
-interface Horario {
-  hora: string;
-  atividades: string[];
-}
-
-const diasSemana = ["Segunda", "Terça", "Quarta", "Quinta", "Sexta", "Sábado"];
-
-const horarios: Horario[] = [
-  { hora: "06:10", atividades: ["Spinning (45 min)", "", "", "", "", ""] },
-  { hora: "07:10", atividades: ["RPM (45 min)", "", "", "", "", ""] },
-  { hora: "08:10", atividades: ["", "", "", "", "", ""] },
-  { hora: "09:10", atividades: ["", "", "Spinning (45 min)", "", "", ""] },
-  { hora: "10:10", atividades: ["", "", "", "", "", ""] },
-  { hora: "11:10", atividades: ["", "", "", "", "", ""] },
-  { hora: "17:10", atividades: ["", "", "", "", "", ""] },
-  { hora: "19:10", atividades: ["", "", "", "Cardio (1 hora)", "", ""] },
-];
+import { FaArrowLeft, FaArrowRight} from "react-icons/fa";
 
 const CronogramaTreino: React.FC = () => {
 
-    const navigate = useNavigate();
+  const diaSemana = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"]
 
-    const handleExit = () => {
-        navigate('/clientHome');
-      };
+  const navigate = useNavigate();
+
+  const [diaAtual, setDiaAtual] = useState(0);
+
+  const handlePrevious = () => {
+    const newIndex = diaAtual === 0 ? diaSemana.length - 1 : diaAtual - 1;
+    setDiaAtual(newIndex);
+    navigate(`/clientHome/cronograma/${diaSemana[newIndex]}`);
+  };
+
+  const handleNext = () => {
+    const newIndex = diaAtual === diaSemana.length - 1 ? 0 : diaAtual + 1;
+    setDiaAtual(newIndex);
+    navigate(`/clientHome/cronograma/${diaSemana[newIndex]}`);
+  };
 
   return (
-    <div className="cronograma-container">
-      <h1>Cronograma de Treino</h1>
-      <button className="exit-button" onClick={handleExit}>
-        <FaSignOutAlt /> Sair
-      </button>
-
-      <table className="cronograma-tabela">
-        <thead>
-          <tr>
-            <th></th>
-            {diasSemana.map((dia, index) => (
-              <th key={index}>{dia}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {horarios.map((horario, index) => (
-            <tr key={index}>
-              <td className="horario">{horario.hora}</td>
-              {horario.atividades.map((atividade, idx) => (
-                <td key={idx} className={atividade ? "atividade-preenchida" : "atividade-vazia"}>{atividade}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
+    <main className="cronograma">
+      <div className="cronograma-container">
+        <div className="semana-container">
+          <button className="voltar__dia" onClick={handlePrevious}><FaArrowLeft/></button>
+          <h1>{diaSemana[diaAtual]}</h1>
+          <button className="avancar__dia" onClick={handleNext}><FaArrowRight/></button>
+        </div>
+      
+        <div className="outlet-container">
+          <Outlet />
+        </div>
+      </div>
+    </main>
   );
 };
 

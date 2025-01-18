@@ -1,0 +1,10 @@
+.treinos {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;   
+}
+
+.treino {
+    font-size: 2rem;   
+    text-align: start;
+}
