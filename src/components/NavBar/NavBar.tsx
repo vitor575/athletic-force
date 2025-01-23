@@ -4,7 +4,7 @@ import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./estiloNav.css";
 import BootstrapModal from "../Modal";
-import Form from "../../components/Modal/Form";
+import Form from "../Modal/FormLogin";
 
 function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);

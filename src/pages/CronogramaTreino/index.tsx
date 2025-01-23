@@ -11,6 +11,10 @@ const CronogramaTreino: React.FC = () => {
 
   const [diaAtual, setDiaAtual] = useState(0);
 
+  const handleExit = () => {
+    navigate("/clientHome");
+};
+
   const handlePrevious = () => {
     const newIndex = diaAtual === 0 ? diaSemana.length - 1 : diaAtual - 1;
     setDiaAtual(newIndex);
@@ -25,6 +29,7 @@ const CronogramaTreino: React.FC = () => {
 
   return (
     <main className="cronograma">
+      <button className="exit-button" onClick={handleExit}>Sair</button>
       <div className="cronograma-container">
         <div className="semana-container">
           <button className="voltar__dia" onClick={handlePrevious}><FaArrowLeft/></button>

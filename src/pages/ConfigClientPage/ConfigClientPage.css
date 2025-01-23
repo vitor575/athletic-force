@@ -1,0 +1,30 @@
+.config-client-page {
+    display: flex;
+    flex-direction: row;
+    gap: 2rem;
+    min-height: 100vh;
+    background-color: #eaeaea; /* Cor de fundo clara */
+  }
+  
+  /* Estilo para o menu lateral */
+  .config-client-nav {
+    flex: 1;
+    max-width: 25rem;
+  }
+  
+  /* Estilo para o conteúdo principal */
+  .config-client-content {
+    flex: 2;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2rem; /* Espaçamento entre os formulários */
+  }
+  
+  /* Título da página */
+  .page-title {
+    font-size: 2rem;
+    color: #333;
+    text-align: center;
+  }
+  
