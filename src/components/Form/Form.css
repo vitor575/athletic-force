@@ -1,14 +1,14 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 0.75rem; 
-  padding: 2rem; background-color: #fff; 
-  border: 1px solid #ccc;
+  gap: 3rem;
+  padding: 6rem 2rem; background-color: #fff; 
+  border: 1px solid #ffa8a8; 
   border-radius: 8px;
   box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-  width: 600px;
+  width: 50%;
+  height: 70vh;
   margin: 0 auto; 
-
 }
 
 .form-title {
@@ -26,5 +26,15 @@
 
 .form-button {
   padding: 0.8rem; 
-  font-size: 1rem; 
+  font-size: 1.5rem; 
+  border-radius: 10px;
+  background-color: rgb(253, 133, 133);
+  color: white;
+  transition: ease-in-out 0.3s;
+}
+
+.form-button:hover {
+  color: black;
+  transform: translateY(-2px);
+  box-shadow: 0 2px 15px 1px rgba(255, 0, 0, 0.5); 
 }

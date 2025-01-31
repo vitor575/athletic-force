@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Outlet, useNavigate } from 'react-router-dom';
 import "./CronogramaTreino.css";
-import { FaArrowLeft, FaArrowRight} from "react-icons/fa";
+import { FaArrowLeft, FaArrowRight, FaSignOutAlt} from "react-icons/fa";
 
 const CronogramaTreino: React.FC = () => {
 
@@ -29,7 +29,7 @@ const CronogramaTreino: React.FC = () => {
 
   return (
     <main className="cronograma">
-      <button className="exit-button" onClick={handleExit}>Sair</button>
+      <button className="exit-button" onClick={handleExit}><FaSignOutAlt />Sair</button>
       <div className="cronograma-container">
         <div className="semana-container">
           <button className="voltar__dia" onClick={handlePrevious}><FaArrowLeft/></button>

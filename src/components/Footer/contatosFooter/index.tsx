@@ -67,8 +67,9 @@ const ContatosFooter = () => {
         </div>
       </ul>
       <div className="maps">
-        <h1>Local</h1>
+        <h2>Local</h2>
         <iframe
+          title="Local"        
           src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3659.1794194964723!2d-46.47471708814433!3d-23.490046158889662!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce61a9987bafc1%3A0x1e71f06be950a1e9!2sRua%20Ricardo%20Butarello%20-%20Ermelino%20Matarazzo%2C%20S%C3%A3o%20Paulo%20-%20SP%2C%2003813-010!5e0!3m2!1spt-BR!2sbr!4v1734997787586!5m2!1spt-BR!2sbr"
           width="400"
           height="200"

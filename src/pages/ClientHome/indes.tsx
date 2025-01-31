@@ -2,7 +2,7 @@ import React from "react";
 import Logo from "../../img/logo.png";
 import Client from "../../img/client.png";
 import "./ClientHome.css";
-import { FaWhatsapp } from "react-icons/fa";
+import { FaSignOutAlt, FaWhatsapp } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import CardCliente from "../../components/CardsCliente";
@@ -35,7 +35,7 @@ const ClientHome = () => {
                     <img src={Client} alt="Sua imagem"/>
                     <div className="client-text">
                         <h2>Olá, seja bem vindo.</h2>
-                        <button className="exit-button" onClick={handleExit}>Sair</button>
+                        <button className="exit-button" onClick={handleExit}><FaSignOutAlt />Sair</button>
                     </div>
                 </div>
             </div>

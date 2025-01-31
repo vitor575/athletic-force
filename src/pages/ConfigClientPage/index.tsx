@@ -11,7 +11,6 @@ const ConfigClientPage = () => {
       </aside>
       <section className="config-client-content">
         <Form />
-        
       </section>
     </main>
   );
