@@ -21,7 +21,7 @@ const Pagamento = () => {
     return (
         <main className="pagamento-container">
             <button className="exit-button" onClick={handleExit}>
-                <FaSignOutAlt /> Sair
+                <FaSignOutAlt />Voltar
             </button>
             <div className="card-pay-container">
                 <h1>Detalhes do Pagamento</h1>

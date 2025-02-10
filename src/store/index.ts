@@ -3,7 +3,6 @@ import { TypedUseSelectorHook, useSelector } from "react-redux";
 import { useDispatch } from "react-redux";
 import treinosSlice from "./reducers/treinosSlice";
 
-
 export const store = configureStore({
     reducer: {
         treinos: treinosSlice

@@ -1,29 +1,35 @@
 import React, { useState } from "react";
 import Logo from "../../../img/logo.png";
 import "./Form.css"; 
-
-interface FormState {
-  email: string;
-  password: string;
-}
+import { login } from "../../../services/authentication";
+import { useNavigate } from "react-router-dom";
+import { ImSpinner8 } from "react-icons/im";
 
 const Form: React.FC = () => {
-  const [formState, setFormState] = useState<FormState>({
-    email: "",
-    password: "",
-  });
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormState((prev) => ({
-      ...prev,
-      [name]: value,
-    }));
-  };
+  const navigate = useNavigate();
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    console.log("Dados enviados:", formState);
+    setLoading(true);
+    try{
+      if(email && senha) {
+        await login(email, senha);
+        navigate("/clientHome");
+        return
+      }else {
+        setError("Email e senha são obrigatórios.");
+      }
+    }catch (e) {
+      console.log(e);
+    }finally {
+      setLoading(false);
+    }
+  
   };
 
   
@@ -39,9 +45,8 @@ const Form: React.FC = () => {
             id="email"
             name="email"
             placeholder="Digite seu e-mail"
-            value={formState.email}
-            onChange={handleChange}
-            required
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
           />
         </div>
         <div className="form-group">
@@ -50,11 +55,17 @@ const Form: React.FC = () => {
             id="password"
             name="password"
             placeholder="Digite sua senha"
-            value={formState.password}
-            onChange={handleChange}
-            required
+            value={senha}
+            onChange={(e) => setSenha(e.target.value)}
           />
         </div>
+
+        {error && (
+          <p>{error}</p>
+        )}
+
+        {loading && <div className="spinner-container"><ImSpinner8 className="spinner"/></div>}
+
         <div className="submit-container">
           <button type="submit" className="submit-button">
             Continuar
