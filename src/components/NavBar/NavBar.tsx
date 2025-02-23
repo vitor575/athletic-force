@@ -3,8 +3,8 @@ import user from "../../img/user.png";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./estiloNav.css";
-import BootstrapModal from "../Modal";
-import Form from "../Modal/FormLogin";
+import BootstrapModal from "../ModalLogin";
+import Form from "../ModalLogin/FormLogin";
 
 function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -12,7 +12,7 @@ function Navbar() {
   const local = useLocation();
 
   return (
-    <nav className={local.pathname.startsWith("/clientHome") ? "navbar-off" : "navbar"}>
+    <nav className={local.pathname === "/" ? "navbar" : "navbar-off"}>
       <img src={Logo} alt="logo" />
 
       <ul className="nav-links">

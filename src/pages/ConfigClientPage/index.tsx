@@ -10,7 +10,7 @@ const ConfigClientPage = () => {
         <ConfiguracaoNav />
       </aside>
       <section className="config-client-content">
-        <Form />
+        <Form titulo="Mudar senha" label1="Senha atual" label2="Nova senha" botao="Salvar" type="password"/>
       </section>
     </main>
   );

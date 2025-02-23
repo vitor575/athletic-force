@@ -21,7 +21,7 @@ const Home = () => {
       </section>
       <section id="treinadores">
         <CardsTraineres  imagem={trainer1} titulo="Jeferson" descricao="Personal trainer de 10 anos na Zenfit"/>
-        <CardsTraineres  imagem={trainer2} titulo="Felipe" descricao="Personal trainer a mais de 5 anos na Zenfit"/>
+        <CardsTraineres  imagem={trainer2} titulo="Sintia" descricao="Personal trainer a mais de 5 anos na Zenfit"/>
         <CardsTraineres  imagem={trainer3} titulo="Matheus" descricao="Personal trainer a mais de 8 anos na ZenFit "/>
       </section>
       <section id="contato">

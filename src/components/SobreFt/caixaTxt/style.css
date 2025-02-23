@@ -31,6 +31,7 @@
   outline: none;
   margin-left: 15px;
 }
+
 @keyframes degrade {
   0% {
     background-position-x: 0%;

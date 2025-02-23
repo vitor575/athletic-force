@@ -1,0 +1,36 @@
+.empregado__login{
+    height: 100vh;
+    padding-top: 100px;
+}
+
+.login__form__container {
+    border: 1px solid rgb(180, 0, 0);
+    margin: 0 auto;
+    background-color: #838383; 
+    width: 80%;
+    padding: 2rem;
+    border-radius: 15px;
+    box-shadow: 0px 0px 20px 0px rgb(180, 0, 0);
+    display: flex;
+}
+
+.login__img {
+    background: url("../../img/academia.jpg");
+    background-repeat: no-repeat;
+    background-position: bottom;
+    background-size: cover;
+    width: 47%;
+    border-radius: 15px;
+}
+
+.login__img h2{
+    color: white;
+    margin-top: 10px;
+    font-size: 32px;
+    font-family: "Roboto", serif;
+    text-transform: uppercase;
+}
+
+.login__form {
+    width: 50%;
+}
