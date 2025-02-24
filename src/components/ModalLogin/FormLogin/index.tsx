@@ -1,38 +1,28 @@
 import React, { useState } from "react";
 import Logo from "../../../img/logo.png";
 import "./Form.css"; 
-import { login } from "../../../services/authentication";
-import { useNavigate } from "react-router-dom";
 import { ImSpinner8 } from "react-icons/im";
+import { useAuth } from "../../../services/authentication/useAuth";
 
 const Form: React.FC = () => {
   const [email, setEmail] = useState("");
   const [senha, setSenha] = useState("");
-  const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
-
-  const navigate = useNavigate();
+  const { authenticate, loginError } = useAuth();
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-    setLoading(true);
     try{
-      if(email && senha) {
-        await login(email, senha);
-        navigate("/clientHome");
-        return
-      }else {
-        setError("Email e senha são obrigatórios.");
-      }
-    }catch (e) {
+      setLoading(true);
+      await authenticate(email, senha);
+    } catch (e) {
       console.log(e);
-    }finally {
+    }finally{
       setLoading(false);
     }
-  
+      
   };
 
-  
   return (
     <div className="container">
       <div className="container__img">
@@ -59,16 +49,15 @@ const Form: React.FC = () => {
             onChange={(e) => setSenha(e.target.value)}
           />
         </div>
-
-        {error && (
-          <p>{error}</p>
+        {loginError && <p>{loginError}</p>}
+        {loading && (
+          <div className="spinner-container">
+            <ImSpinner8 className="spinner" />
+          </div>
         )}
-
-        {loading && <div className="spinner-container"><ImSpinner8 className="spinner"/></div>}
-
         <div className="submit-container">
           <button type="submit" className="submit-button">
-            Continuar
+            Login
           </button>
         </div>
       </form>

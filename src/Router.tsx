@@ -9,7 +9,6 @@ import CronogramaTreino from "./pages/CronogramaTreino";
 import Treino from "./components/Treino";
 import ConfigClientPage from "./pages/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
-import EmpregadoLogin from "./pages/EmpregadoLogin";
 import EmpregadoDashboard from "./pages/EmpregadoDashboard";
 import DashboardAlunos from "./components/DashboardAlunos";
 import DashboardHome from "./components/DashboardHome";
@@ -25,7 +24,6 @@ const App: React.FC = () => {
             <Routes>
               <Route path="/" element={<Home />} />
               <Route path="/login" element={<Login />} />
-              <Route path="/empregadoLogin" element={<EmpregadoLogin />} />
               <Route
                 path="/EmpregadoDashboard"
                 element={<EmpregadoDashboard />}
