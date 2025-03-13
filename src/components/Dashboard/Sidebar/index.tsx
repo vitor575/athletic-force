@@ -3,8 +3,7 @@ import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
 import "react-pro-sidebar/dist/css/styles.css";
-import { tokens } from "../../tema";
-import HomeOutlinedIcon from "@mui/icons-material/HomeOutlined";
+import { tokens } from "../../../tema";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
@@ -39,7 +38,7 @@ const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [isCollapsed, setIsCollapsed] = useState(false);
-  const [selected, setSelected] = useState("Dashboard");
+  const [selected, setSelected] = useState("Alunos");
 
   return (
     <Box
@@ -125,13 +124,6 @@ const Sidebar = () => {
           )}
 
           <Box paddingLeft={isCollapsed ? undefined : "10%"}>
-            <Item
-              title="Dashboard"
-              to="/EmpregadoDashboard"
-              icon={<HomeOutlinedIcon />}
-              selected={selected}
-              setSelected={setSelected}
-            />
             <Typography
               variant="h6"
               color={colors.grey[300]}
@@ -141,7 +133,14 @@ const Sidebar = () => {
             </Typography>
             <Item
               title="Alunos"
-              to="/EmpregadoDashboard/Alunos"
+              to="/EmpregadoDashboard"
+              icon={<PeopleOutlinedIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
+              title="Administração"
+              to="/EmpregadoDashboard/DashboardAdmin"
               icon={<PeopleOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}

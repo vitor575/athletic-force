@@ -1,27 +1,16 @@
-import { Box, Button, Typography, useTheme } from "@mui/material";
+import { Backdrop, Box, Button, CircularProgress, Typography, useTheme } from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
-import { tokens } from "../../tema";
+import { tokens } from "../../../tema";
 import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
 import { useNavigate } from "react-router-dom";
+import { useStudentData } from "../../../services/GetData/useStudentData";
 
 const DashboardAlunos = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const aluno = [
-    {
-      id: 1,
-      nome: "vitor",
-      numero: "11999999999",
-      email: "vitor95340@gmail.com"
-    },
-    {
-      id: 2,
-      nome: "Carlos",
-      numero: "11999999999",
-      email: "vitor95340@gmail.com"
-    }
-  ];
+  const {data, loading } = useStudentData();
+  const alunos = data?.findAllUsers.filter((user: any) => user.role === "STUDENT") || [];
 
   const colunas = [
     {
@@ -29,13 +18,13 @@ const DashboardAlunos = () => {
       headerName: "ID",
     },
     {
-      field: "nome",
+      field: "name",
       headerName: "Nome",
       flex: 1,
       cellClassName: "name--column--cell",
     },
     {
-      field: "numero",
+      field: "cellphone",
       headerName: "Numero de celular",
       flex: 1,
     },
@@ -49,14 +38,14 @@ const DashboardAlunos = () => {
       headerName: "Treinos",
       width: 150,
       flex: 1,
-      renderCell: () => {
+      renderCell: (params: any) => {
         return (
           <Button sx={{
             backgroundColor: colors.greenAccent[600],
              color: colors.grey[100]}}
             variant="contained"
             onClick={() => {
-              navigate("/EmpregadoDashboard/Alunos/treinos")
+              navigate(`/EmpregadoDashboard/treinos/${params.row.id}`)
             }}
           >
             <FitnessCenterOutlinedIcon/>
@@ -68,7 +57,13 @@ const DashboardAlunos = () => {
   ];
 
   return (
-    <Box m="20px">
+    <Box m="10px">
+      <Backdrop
+        sx={{ color: "#fff", zIndex: theme.zIndex.drawer + 1 }}
+        open={loading}
+      >
+        <CircularProgress color="inherit" />
+      </Backdrop>
       <Typography variant="h3" fontSize="32px" m="0 0 0 10px">
         ALUNOS
       </Typography>
@@ -81,7 +76,7 @@ const DashboardAlunos = () => {
         Todos alunos da academia
       </Typography>
       <Box
-        m="30px 0 0 0"
+        m="10px 0 0 0"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
@@ -103,7 +98,7 @@ const DashboardAlunos = () => {
           },
         }}
       >
-        <DataGrid rows={aluno} columns={colunas} />
+        <DataGrid rows={alunos} columns={colunas} />
       </Box>
     </Box>
   );

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import {
   Modal,
   Box,
@@ -22,52 +22,25 @@ interface EditTrainingModalProps {
   onSave: (data: { treino: string; repeticoes: string; carga: string }) => void;
 }
 
-const EditTrainingModal: React.FC<EditTrainingModalProps> = ({ open, handleClose, initialData, onSave }) => {
-
-  const [formData, setFormData] = useState({
-    treino: "",
-    repeticoes: "",
-    carga: "",
-  });
+const EditTrainingModal: React.FC<EditTrainingModalProps> = ({ open, handleClose }) => {
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const styles = {
-    position: "absolute" as const,
+    position: "relative" as const,
     top: "50%",
     left: "50%",
     transform: "translate(-50%, -50%)",
-    height: 400,
-    width: 800,
     color: colors.grey[600],
     bgcolor: colors.grey[600],
-    borderRadius: 4,
-    boxShadow: 24,
-    p: 4,
-    border: `2px solid ${colors.blueAccent[600]}`,
-  };
-
-  useEffect(() => {
-    setFormData(initialData);
-  }, [initialData]);
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = e.target;
-    setFormData((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    onSave(formData);
+    margin : "30px 0 0 0"
   };
 
   return (
     <Modal
       open={open}
       onClose={handleClose}
-      aria-labelledby="edit-training-modal-title"
-      aria-describedby="edit-training-modal-description"
     >
       <Box
         sx={{
@@ -93,7 +66,7 @@ const EditTrainingModal: React.FC<EditTrainingModalProps> = ({ open, handleClose
         >
           Editar Treino
         </Typography>
-        <form onSubmit={handleSubmit}>
+        <form>
           <TextField
             label="Treino"
             variant="outlined"
@@ -101,8 +74,7 @@ const EditTrainingModal: React.FC<EditTrainingModalProps> = ({ open, handleClose
             margin="normal"
             name="treino"
             sx={styles}
-            value={formData.treino}
-            onChange={handleChange}
+         
           />
           <TextField
             label="Repetições"
@@ -111,8 +83,7 @@ const EditTrainingModal: React.FC<EditTrainingModalProps> = ({ open, handleClose
             margin="normal"
             name="repeticoes"
             sx={styles}
-            value={formData.repeticoes}
-            onChange={handleChange}
+            
           />
           <TextField
             label="Carga"
@@ -121,8 +92,7 @@ const EditTrainingModal: React.FC<EditTrainingModalProps> = ({ open, handleClose
             margin="normal"
             name="carga"
             sx={styles}
-            value={formData.carga}
-            onChange={handleChange}
+           
           />
           <Box mt={2} display="flex" justifyContent="flex-end" gap={1}>
             <Button

@@ -16,11 +16,12 @@ export const useAuth = () => {
     try {
       await login(email, senha);
       const { data } = await refetch();
+      console.log("Dados retornados da query 'me':", data);
       if (data && data.me) {
         const user = data.me;
-        if (user.role === 'EMPLOYEE' || user.role === 'TEACHER') {
+        if (user.role === 'Employee' || user.role === 'Professor' || user.role === 'Admin') {
           navigate('/EmpregadoDashboard');
-        } else if (user.role === 'CUSTOMER') {
+        } else if (user.role === 'Student') {
           navigate("/clientHome");
         }
       }

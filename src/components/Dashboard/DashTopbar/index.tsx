@@ -7,10 +7,10 @@ import  SettingsOutlinedIcon  from "@mui/icons-material/SettingsOutlined";
 import  PersonOutlinedIcon  from "@mui/icons-material/PersonOutlined";
 import  SearchIcon  from "@mui/icons-material/Search";
 import { useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../../store";
+import { AppDispatch, RootState } from "../../../store";
 import { useSelector } from "react-redux";
-import { themeSettings, tokens } from "../../tema";
-import { toggleColorMode } from "../../store/reducers/temaSlice";
+import { themeSettings, tokens } from "../../../tema";
+import { toggleColorMode } from "../../../store/reducers/temaSlice";
 
 
 const DashTopbar = () => {

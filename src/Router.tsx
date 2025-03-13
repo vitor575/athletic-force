@@ -10,50 +10,58 @@ import Treino from "./components/Treino";
 import ConfigClientPage from "./pages/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
 import EmpregadoDashboard from "./pages/EmpregadoDashboard";
-import DashboardAlunos from "./components/DashboardAlunos";
-import DashboardHome from "./components/DashboardHome";
-import DashboardTreinos from "./components/DashboardTreinos";
+import DashboardAlunos from "./components/Dashboard/DashboardAlunos";
+import DashboardTreinos from "./components/Dashboard/DashboardTreinos";
+import DashboardAdmin from "./components/Dashboard/DashboardAdmin";
 
 const App: React.FC = () => {
-
   return (
-      <div className="App">
-        <Router>
-          <Navbar />
-          <main>
-            <Routes>
-              <Route path="/" element={<Home />} />
-              <Route path="/login" element={<Login />} />
+    <div className="App">
+      <Router>
+        <Navbar />
+        <main>
+          <Routes>
+            <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
+   
+            <Route element={<ProtectedRoute redirectPath="/login" />}>
+              
+              <Route path="/clientHome" element={<ClientHome />} />
+              <Route path="/clientHome/pagamentos" element={<Pagamento />} />
+              <Route path="/clientHome/configuration" element={<ConfigClientPage />}/>
+              <Route
+                path="/clientHome/cronograma"
+                element={<CronogramaTreino />}
+              >
+                <Route
+                  path="/clientHome/cronograma/:dia"
+                  element={<Treino />}
+                />
+              </Route>
+
               <Route
                 path="/EmpregadoDashboard"
                 element={<EmpregadoDashboard />}
               >
-                <Route index element={<DashboardHome />}/>
-                <Route path="/EmpregadoDashboard/Alunos" element={<DashboardAlunos />} />
-                <Route path="/EmpregadoDashboard/Alunos/treinos" element={<DashboardTreinos />} />
-              </Route>
-              <Route element={<ProtectedRoute redirectPath="/login" />}>
-                <Route path="/clientHome" element={<ClientHome />} />
-                <Route path="/clientHome/pagamentos" element={<Pagamento />} />
                 <Route
-                  path="/clientHome/configuration"
-                  element={<ConfigClientPage />}
+                  index
+                  element={<DashboardAlunos />}
                 />
                 <Route
-                  path="/clientHome/cronograma"
-                  element={<CronogramaTreino />}
-                >
-                  <Route
-                    path="/clientHome/cronograma/:dia"
-                    element={<Treino />}
-                  />
-                </Route>
+                  path="/EmpregadoDashboard/DashboardAdmin"
+                  element={<DashboardAdmin />}
+                />
+                <Route
+                  path="/EmpregadoDashboard/treinos/:id"
+                  element={<DashboardTreinos />}
+                />
               </Route>
-            </Routes>
-          </main>
-        </Router>
-      </div>
+            </Route>
+          </Routes>
+        </main>
+      </Router>
+    </div>
   );
-}
+};
 
 export default App;
