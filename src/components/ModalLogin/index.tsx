@@ -1,37 +1,149 @@
-import React, { FC } from 'react';
+import React, { useState } from "react";
+import { Modal, Box, Typography, Button, useTheme } from "@mui/material";
+import { tokens } from "../../tema";
+import { useAuth } from "../../services/authentication/useAuth";
+import LoopIcon from "@mui/icons-material/Loop";
+import logo from "../../img/logo3.png";
+import CustomTextField from "../Dashboard/DashboardAdmin/TextField";
+import { keyframes } from "@mui/system";
 
-interface BootstrapModalProps {
-  isOpen: boolean;
+interface ModalLoginProps {
+  open: boolean;
   onClose: () => void;
-  title: string;
-  children: React.ReactNode;
-  size?: 'sm' | 'lg' | 'xl';
 }
 
-const BootstrapModal: FC<BootstrapModalProps> = ({ isOpen, onClose, title, children, size }) => {
+const spin = keyframes`
+  from { transform: rotate(0deg); }
+  to { transform: rotate(-360deg); }
+`;
+
+const slideDownFadeIn = keyframes`
+  from {
+    opacity: 0;
+    transform: translateY(-50px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+`;
+
+const ModalLogin: React.FC<ModalLoginProps> = ({ open, onClose }) => {
+  const [email, setEmail] = useState("");
+  const [senha, setSenha] = useState("");
+  const [loading, setLoading] = useState(false);
+  const { authenticate } = useAuth();
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      await authenticate(email, senha);
+      onClose();
+    } catch (e) {
+      console.log(e);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
   return (
-    <div
-      className={`modal fade ${isOpen ? 'show d-block' : ''}`}
-      tabIndex={-1}
-      style={{ backgroundColor: 'rgba(0, 0, 0, 0.5)' }}
-      role="dialog"
-    >
-      <div className={`modal-dialog ${size ? `modal-${size}` : ''}`} role="document"> {/* Aqui */}
-        <div className="modal-content">
-          <div className="modal-header">
-            <h5 className="modal-title">{title}</h5>
-            <button
-              type="button"
-              className="btn-close"
-              aria-label="Close"
-              onClick={onClose}
-            ></button>
-          </div>
-          <div className="modal-body">{children}</div>
-        </div>
-      </div>
-    </div>
+    <Modal open={open} onClose={onClose}>
+      <Box
+        component="form"
+        onSubmit={handleSubmit}
+        sx={{
+          width: 700,
+          height: 500,
+          mx: "auto",
+          mt: 8,
+          p: 3,
+          border: `3px solid ${colors.blueAccent[600]}`,
+          bgcolor: colors.primary[500],
+          borderRadius: 2,
+          animation: `${slideDownFadeIn} 0.5s ease-out`,
+        }}
+      >
+        <Typography
+          variant="h5"
+          gutterBottom
+          paddingBottom={1}
+          borderBottom={`2px solid ${colors.blueAccent[400]}`}
+          color={colors.grey[800]}
+        >
+          Efetuar login
+        </Typography>
+        <Box
+          component="img"
+          src={logo}
+          sx={{
+            width: 150,
+            margin: "10px 250px",
+            border: `3px solid ${colors.blueAccent[400]}`,
+            borderRadius: 5,
+          }}
+        />
+        <CustomTextField
+          label="Email"
+          name="email"
+          type="email"
+          fullWidth
+          slotProps={{
+            inputLabel: {
+              sx: {
+                color: colors.grey[900],
+                "&.Mui-focused": { color: colors.grey[700] },
+              },
+            },
+          }}
+          margin="normal"
+          value={email}
+          onChange={(e) => setEmail(e.target.value)}
+          required
+        />
+        <CustomTextField
+          label="Senha"
+          name="password"
+          type="password"
+          fullWidth
+          slotProps={{
+            inputLabel: {
+              sx: {
+                color: colors.grey[900],
+                "&.Mui-focused": { color: colors.grey[700] },
+              },
+            },
+          }}
+          margin="normal"
+          value={senha}
+          onChange={(e) => setSenha(e.target.value)}
+          required
+        />
+        {loading && (
+          <LoopIcon
+            fontSize="large"
+            sx={{
+              margin: "0 300px",
+              animation: `${spin} 2s linear infinite`,
+              color: "white",
+            }}
+          />
+        )}
+        {!loading && (
+          <Button
+            type="submit"
+            variant="contained"
+            sx={{ mt: 4, bgcolor: colors.blueAccent[500] }}
+          >
+            Entrar
+          </Button>
+        )}
+      </Box>
+    </Modal>
   );
 };
 
-export default BootstrapModal;
+export default ModalLogin;

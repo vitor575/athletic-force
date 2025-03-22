@@ -1,4 +1,4 @@
-import { Box, createTheme, IconButton, useTheme } from "@mui/material";
+import { Box, IconButton, useTheme } from "@mui/material";
 import InputBase from "@mui/material/InputBase";
 import  LightModeOutlinedIcon  from "@mui/icons-material/LightModeOutlined";
 import  DarkModeOutlinedIcon  from "@mui/icons-material/DarkModeOutlined";
@@ -7,9 +7,8 @@ import  SettingsOutlinedIcon  from "@mui/icons-material/SettingsOutlined";
 import  PersonOutlinedIcon  from "@mui/icons-material/PersonOutlined";
 import  SearchIcon  from "@mui/icons-material/Search";
 import { useDispatch } from "react-redux";
-import { AppDispatch, RootState } from "../../../store";
-import { useSelector } from "react-redux";
-import { themeSettings, tokens } from "../../../tema";
+import { AppDispatch } from "../../../store";
+import { tokens } from "../../../tema";
 import { toggleColorMode } from "../../../store/reducers/temaSlice";
 
 
@@ -17,7 +16,6 @@ const DashTopbar = () => {
 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const mode = useSelector((state: RootState) => state.tema.mode);
     const dispatch = useDispatch<AppDispatch>();
 
     return (

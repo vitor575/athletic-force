@@ -118,10 +118,11 @@ const DashboardAdmin: React.FC = () => {
       onSubmit={handleSubmit}
       sx={{
         width: 700,
-        mx: "auto",
-        mt: 1,
-        p: 2,
+        mx:'auto',
+        mt: 8,
+        p: 3,
         border: `2px solid ${colors.blueAccent[600]}`,
+        bgcolor: colors.primary[400],
         borderRadius: 2,
       }}
     >
@@ -235,7 +236,6 @@ const DashboardAdmin: React.FC = () => {
       <Button
         type="submit"
         variant="contained"
-        color="primary"
         sx={{ mt: 4, bgcolor: colors.blueAccent[500] }}
       >
         Cadastrar

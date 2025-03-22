@@ -11,13 +11,20 @@ const CustomTextField: React.FC<TextFieldProps> = (props) => {
     <TextField
       {...props}
       sx={{
-        "& .MuiOutlinedInput-root.Mui-focused fieldset": {
-          borderColor: colors.blueAccent[200],
+        "& .MuiInputBase-input": {
+          color: 'white'
         },
-        "& .MuiInputLabel-root.Mui-focused": {
-          color: colors.blueAccent[200], 
+        "& .MuiOutlinedInput-root": {
+          "& fieldset": {
+            borderColor: colors.blueAccent[600],
+          },
+          "&:hover fieldset": {
+            borderColor: colors.blueAccent[400],
+          },
+          "&.Mui-focused fieldset": {
+            borderColor: colors.blueAccent[300],
+          }, 
         },
-        ...props.sx, 
       }}
     />
   );

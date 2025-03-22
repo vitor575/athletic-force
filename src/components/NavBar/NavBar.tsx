@@ -3,8 +3,7 @@ import user from "../../img/user.png";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./estiloNav.css";
-import BootstrapModal from "../ModalLogin";
-import Form from "../ModalLogin/FormLogin";
+import ModalLogin from "../ModalLogin";
 
 function Navbar() {
   const [isModalOpen, setModalOpen] = useState(false);
@@ -26,14 +25,12 @@ function Navbar() {
         <img src={user} alt="logo" />
       </button>
 
-      <BootstrapModal
-        isOpen={isModalOpen}
+      <ModalLogin
+        open={isModalOpen}
         onClose={() => setModalOpen(false)}
-        title="Login"
-        size="lg"
-      >
-        <Form />
-      </BootstrapModal>
+      />
+        
+    
     </nav>
   );
 }
