@@ -11,7 +11,7 @@ import ConfigClientPage from "./pages/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
 import EmpregadoDashboard from "./pages/EmpregadoDashboard";
 import DashboardAlunos from "./components/Dashboard/DashboardAlunos";
-import DashboardTreinos from "./components/Dashboard/DashboardTreinos";
+import DashboardTreinos from "./components/Dashboard/DashboardRotinas";
 import DashboardAdmin from "./components/Dashboard/DashboardAdmin";
 
 const App: React.FC = () => {

@@ -12,7 +12,7 @@ interface TrainingData {
   id: string;
 }
 
-const DashboardAlunos: React.FC = () => {
+const DashboardRotinas: React.FC = () => {
   const { id } = useParams<{ id: string }>();
   const { data, loading } = useStudentData();
   const navigate = useNavigate();
@@ -132,4 +132,4 @@ const DashboardAlunos: React.FC = () => {
   );
 };
 
-export default DashboardAlunos;
+export default DashboardRotinas;

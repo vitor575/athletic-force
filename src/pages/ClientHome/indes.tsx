@@ -1,51 +1,148 @@
 import React from "react";
-import Logo from "../../img/logo.png";
+import Logo from "../../img/logo3.png";
 import Client from "../../img/client.png";
 import "./ClientHome.css";
 import { FaSignOutAlt, FaWhatsapp } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
 import CardCliente from "../../components/CardsCliente";
-import Calendario from '../../img/calendario.png';
-import Pagamento from '../../img/pagamento.png';
-import Configuracao from '../../img/configuracao.png';
+import Calendario from "../../img/calendario.png";
+import Pagamento from "../../img/pagamento.png";
+import Configuracao from "../../img/configuracao.png";
 import { useNavigate } from "react-router-dom";
+import { Box, List, ListItem, Typography, useTheme } from "@mui/material";
+import { tokens } from "../../tema";
 
 const ClientHome = () => {
-    const navigate = useNavigate();
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+  const handleExit = () => {
+    navigate("/");
+  };
 
-    const handleExit = () => {
-        navigate("/")
-    };
+  const listStyle = {"&:hover": {
+                    transform: "scale(0.9)",
+                    transition: "transform 0.3s ease-in-out",
+                    color: `${colors.blueAccent[400]}`,
+                  },};
 
-    return (
-        <main className="client-page">
-            <div className="header-container">
-                <div className="container-logo">
-                    <img src={Logo} alt="Logo"/>
-                    <div className="social-links">
-                        <ul>
-                            <li><FaWhatsapp /></li>
-                            <li><FaFacebook /></li>
-                            <li><FaInstagram /></li>
-                        </ul>
-                    </div>
-                </div>
-                <div className="client-container">
-                    <img src={Client} alt="Sua imagem"/>
-                    <div className="client-text">
-                        <h2>Olá, seja bem vindo.</h2>
-                        <button className="exit-button" onClick={handleExit}><FaSignOutAlt />Sair</button>
-                    </div>
-                </div>
-            </div>
-            <div className="cards-container">
-                <CardCliente titulo="Cronograma de treinos" imagem={Calendario} destino="/clientHome/cronograma/Segunda-feira" />
-                <CardCliente titulo="Pagamentos pendentes" imagem={Pagamento} destino="/clientHome/pagamentos" />
-                <CardCliente titulo="Configuração da conta" imagem={Configuracao} destino="/clientHome/configuration" />
-            </div>
-        </main>
-    )
-}
+  return (
+    <Box
+      sx={{
+        height: "100vh",
+        width: "100%",
+        bgcolor: colors.primary[200],
+        display: "flex",
+        flexDirection: "column",
+        gap: "4rem",
+      }}
+      component="main"
+    >
+      <Box
+        sx={{
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          width: "100%",
+          padding: "0.5rem 3rem",
+          bgcolor: colors.primary[300],
+          boxShadow: "0 4px 8px rgba(0, 0, 0, 0.1)",
+          borderBottom: `3px solid ${colors.blueAccent[500]}`,
+        }}
+      >
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            alignItems: "center",
+            gap: "1rem",
+          }}
+        >
+          <Box
+            component="img"
+            sx={{ width: "150px" }}
+            border={`1px solid ${colors.blueAccent[500]}`}
+            src={Logo}
+            alt="Logo"
+          />
+          <Box>
+            <List
+              sx={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "1.5rem",
+                fontSize: "3rem",
+                color: colors.blueAccent[500],
+              }}
+            >
+              <ListItem
+                sx={listStyle}
+              >
+                <FaWhatsapp />
+              </ListItem>
+              <ListItem
+                sx={listStyle}
+              >
+                <FaFacebook />
+              </ListItem>
+              <ListItem
+                sx={listStyle}
+              >
+                <FaInstagram />
+              </ListItem>
+            </List>
+          </Box>
+        </Box>
+        <Box sx={{
+              width: '50%',
+              height: '75%',
+              display: 'flex',
+              alignItems: 'center',
+              gap: '2rem',
+              padding: '2rem', 
+              background: colors.primary[600],
+              border: `3px solid ${colors.blueAccent[500]}`,
+              borderRadius: '20px',
+              boxShadow: '0 4px 8px rgba(0, 0, 0, 0.1)',
+              transition: 'transform 0.2s ease, box-shadow 0.2s ease',
+              position: 'relative',
+              color: colors.grey[900] 
+        }}>
+          <Box sx={{
+            border: `4px solid ${colors.blueAccent[600]}`,
+            borderRadius: '50%',
+            width: '120px',  
+            height: '120px'
+          }} component='img' src={Client} alt="Imagem de avatar" />
+          <Box fontSize='2rem' fontWeight='bold'>
+            <Typography variant="h3" component='h2'>Seja bem vindo.</Typography>
+            <button className="exit-button" onClick={handleExit}>
+              <FaSignOutAlt />
+              Sair
+            </button>
+          </Box>
+        </Box>
+      </Box>
+      <div className="cards-container">
+        <CardCliente
+          titulo="Cronograma de treinos"
+          imagem={Calendario}
+          destino="/clientHome/cronograma/Segunda-feira"
+        />
+        <CardCliente
+          titulo="Pagamentos pendentes"
+          imagem={Pagamento}
+          destino="/clientHome/pagamentos"
+        />
+        <CardCliente
+          titulo="Configuração da conta"
+          imagem={Configuracao}
+          destino="/clientHome/configuration"
+        />
+      </div>
+    </Box>
+  );
+};
 
 export default ClientHome;
