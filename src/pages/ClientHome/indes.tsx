@@ -10,7 +10,7 @@ import Calendario from "../../img/calendario.png";
 import Pagamento from "../../img/pagamento.png";
 import Configuracao from "../../img/configuracao.png";
 import { useNavigate } from "react-router-dom";
-import { Box, List, ListItem, Typography, useTheme } from "@mui/material";
+import { Box, Button, List, ListItem, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../tema";
 
 const ClientHome = () => {
@@ -95,7 +95,7 @@ const ClientHome = () => {
           </Box>
         </Box>
         <Box sx={{
-              width: '50%',
+              width: '45%',
               height: '75%',
               display: 'flex',
               alignItems: 'center',
@@ -117,14 +117,37 @@ const ClientHome = () => {
           }} component='img' src={Client} alt="Imagem de avatar" />
           <Box fontSize='2rem' fontWeight='bold'>
             <Typography variant="h3" component='h2'>Seja bem vindo.</Typography>
-            <button className="exit-button" onClick={handleExit}>
+            <Button sx={{
+              bgcolor: colors.blueAccent[500],
+              color: 'white',
+              padding: '0.1rem 2rem',
+              fontSize: '1.6rem',
+              border: 'none',
+              borderRadius: '10px',
+              cursor: 'pointer',
+              transition: 'background-color 0.3s ease, transform 0.2s ease',
+              position: 'absolute', 
+              top: '1rem', 
+              right: '1rem',
+              '&:hover': {
+                bgcolor: colors.blueAccent[400],
+                transform: 'scale(0.9)'
+              }
+            }} onClick={handleExit}>
               <FaSignOutAlt />
               Sair
-            </button>
+            </Button>
           </Box>
         </Box>
       </Box>
-      <div className="cards-container">
+      <Box sx={{
+            display: 'flex',
+            justifyContent: 'center',
+            alignItems: 'center',
+            gap: '3rem',
+            margin: "2rem 4rem",
+            flexWrap: 'wrap'
+      }} className="cards-container">
         <CardCliente
           titulo="Cronograma de treinos"
           imagem={Calendario}
@@ -140,7 +163,7 @@ const ClientHome = () => {
           imagem={Configuracao}
           destino="/clientHome/configuration"
         />
-      </div>
+      </Box>
     </Box>
   );
 };

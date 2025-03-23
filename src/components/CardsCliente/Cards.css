@@ -24,13 +24,6 @@
     margin-bottom: 1rem;
 }
 
-.card-titulo p {
-    font-size: 1.3rem;
-    font-weight: bold;
-    color: #333;
-    text-align: center;
-}
-
 .card-button .navegacao {
     background-color: red;
     color: white;
