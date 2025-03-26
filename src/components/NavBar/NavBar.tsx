@@ -23,21 +23,21 @@ const Navbar = () => {
       }}
       className={local.pathname === "/" ? "navbar" : "navbar-off"}
     >
-      <Toolbar sx={{ display: "flex", justifyContent: "space-between", alignItems: "center" }}>
+      <Toolbar sx={{ display: "flex", alignItems: "center", width: "100%"}}>
         {/* Logo */}
-        <Box component="img" src={Logo} alt="Logo" sx={{ width: "8%", cursor: "pointer",border: `1px solid ${colors.blueAccent[600]}` }} />
+        <Box component="img" src={Logo} alt="Logo" sx={{ width: "8%", cursor: "pointer",border: `1px solid ${colors.blueAccent[600]}`, marginRight: "30%"}} />
 
         {/* Links de navegação */}
-        <Box sx={{ display: "flex", gap: 4}}>
-          <Button color="inherit" href="#home" sx={{fontSize: "30px", "&:hover": {color: colors.blueAccent[500]}}}>Home</Button>    
-          <Button color="inherit" href="#sobre"  sx={{fontSize: "30px",  "&:hover": {color: colors.blueAccent[500]}}}>Sobre</Button>
-          <Button color="inherit" href="#treinadores"  sx={{fontSize: "30px",  "&:hover": {color: colors.blueAccent[500]}}}>Treinadores</Button>
-          <Button color="inherit" href="#contato"  sx={{fontSize: "30px" , "&:hover": {color: colors.blueAccent[500]}}}>Contato</Button>
+        <Box sx={{ display: "flex", gap: 3, border: `1px solid ${colors.blueAccent[600]}`,borderRadius: "50px", padding: "15px 30px"}}>
+          <Button color="inherit" href="#home" sx={{fontSize: "25px", "&:hover": {color: colors.blueAccent[500]}}}>Home</Button>    
+          <Button color="inherit" href="#sobre"  sx={{fontSize: "25px",  "&:hover": {color: colors.blueAccent[500]}}}>Sobre</Button>
+          <Button color="inherit" href="#treinadores"  sx={{fontSize: "25px",  "&:hover": {color: colors.blueAccent[500]}}}>Treinadores</Button>
+          <Button color="inherit" href="#contato"  sx={{fontSize: "25px" , "&:hover": {color: colors.blueAccent[500]}}}>Contato</Button>
         </Box>
 
         {/* Botão de Login */}
         <IconButton onClick={() => setModalOpen(!isModalOpen)}>
-          <Box component="img" src={user} alt="Usuário" sx={{ width: "100px" }} />
+          <Box component="img" src={user} alt="Usuário" sx={{ width: "100px",  border: `1px solid ${colors.blueAccent[600]}`,borderRadius: "100%",padding: "15px"}} />
         </IconButton>
 
         {/* Modal de Login */}
