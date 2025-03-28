@@ -6,8 +6,6 @@ import { tokens } from "../../tema";
 import { useTheme } from "@mui/material";
 import Logo from "../../img/logo3.png";
 import user from "../../img/user.png";
-import { color } from "framer-motion";
-import { BorderBottom, BorderTop } from "@mui/icons-material";
 
 const Navbar = () => {
   const [isModalOpen, setModalOpen] = useState(false);

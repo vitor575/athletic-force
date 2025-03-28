@@ -4,31 +4,8 @@ import logoDois from "../../img/logo2.png";
 import IconsFooter from "./icons";
 import ContatosFooter from "./contatosFooter";
 import TextFooter from "./text";
-import { useLayoutEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 
 const Footer = () => {
-
-
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(".logo-dois", {
-      opacity: 1,
-      x:0,
-      scrollTrigger: {
-        trigger: ".imglogodois",
-        start: "top 600px",
-        end: "bottom 700px",
-        scrub: true,
-      },
-    });
-
-    return () => {
-      gsap.killTweensOf(".logo-dois");
-    };
-  }, []);
 
   
   return (

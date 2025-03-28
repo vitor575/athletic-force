@@ -8,8 +8,6 @@
     padding: 30px 50px;
     width: 80%;
     margin: 1% 10% 5px 10%;
-    transform: translateX(900px);
-    opacity: 0;
     transition: 400ms;
   }
   .links h1 {

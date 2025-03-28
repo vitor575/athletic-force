@@ -2,6 +2,7 @@
   "name": "athletic-force",
   "version": "0.1.0",
   "private": true,
+  "module": "react-slick",
   "dependencies": {
     "@apollo/client": "^3.13.1",
     "@emotion/react": "^11.14.0",
@@ -26,7 +27,9 @@
     "react-pro-sidebar": "^0.7.1",
     "react-redux": "^9.2.0",
     "react-router-dom": "^7.0.2",
-    "react-scripts": "5.0.1"
+    "react-scripts": "5.0.1",
+    "react-slick": "^0.30.3",
+    "slick-carousel": "^1.8.1"
   },
   "scripts": {
     "start": "react-scripts start",
