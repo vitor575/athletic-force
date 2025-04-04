@@ -1,14 +1,11 @@
-import React from 'react'
-import ImagemContato from "../../../img/imagemContato.jpg"
-import "../styles.css"
-import { useLayoutEffect } from "react";
+import React, { useLayoutEffect } from "react";
+import { Box } from "@mui/material";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import ImagemContato from "../../../img/imagemContato.jpg";
 
 const FotoContato = () => {
-
   useLayoutEffect(() => {
-
     gsap.registerPlugin(ScrollTrigger);
 
     gsap.to(".imagem-contato", {
@@ -24,14 +21,28 @@ const FotoContato = () => {
     return () => {
       gsap.killTweensOf(".imagem-contato");
     };
-
   }, []);
 
   return (
-    <div className='imagem-contato'>
-        <img src={ImagemContato} alt="ImagemContato" className='imagemlogocontato'/>
-    </div>
-  )
-}
+    <Box
+      sx={{
+        width: "100%",
+        position: "relative",
+        top: "-150px",
+        opacity: 0,
+        display: "flex",
+        justifyContent: "center",
+      }}
+      className="imagem-contato"
+    >
+      <img
+        src={ImagemContato}
+        alt="ImagemContato"
+        className="imagemlogocontato"
+        style={{ width: "100%", objectFit: "cover" }}
+      />
+    </Box>
+  );
+};
 
-export default FotoContato
+export default FotoContato;

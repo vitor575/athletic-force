@@ -1,9 +1,7 @@
-import React, { useState, useLayoutEffect } from "react";
+import React, { useState } from "react";
+import { Box, TextField, Button, Typography, Paper } from "@mui/material";
 import FotoContato from "./fotoContato";
-import "./styles.css";
-import logocontato from "../../img/logo.png";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import logocontato from "../../img/logo3.png"
 
 interface FormContact {
   email: string;
@@ -30,79 +28,76 @@ const Contato: React.FC = () => {
     console.log("Dados enviados:", formContatoState);
   };
 
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(".container-contact", {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: ".formulario",
-        start: "top 600px",
-        end: "bottom 700px",
-        scrub: true,
-      },
-    });
-
-    return () => gsap.killTweensOf(".container-contact");
-  }, []);
-
   return (
-    <main>
-      <div>
-        <FotoContato />
-      </div>
-      <div className="container-contact">
-        <div className="logo">
-          <img src={logocontato} alt="logocontato" className="animacao" />
-        </div>
-        <form className="formulario" onSubmit={handleSubmit}>
-          <div className="nomecontato">
-            CONTATO COM<span>ZENFIT</span>
-          </div>
-          <div className="forms">
-            <input
-              type="text"
-              id="nome"
-              name="nome"
-              value={formContatoState.nome}
-              onChange={handleChange}
-              placeholder="Digite seu Nome :"
-              required
-            />
-          </div>
-          <div className="forms2">
-            <input
+    <Box >
+      <FotoContato />
+      <Paper
+        elevation={3}
+        sx={{
+          padding: 4,
+          borderRadius: 3,
+          boxShadow: "0px 4px 60px rgba(177, 177, 177, 0.973)",
+          width: "65%",
+          margin: "0 auto",
+          mt: -10,
+          position: "relative",
+          top: "-200px",
+        }}
+      >
+        <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
+          <img src={logocontato} alt="logocontato" style={{ width: "20%", animation: "imgLogo 4s ease-in-out infinite" }} />
+        </Box>
+        <Typography variant="h3" fontWeight={600} textAlign="center" color="error" gutterBottom>
+          CONTATO COM <span style={{ background: "linear-gradient(20deg, #fff, #ff0000)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>ZENFIT</span>
+        </Typography>
+        <form onSubmit={handleSubmit}>
+          <TextField
+            fullWidth
+            label="Nome"
+            name="nome"
+            value={formContatoState.nome}
+            onChange={handleChange}
+            required
+            margin="normal"
+          />
+          <Box sx={{ display: "flex", gap: 2, mt: 1 }}>
+            <TextField
+              fullWidth
               type="email"
-              id="email"
+              label="E-mail"
               name="email"
-              placeholder="Digite seu E-mail :"
               value={formContatoState.email}
               onChange={handleChange}
               required
             />
-            <input
-              type="text"
-              id="numero"
+            <TextField
+              fullWidth
+              label="Número"
               name="numero"
-              placeholder="(00) 00000-0000"
-              required
               value={formContatoState.numero}
               onChange={handleChange}
+              required
             />
-          </div>
-          <textarea
+          </Box>
+          <TextField
+            fullWidth
+            multiline
+            rows={4}
+            label="Mensagem"
             name="textmensage"
-            placeholder="Deixe sua mensagem :"
             value={formContatoState.textmensage}
             onChange={handleChange}
             required
-          ></textarea>
-          <div className="submit">
-            <button type="submit">Enviar mensagem</button>
-          </div>
+            margin="normal"
+          />
+          <Box sx={{ display: "flex", justifyContent: "end", mt: 2 }}>
+            <Button type="submit" variant="contained" color="error" sx={{ fontWeight: "bold", padding: "12px 24px" }}>
+              Enviar mensagem
+            </Button>
+          </Box>
         </form>
-      </div>
-    </main>
+      </Paper>
+    </Box>
   );
 };
 
