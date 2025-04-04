@@ -11,6 +11,7 @@ const CustomTextField: React.FC<TextFieldProps> = (props) => {
     <TextField
       {...props}
       sx={{
+        
         "& .MuiInputBase-input": {
           color: 'white'
         },

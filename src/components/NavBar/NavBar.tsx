@@ -1,5 +1,5 @@
 import Logo from "../../img/logo.png";
-import user from "../../img/user.png";
+import PersonIcon from "@mui/icons-material/Person";
 import React, { useState } from "react";
 import { useLocation } from "react-router-dom";
 import "./estiloNav.css";
@@ -22,15 +22,17 @@ function Navbar() {
       </ul>
 
       <button className="login" onClick={() => setModalOpen(!isModalOpen)}>
-        <img src={user} alt="logo" />
+        <PersonIcon
+          sx={{
+            fontSize: "64px",
+            bgcolor: "white",
+            border: "3px solid black",
+            borderRadius: "100px",
+          }}
+        />
       </button>
 
-      <ModalLogin
-        open={isModalOpen}
-        onClose={() => setModalOpen(false)}
-      />
-        
-    
+      <ModalLogin open={isModalOpen} onClose={() => setModalOpen(false)} />
     </nav>
   );
 }

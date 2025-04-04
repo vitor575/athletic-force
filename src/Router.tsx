@@ -12,7 +12,9 @@ import ProtectedRoute from "./components/protectedRoute";
 import EmpregadoDashboard from "./pages/EmpregadoDashboard";
 import DashboardAlunos from "./components/Dashboard/DashboardAlunos";
 import DashboardTreinos from "./components/Dashboard/DashboardRotinas";
-import DashboardAdmin from "./components/Dashboard/DashboardAdmin";
+import DashboardAdmin from "./components/Dashboard/DashboardAdminUser";
+import DashboardAdminExercise from "./components/Dashboard/DashboardAdminExercise";
+import DashboardAdminTrainings from "./components/Dashboard/DashboardAdminTrainings";
 
 const App: React.FC = () => {
   return (
@@ -48,8 +50,17 @@ const App: React.FC = () => {
                   element={<DashboardAlunos />}
                 />
                 <Route
-                  path="/EmpregadoDashboard/DashboardAdmin"
+                  path="/EmpregadoDashboard/DashboardAdminUser"
                   element={<DashboardAdmin />}
+                />
+                <Route
+                  path="/EmpregadoDashboard/DashboardAdminExercise"
+                  element={<DashboardAdminExercise />}
+                />
+
+                <Route
+                  path="/EmpregadoDashboard/DashboardAdminTrainings"
+                  element={<DashboardAdminTrainings />}
                 />
                 <Route
                   path="/EmpregadoDashboard/treinos/:id"

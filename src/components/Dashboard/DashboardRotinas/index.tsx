@@ -3,7 +3,7 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { tokens } from "../../../tema";
 import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
 import { useNavigate, useParams } from "react-router-dom";
-import { useStudentData } from "../../../services/GetData/useStudentData";
+import { useStudentData } from "../../../services/querrys/useStudentData";
 
 interface TrainingData {
   treino: string;
@@ -19,10 +19,8 @@ const DashboardRotinas: React.FC = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
- 
   const student = data?.findAllUsers.find((user: any) => user.id === id);
 
- 
   const trainings: TrainingData[] =
     student?.trainings?.map((training: any) => ({
       id: training.Id,
@@ -63,6 +61,10 @@ const DashboardRotinas: React.FC = () => {
               marginRight: "5px",
             }}
             variant="contained"
+            onClick={() => {
+              
+              console.log("Editar treino", params.row);
+            }}
           >
             <FitnessCenterOutlinedIcon />
             <Typography m="0 0 0 5px">Editar</Typography>
@@ -73,6 +75,9 @@ const DashboardRotinas: React.FC = () => {
               color: colors.grey[100],
             }}
             variant="contained"
+            onClick={() => {
+              console.log("Excluir treino", params.row);
+            }}
           >
             Excluir
           </Button>
@@ -90,17 +95,35 @@ const DashboardRotinas: React.FC = () => {
       <Typography variant="h4" fontSize="16px" ml="10px" mt="5px" color={colors.greenAccent[500]}>
         Treinos de {student ? student.name : "Aluno"}
       </Typography>
-      <Button
+      <Box
         sx={{
-          backgroundColor: colors.blueAccent[700],
-          color: colors.grey[100],
-          m: "5px 0 0 10px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+          ml: "10px",
+          mr: "10px",
+          mt: "10px",
         }}
-        onClick={() => navigate(-1)}
       >
-        Voltar
-      </Button>
-
+        <Button
+          sx={{
+            backgroundColor: colors.blueAccent[700],
+            color: colors.grey[100],
+          }}
+          onClick={() => navigate(-1)}
+        >
+          Voltar
+        </Button>
+        <Button
+          sx={{
+            backgroundColor: colors.greenAccent[600],
+            color: colors.grey[100],
+          }}
+          onClick={() => navigate(`/EmpregadoDashboard/Alunos/treinos/criar`)}
+        >
+          Criar Treino
+        </Button>
+      </Box>
       <Box
         m="20px 0 0 0"
         height="75vh"

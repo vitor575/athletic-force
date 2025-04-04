@@ -3,13 +3,14 @@ import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../tema";
 import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
 import { useNavigate } from "react-router-dom";
-import { useStudentData } from "../../../services/GetData/useStudentData";
+import { useStudentData } from "../../../services/querrys/useStudentData";
 
 const DashboardAlunos = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const {data, loading } = useStudentData();
+
   const alunos = data?.findAllUsers.filter((user: any) => user.role === "STUDENT") || [];
 
   const colunas = [

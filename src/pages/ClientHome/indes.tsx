@@ -1,7 +1,6 @@
 import React from "react";
 import Logo from "../../img/logo3.png";
-import Client from "../../img/client.png";
-import "./ClientHome.css";
+import user from "../../img/user.jpg";
 import { FaSignOutAlt, FaWhatsapp } from "react-icons/fa";
 import { FaFacebook } from "react-icons/fa";
 import { FaInstagram } from "react-icons/fa";
@@ -114,7 +113,7 @@ const ClientHome = () => {
             borderRadius: '50%',
             width: '120px',  
             height: '120px'
-          }} component='img' src={Client} alt="Imagem de avatar" />
+          }} component='img' src={user} alt="Imagem de avatar" />
           <Box fontSize='2rem' fontWeight='bold'>
             <Typography variant="h3" component='h2'>Seja bem vindo.</Typography>
             <Button sx={{

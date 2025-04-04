@@ -118,8 +118,9 @@ const DashboardAdmin: React.FC = () => {
       onSubmit={handleSubmit}
       sx={{
         width: 700,
+        height: 560,
         mx:'auto',
-        mt: 8,
+        mt: 1,
         p: 3,
         border: `2px solid ${colors.blueAccent[600]}`,
         bgcolor: colors.primary[400],

@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { login } from "../login";
-import { useClientData } from "../GetData/useClientData";
+import { useClientData } from "../querrys/useClientData";
 import { useNavigate } from "react-router-dom";
 
 export const useAuth = () => {
@@ -16,7 +16,6 @@ export const useAuth = () => {
     try {
       await login(email, senha);
       const { data } = await refetch();
-      console.log("Dados retornados da query 'me':", data);
       if (data && data.me) {
         const user = data.me;
         if (user.role === 'Employee' || user.role === 'Professor' || user.role === 'Admin') {
