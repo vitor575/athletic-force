@@ -2,32 +2,12 @@ import React from "react";
 import "./styles.css";
 import { FaGooglePlay } from "react-icons/fa";
 import { FaApple } from "react-icons/fa6";
-import { useLayoutEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 
 
 const ContatosFooter = () => {
   
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(".links", {
-      opacity: 1,
-      x:0,
-      scrollTrigger: {
-        trigger: ".lista-footer",
-        start: "top 800px",
-        end: "bottom 900px",
-        scrub: true,
-      },
-    });
-
-    return () => {
-      gsap.killTweensOf(".links");
-    };
-  }, []);
-
+  
   
   return (
     <div className="links">

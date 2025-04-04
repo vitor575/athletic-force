@@ -6,9 +6,7 @@
   height: 330px;
   margin: 3% 10% 5px 10%;
   border-top: 2px solid #9c9c9c;
-  opacity: 0;
   transition: 400ms;
-  transform: translateX(700px);
 }
 .logo-dois img {
   border-radius: 9px;

@@ -1,33 +1,46 @@
-import React from "react";
-import banner from "../../img/banner1.png";
-import black from "../../img/blckfried2.png";
-import "./estiloBN.css";
-import { useState, useEffect } from "react";
+import React, { useState, useEffect } from "react";
+import banner1 from "../../img/banner1.png";
+import banner2 from "../../img/blckfried2.png";
+import { Box } from "@mui/material";
 
 const Banner = () => {
-  const images = [banner, black];
-
+  const images = [banner1, banner2];
   const [currentIndex, setCurrentIndex] = useState(0);
 
   useEffect(() => {
     const interval = setInterval(() => {
       setCurrentIndex((prevIndex) => (prevIndex + 1) % images.length);
-    }, 5000);
+    }, 3000);
 
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, []);
 
   return (
-    <div className="banner-container">
-      <div
-        className="banner-slider"
-        style={{ transform: `translateX(-${currentIndex * 100}%)` }}
+    <Box sx={{ width: "100%", overflow: "hidden", borderRadius: "10px" }}>
+      <Box
+        sx={{
+          display: "flex",
+          width: `${images.length * 100}%`,
+          transform: `translateX(-${currentIndex * (100 / images.length)}%)`,
+          transition: "transform 1s ease-in-out",
+        }}
       >
         {images.map((image, index) => (
-          <img key={index} src={image} alt={`Banner ${index + 1}`} />
+          <Box
+            key={index}
+            component="img"
+            src={image}
+            alt={`Banner ${index + 1}`}
+            sx={{
+              width: `${100 / images.length}%`,
+              height: "600px",
+              objectFit: "cover",
+              flexShrink: 0,
+            }}
+          />
         ))}
-      </div>
-    </div>
+      </Box>
+    </Box>
   );
 };
 

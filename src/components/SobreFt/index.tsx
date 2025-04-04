@@ -1,43 +1,42 @@
-import React from "react";
+import React, { useLayoutEffect } from "react";
+import { Box } from "@mui/material";
 import Sobre from "../../img/sobre.jpg";
 import CaixaTxt from "./caixaTxt";
-import { useLayoutEffect } from "react";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import "./style.css";
+import { tokens } from "../../tema";
+import { useTheme } from "@mui/material";
 
 const SobreFT = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(".imagemSobreTxt", {
-      x: 0,
-      opacity: 1,
-      scrollTrigger: {
-        trigger: ".imagem-container",
-        start: "top 800px",
-        end: "bottom 900px",
-        scrub: true,
-        
-      
-      },
-    });
-    return () => {
-      gsap.killTweensOf(".imagemSobreTxt");
-    };
-  }, []);
 
   return (
-    <div className="imagem-container" >
-      <img
+    <Box
+      sx={{
+        margin: "50px",
+        display: "flex",
+        justifyContent: "center",
+        alignItems: "center",
+        width: "95%",
+        marginBottom: "3%",
+      }}
+    >
+      <Box
+        component="img"
         src={Sobre}
         alt="imagem da caixa do sobre"
         className="imagemSobreTxt"
+        sx={{
+          width: "55%",
+          borderRadius: "20px",
+          boxShadow: `0px 4px 60px ${colors.blueAccent[600]}`,
+        }}
       />
       <CaixaTxt />
-    </div>
+    </Box>
   );
 };
 
-export default SobreFT
+export default SobreFT;
