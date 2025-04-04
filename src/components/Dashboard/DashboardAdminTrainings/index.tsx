@@ -8,6 +8,7 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
+import ModalTrainings from "./ModalTrainings";
 import { tokens } from "../../../tema";
 import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
 import AddIcon from "@mui/icons-material/Add";
@@ -20,7 +21,7 @@ const DashboardExercises: React.FC = () => {
   const colors = tokens(theme.palette.mode);
   const { data, loading } = useTrainingsData();
   
-  const treinos = data || [];
+  const treinos = data?.getAllTrainings || [];
 
   const [openAddModal, setOpenAddModal] = useState(false);
 
@@ -117,6 +118,7 @@ const DashboardExercises: React.FC = () => {
           slots={{ toolbar: CustomToolbar }}
         />
       </Box>
+      <ModalTrainings open={openAddModal} handleClose={handleCloseAddModal} />
     </Box>
   );
 };
