@@ -17,7 +17,7 @@ import {
 import { tokens } from "../../../tema";
 import {
   cadastrarFuncionario,
-  cadastrarCliente,
+  funcionarioCadastrarCliente,
 } from "../../../services/login";
 import CustomTextField from "./TextField";
 
@@ -85,7 +85,7 @@ const DashboardAdmin: React.FC = () => {
           isProfessor
         );
       } else {
-        response = await cadastrarCliente(
+        response = await funcionarioCadastrarCliente(
           formData.name,
           formData.email,
           formData.password,

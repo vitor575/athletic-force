@@ -6,6 +6,10 @@ import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../tema";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
+import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
+import ViewDayIcon from '@mui/icons-material/ViewDay';
 
 interface ItemProps {
   title: string;
@@ -134,7 +138,7 @@ const Sidebar = () => {
             <Item
               title="Alunos"
               to="/EmpregadoDashboard"
-              icon={<PeopleOutlinedIcon />}
+              icon={<DirectionsRunIcon />}
               selected={selected}
               setSelected={setSelected}
             />
@@ -146,16 +150,23 @@ const Sidebar = () => {
               setSelected={setSelected}
             />
             <Item
+              title="Rotinas"
+              to="/EmpregadoDashboard/DashboardAdminRoutines"
+              icon={<ViewDayIcon />}
+              selected={selected}
+              setSelected={setSelected}
+            />
+            <Item
               title="Treinos"
               to="/EmpregadoDashboard/DashboardAdminTrainings"
-              icon={<PeopleOutlinedIcon />}
+              icon={<FormatListBulletedIcon />}
               selected={selected}
               setSelected={setSelected}
             />
             <Item
               title="Exercícios"
               to="/EmpregadoDashboard/DashboardAdminExercise"
-              icon={<PeopleOutlinedIcon />}
+              icon={<FitnessCenterOutlinedIcon />}
               selected={selected}
               setSelected={setSelected}
             />

@@ -11,8 +11,8 @@ import {
   useTheme,
   Alert,
 } from "@mui/material";
-import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
-import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
+import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { tokens } from "../../../../tema";
 import { CREATE_TRAINING } from "../../../../services/mutations/cadastratTreinos";
 import { useMutation } from "@apollo/client";
@@ -22,9 +22,14 @@ import { useExercisesData } from "../../../../services/querrys/useExercisesData"
 interface ModalTrainingsProps {
   open: boolean;
   handleClose: () => void;
+  onTrainingCreated: () => void;
 }
 
-const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose }) => {
+const ModalTrainings: React.FC<ModalTrainingsProps> = ({
+  open,
+  handleClose,
+  onTrainingCreated,
+}) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { data } = useExercisesData();
@@ -57,7 +62,8 @@ const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose }) =>
               );
             }}
           >
-           Selecionar {isSelected ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
+            Selecionar{" "}
+            {isSelected ? <CheckBoxIcon /> : <CheckBoxOutlineBlankIcon />}
           </Button>
         );
       },
@@ -83,7 +89,9 @@ const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose }) =>
     e.preventDefault();
 
     if (!formData.name || !formData.description || selectedIds.length === 0) {
-      setSnackbarMessage("É necessário preencher o formulário e selecionar ao menos um exercício.");
+      setSnackbarMessage(
+        "É necessário preencher o formulário e selecionar ao menos um exercício."
+      );
       setOpenSnackbar(true);
       return;
     }
@@ -96,10 +104,15 @@ const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose }) =>
           exerciseIds: selectedIds,
         },
       });
+
       setSnackbarMessage(response.data.createTraining.message);
       setOpenSnackbar(true);
+
+      onTrainingCreated();
+      handleClose();
     } catch (err: any) {
-      setSnackbarMessage("Erro ao criar treino: " + err.message);
+      console.error("Erro ao criar treino:", err);
+      setSnackbarMessage("Erro ao criar treino. Tente novamente.");
       setOpenSnackbar(true);
     }
   };
@@ -134,7 +147,7 @@ const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose }) =>
           Adicionar Treino
         </Typography>
 
-        <Box display='flex' gap={2}>
+        <Box display="flex" gap={2}>
           <TextField
             label="Nome do Treino"
             name="name"
@@ -147,7 +160,7 @@ const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose }) =>
             InputLabelProps={{
               sx: {
                 color: colors.grey[100],
-                '&.Mui-focused': { color: colors.blueAccent[200] },
+                "&.Mui-focused": { color: colors.blueAccent[200] },
               },
             }}
           />
@@ -164,19 +177,31 @@ const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose }) =>
             InputLabelProps={{
               sx: {
                 color: colors.grey[100],
-                '&.Mui-focused': { color: colors.blueAccent[200] },
+                "&.Mui-focused": { color: colors.blueAccent[200] },
               },
             }}
           />
         </Box>
 
-        <Box m="10px 0 0 0" height="50vh" sx={{
-          "& .MuiDataGrid-root": { border: "none" },
-          "& .MuiDataGrid-cell": { border: "none" },
-          "& .MuiDataGrid-columnHeader": { backgroundColor: colors.blueAccent[700], borderBottom: "none" },
-          "& .MuiDataGrid-virtualScroller": { backgroundColor: colors.primary[400] },
-          "& .MuiDataGrid-footerContainer": { borderTop: "none", backgroundColor: colors.blueAccent[700] },
-        }}>
+        <Box
+          m="10px 0 0 0"
+          height="55vh"
+          sx={{
+            "& .MuiDataGrid-root": { border: "none" },
+            "& .MuiDataGrid-cell": { border: "none" },
+            "& .MuiDataGrid-columnHeader": {
+              backgroundColor: colors.blueAccent[700],
+              borderBottom: "none",
+            },
+            "& .MuiDataGrid-virtualScroller": {
+              backgroundColor: colors.primary[400],
+            },
+            "& .MuiDataGrid-footerContainer": {
+              borderTop: "none",
+              backgroundColor: colors.blueAccent[700],
+            },
+          }}
+        >
           <DataGrid
             rows={exercicios}
             columns={colunas}
@@ -187,12 +212,24 @@ const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose }) =>
         <Button
           type="submit"
           variant="contained"
-          sx={{ mt: 2, backgroundColor: colors.greenAccent[600], color: colors.grey[100] }}
+          sx={{
+            mt: 2,
+            backgroundColor: colors.greenAccent[600],
+            color: colors.grey[100],
+          }}
+          disabled={loading}
         >
-          Salvar
+          {loading ? (
+            <CircularProgress size={24} sx={{ color: "white" }} />
+          ) : (
+            "Salvar"
+          )}
         </Button>
 
-        <Backdrop open={loading} sx={{ color: "#fff", zIndex: theme.zIndex.drawer + 9999 }}>
+        <Backdrop
+          open={loading}
+          sx={{ color: "#fff", zIndex: theme.zIndex.drawer + 9999 }}
+        >
           <CircularProgress color="inherit" />
         </Backdrop>
 

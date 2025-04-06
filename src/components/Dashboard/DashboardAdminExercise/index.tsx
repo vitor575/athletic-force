@@ -11,12 +11,10 @@ import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { tokens } from "../../../tema";
 import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
 import AddIcon from "@mui/icons-material/Add";
-import { useNavigate } from "react-router-dom";
 import { useExercisesData } from "../../../services/querrys/useExercisesData";
 import ModalExercise from "./ModalExercise";
 
 const DashboardExercises: React.FC = () => {
-  const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const { data, loading } = useExercisesData();

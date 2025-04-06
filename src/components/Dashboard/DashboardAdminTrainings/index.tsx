@@ -8,18 +8,17 @@ import {
   CircularProgress,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
-import ModalTrainings from "./ModalTrainings";
 import { tokens } from "../../../tema";
-import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 import { useTrainingsData } from "../../../services/querrys/useTrainingsData";
+import ModalTrainings from "./ModalTrainings";
 
 const DashboardExercises: React.FC = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const { data, loading } = useTrainingsData();
+  const { data, loading, refetch } = useTrainingsData();
   
   const treinos = data?.getAllTrainings || [];
 
@@ -27,6 +26,10 @@ const DashboardExercises: React.FC = () => {
 
   const handleOpenAddModal = () => setOpenAddModal(true);
   const handleCloseAddModal = () => setOpenAddModal(false);
+
+  const handleTrainingCreated = () => {
+    refetch();
+  };
 
   const colunas: GridColDef[] = [
     { field: "id", headerName: "ID", width: 70 },
@@ -43,11 +46,8 @@ const DashboardExercises: React.FC = () => {
             color: colors.grey[100],
           }}
           variant="contained"
-          onClick={() =>
-            navigate(`/EmpregadoDashboard/treinos/${params.row.id}`)
-          }
+          onClick={() => navigate(`/EmpregadoDashboard/treinos/${params.row.id}`)}
         >
-          <FitnessCenterOutlinedIcon />
           <Typography ml="5px">Ver treinos</Typography>
         </Button>
       ),
@@ -84,29 +84,18 @@ const DashboardExercises: React.FC = () => {
       <Typography variant="h3" fontSize="32px" m="0 0 0 10px">
         Treinos
       </Typography>
-      <Typography
-        variant="h4"
-        fontSize="16px"
-        m="10px 0 0 10px"
-        color={colors.greenAccent[500]}
-      >
+      <Typography variant="h4" fontSize="16px" m="10px 0 0 10px" color={colors.greenAccent[500]}>
         Todos treinos cadastrados até o momento.
       </Typography>
 
       <Box m="10px 0 0 0" height="75vh" sx={{
-          "& .MuiDataGrid-root": {
-            border: "none",
-          },
-          "& .MuiDataGrid-cell": {
-            border: "none",
-          },
+          "& .MuiDataGrid-root": { border: "none" },
+          "& .MuiDataGrid-cell": { border: "none" },
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: colors.blueAccent[700],
             borderBottom: "none",
           },
-          "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
-          },
+          "& .MuiDataGrid-virtualScroller": { backgroundColor: colors.primary[400] },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
             backgroundColor: colors.blueAccent[700],
@@ -118,7 +107,8 @@ const DashboardExercises: React.FC = () => {
           slots={{ toolbar: CustomToolbar }}
         />
       </Box>
-      <ModalTrainings open={openAddModal} handleClose={handleCloseAddModal} />
+      
+      <ModalTrainings open={openAddModal} handleClose={handleCloseAddModal} onTrainingCreated={handleTrainingCreated} />
     </Box>
   );
 };

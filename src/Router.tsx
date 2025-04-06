@@ -15,6 +15,7 @@ import DashboardTreinos from "./components/Dashboard/DashboardRotinas";
 import DashboardAdmin from "./components/Dashboard/DashboardAdminUser";
 import DashboardAdminExercise from "./components/Dashboard/DashboardAdminExercise";
 import DashboardAdminTrainings from "./components/Dashboard/DashboardAdminTrainings";
+import DashboardAdminRoutines from "./components/Dashboard/DashboardAdminRoutines";
 
 const App: React.FC = () => {
   return (
@@ -61,6 +62,10 @@ const App: React.FC = () => {
                 <Route
                   path="/EmpregadoDashboard/DashboardAdminTrainings"
                   element={<DashboardAdminTrainings />}
+                />
+                <Route
+                  path="/EmpregadoDashboard/DashboardAdminRoutines"
+                  element={<DashboardAdminRoutines />}
                 />
                 <Route
                   path="/EmpregadoDashboard/treinos/:id"
