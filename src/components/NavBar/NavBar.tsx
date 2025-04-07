@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { AppBar, Toolbar, Button, IconButton, Box } from "@mui/material";
-import { useLocation } from "react-router-dom";
 import ModalLogin from "../ModalLogin";
 import { tokens } from "../../tema";
 import { useTheme } from "@mui/material";
@@ -9,7 +8,7 @@ import user from "../../img/user.png";
 
 const Navbar = () => {
   const [isModalOpen, setModalOpen] = useState(false);
-  const local = useLocation();
+
 
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -27,10 +26,8 @@ const Navbar = () => {
         backgroundColor: colors.primary?.[500],
         padding: "10px 20px",
       }}
-      className={local.pathname === "/" ? "navbar" : "navbar-off"}
     >
       <Toolbar sx={{ display: "flex", alignItems: "center", width: "100%" }}>
-        {/* Logo */}
         <Box
           component="img"
           src={Logo}
@@ -43,11 +40,10 @@ const Navbar = () => {
           }}
         />
 
-        {/* Links de navegação */}
         <Box
           sx={{
             display: "flex",
-            gap: 3,
+            gap: 1,
             backgroundColor: colors.primary[600],
             border: `1px solid ${colors.blueAccent[600]}`,
             borderRadius: "50px",
@@ -71,8 +67,6 @@ const Navbar = () => {
             Contato
           </Button>
         </Box>
-
-        {/* Botão de Login */}
         <IconButton onClick={() => setModalOpen(!isModalOpen)}>
           <Box
             component="img"
@@ -92,8 +86,6 @@ const Navbar = () => {
             }}
           />
         </IconButton>
-
-        {/* Modal de Login */}
         <ModalLogin open={isModalOpen} onClose={() => setModalOpen(false)} />
       </Toolbar>
     </AppBar>

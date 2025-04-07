@@ -13,7 +13,7 @@ const Banner = () => {
     }, 3000);
 
     return () => clearInterval(interval);
-  }, []);
+  }, [images.length]);
 
   return (
     <Box sx={{ width: "100%", overflow: "hidden", borderRadius: "10px" }}>

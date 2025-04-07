@@ -7,10 +7,9 @@ interface ProtectedRouteProps {
   redirectPath?: string;
 }
 
-const ProtectedRoute: FC<ProtectedRouteProps> = ({ redirectPath = '/login' }): JSX.Element => {
+const ProtectedRoute: FC<ProtectedRouteProps> = ({ redirectPath = '/' }): JSX.Element => {
 
   const token = Cookies.get('token');
-
 
   if (!token) {
     return <Navigate to={redirectPath} replace />;

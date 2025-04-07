@@ -21,8 +21,8 @@ export const login = async (email: string, password: string) => {
 
 export const funcionarioCadastrarCliente = async (name: string ,email: string, password: string, cpf: string, cellphone: string) => {
     try {
-        const token = Cookies.get("token");
-        const response = await api.post("/employee/createStudent", {name, email, password, cpf, cellphone, token});
+        const token = Cookies.get('token');
+        const response = await api.post("auth/client/signup ", {name, email, password, cpf, cellphone, token});
         if (response) {
             return "Usuário cadastrado com sucesso !!"
         }
@@ -33,7 +33,7 @@ export const funcionarioCadastrarCliente = async (name: string ,email: string, p
 
 export const cadastrarFuncionario = async (name: string ,email: string, password: string, cpf: string, cellphone: string, isProfessor: boolean) => {
     try {
-        const token = Cookies.get("token");
+        const token = Cookies.get('token')
         const response = await api.post("/admin/employee/create", {name, email, password, cpf, cellphone, isProfessor, token});
         if(response) {
             return "Funcionário cadastrado com sucesso !!"

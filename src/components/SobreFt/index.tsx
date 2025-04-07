@@ -1,13 +1,12 @@
-import React, { useLayoutEffect } from "react";
+import React from "react";
 import { Box } from "@mui/material";
 import Sobre from "../../img/sobre.jpg";
 import CaixaTxt from "./caixaTxt";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+
 import { tokens } from "../../tema";
 import { useTheme } from "@mui/material";
 
-const SobreFT = () => {
+const SobreFT: React.FC = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 

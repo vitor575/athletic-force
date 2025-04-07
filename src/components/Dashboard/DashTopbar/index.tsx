@@ -19,7 +19,7 @@ const DashTopbar = () => {
     const dispatch = useDispatch<AppDispatch>();
 
     return (
-        <Box display="flex" justifyContent="space-between" p={2} >
+        <Box display="flex" justifyContent="space-between" p={1.5} >
             <Box display="flex" borderRadius="3px" bgcolor={colors.primary[400]}>
                 <InputBase sx={{ml: 2, flex: 1}} placeholder="Procurar"/>
                 <IconButton type="button" sx={{ p: 1}}>

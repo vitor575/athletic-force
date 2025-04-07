@@ -1,5 +1,5 @@
 import React from "react";
-import Banner from "../../components/banner";
+import Banner from "../../components/Banner";
 import SobreFT from "../../components/SobreFt";
 import CardsTraineres from "../../components/CardsTrainers";
 import trainer1 from "../../img/kayk.jpg";
@@ -7,12 +7,14 @@ import trainer2 from "../../img/isabela.jpg";
 import trainer3 from "../../img/max.jpg";
 import Contato from "../../components/Contato";
 import Footer from "../../components/Footer";
+import Navbar from "../../components/NavBar/NavBar";
 
 
 
 const Home = () => {
   return (
     <main>
+      <Navbar />
       <section id="home">
         <Banner />
       </section>

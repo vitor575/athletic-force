@@ -1,7 +1,8 @@
 import { useState } from "react";
 import { login } from "../login";
-import { useClientData } from "../GetData/useClientData";
+import { useClientData } from "../querrys/useClientData";
 import { useNavigate } from "react-router-dom";
+import Cookies from "js-cookie";
 
 export const useAuth = () => {
   const [loginError, setLoginError] = useState("");
@@ -14,9 +15,9 @@ export const useAuth = () => {
       return;
     }
     try {
+      Cookies.remove('token');
       await login(email, senha);
       const { data } = await refetch();
-      console.log("Dados retornados da query 'me':", data);
       if (data && data.me) {
         const user = data.me;
         if (user.role === 'Employee' || user.role === 'Professor' || user.role === 'Admin') {

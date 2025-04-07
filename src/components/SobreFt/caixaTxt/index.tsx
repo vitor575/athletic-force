@@ -2,7 +2,6 @@ import React from "react";
 import { Box, Typography, Button } from "@mui/material";
 import { tokens } from "../../../tema";
 import { useTheme } from "@mui/material";
-import { Padding } from "@mui/icons-material";
 const CaixaTxt = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
