@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Backdrop,
   Box,
@@ -19,13 +19,22 @@ import {
 import { tokens } from "../../../../tema";
 import { CREATE_EXERCISE } from "../../../../services/mutations/cadastrarExercicio";
 import { useMutation } from "@apollo/client";
+import { EDIT_EXERCISE } from "../../../../services/mutations/atualizarExercicios";
 
 interface ModalExerciseProps {
   open: boolean;
   handleClose: () => void;
+  exercise?: {
+    id: string;
+    name: string;
+    muscleGroup: string;
+    qtdSets?: number;
+    time?: number;
+  } | null;
 }
 
-const ModalExercise: React.FC<ModalExerciseProps> = ({ open, handleClose }) => {
+
+const ModalExercise: React.FC<ModalExerciseProps> = ({ open, handleClose, exercise }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
@@ -36,34 +45,62 @@ const ModalExercise: React.FC<ModalExerciseProps> = ({ open, handleClose }) => {
     time: 0,
   });
 
+  useEffect(() => {
+    if (exercise) {
+      setFormData({
+        name: exercise.name,
+        muscleGroup: exercise.muscleGroup,
+        qtdSets: exercise.qtdSets || 3,
+        time: exercise.time || 0,
+      });
+    } else {
+      setFormData({
+        name: "",
+        muscleGroup: "",
+        qtdSets: 3,
+        time: 0,
+      });
+    }
+  }, [exercise]);
+  
+
   const [openSnackbar, setOpenSnackbar] = useState<boolean>(false);
   const [snackbarMessage, setSnackbarMessage] = useState<string>("");
 
   const [createExercise, { loading }] = useMutation(CREATE_EXERCISE);
+  const [editExercise] = useMutation(EDIT_EXERCISE);
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
     setSnackbarMessage("");
   };
 
-  const handleAddExercise = async (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
     if (!formData.name || !formData.muscleGroup) {
       setSnackbarMessage("É necessário preencher o formulário.");
       setOpenSnackbar(true);
       return;
     }
-
     try {
-      const response = await createExercise({ variables: formData });
-      setSnackbarMessage(response.data.createExercise.message);
+      if (exercise && exercise.id) {
+        const response = await editExercise({ variables: { id: exercise.id, ...formData } });
+        setSnackbarMessage(response.data.editExercise.message);
+        debugger
+        setSnackbarMessage("Exercício atualizado com sucesso!");
+      } else {
+        const response = await createExercise({ variables: formData });
+        setSnackbarMessage(response.data.createExercise.message);
+      }
       setOpenSnackbar(true);
     } catch (err: any) {
-      setSnackbarMessage("Erro ao criar exercício: " + err.message);
+      setSnackbarMessage("Erro ao salvar exercício: " + err.message);
       setOpenSnackbar(true);
+    } finally {
+      handleClose();
     }
   };
+  
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
@@ -77,7 +114,7 @@ const ModalExercise: React.FC<ModalExerciseProps> = ({ open, handleClose }) => {
     <Modal open={open} onClose={handleClose}>
       <Box
         component="form"
-        onSubmit={handleAddExercise}
+        onSubmit={handleSubmit}
         sx={{
           position: "absolute",
           top: "50%",
