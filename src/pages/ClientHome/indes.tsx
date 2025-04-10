@@ -1,9 +1,7 @@
-import React from "react";
+
 import Logo from "../../img/logo3.png";
 import user from "../../img/user.jpg";
-import { FaSignOutAlt, FaWhatsapp } from "react-icons/fa";
-import { FaFacebook } from "react-icons/fa";
-import { FaInstagram } from "react-icons/fa";
+import { FaSignOutAlt } from "react-icons/fa";
 import CardCliente from "../../components/CardsCliente";
 import Calendario from "../../img/calendario.png";
 import Pagamento from "../../img/pagamento.png";
@@ -12,8 +10,6 @@ import { useNavigate } from "react-router-dom";
 import {
   Box,
   Button,
-  List,
-  ListItem,
   Typography,
   useTheme,
 } from "@mui/material";
@@ -27,13 +23,6 @@ const ClientHome = () => {
     navigate("/");
   };
 
-  const listStyle = {
-    "&:hover": {
-      transform: "scale(0.9)",
-      transition: "transform 0.3s ease-in-out",
-      color: `${colors.blueAccent[400]}`,
-    },
-  };
 
   return (
     <Box
@@ -69,37 +58,18 @@ const ClientHome = () => {
         >
           <Box
             component="img"
-            sx={{ width: "120px" }}
+            sx={{ width: "80px", marginLeft: "60px" }}
             border={`1px solid ${colors.blueAccent[500]}`}
             src={Logo}
             alt="Logo"
           />
           <Box>
-            <List
-              sx={{
-                display: "flex",
-                justifyContent: "center",
-                gap: "0.5rem",
-                fontSize: "2rem",
-                color: colors.blueAccent[500],
-              }}
-            >
-              <ListItem sx={listStyle}>
-                <FaWhatsapp />
-              </ListItem>
-              <ListItem sx={listStyle}>
-                <FaFacebook />
-              </ListItem>
-              <ListItem sx={listStyle}>
-                <FaInstagram />
-              </ListItem>
-            </List>
           </Box>
         </Box>
         <Box
           sx={{
-            width: "50%",
-            height: "90%",
+            width: "70%",
+            height: "20%",
             display: "flex",
             alignItems: "center",
             gap: "2rem",
@@ -117,15 +87,15 @@ const ClientHome = () => {
             sx={{
               border: `4px solid ${colors.blueAccent[600]}`,
               borderRadius: "50%",
-              width: "120px",
-              height: "120px",
+              width: "50px",
+              height: "50px",
             }}
             component="img"
             src={user}
             alt="Imagem de avatar"
           />
-          <Box fontSize="2rem" fontWeight="bold">
-            <Typography variant="h3" component="h2">
+          <Box fontWeight="bold" >
+            <Typography variant="h3" component="h2" sx={{ fontSize: "1.6em" }}>
               Seja bem vindo.
             </Typography>
             <Button
@@ -139,12 +109,13 @@ const ClientHome = () => {
                 cursor: "pointer",
                 transition: "background-color 0.3s ease, transform 0.2s ease",
                 position: "absolute",
-                top: "1rem",
+                top: "8px",
                 right: "1rem",
                 "&:hover": {
                   bgcolor: colors.blueAccent[400],
                   transform: "scale(0.9)",
                 },
+
               }}
               onClick={handleExit}
             >
