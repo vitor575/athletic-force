@@ -19,7 +19,8 @@ import {
 import { tokens } from "../../../../tema";
 import { CREATE_EXERCISE } from "../../../../services/mutations/cadastrarExercicio";
 import { useMutation } from "@apollo/client";
-import { EDIT_EXERCISE } from "../../../../services/mutations/atualizarExercicios";
+import { EDIT_EXERCISE } from "../../../../services/mutations/editarExercicios";
+import { EXERCISE_QUERY } from "../../../../services/querrys/useExercisesData";
 
 interface ModalExerciseProps {
   open: boolean;
@@ -68,7 +69,7 @@ const ModalExercise: React.FC<ModalExerciseProps> = ({ open, handleClose, exerci
   const [snackbarMessage, setSnackbarMessage] = useState<string>("");
 
   const [createExercise, { loading }] = useMutation(CREATE_EXERCISE);
-  const [editExercise] = useMutation(EDIT_EXERCISE);
+  const [updateExercise, { loading: loadingEdit}] = useMutation(EDIT_EXERCISE);
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar(false);
@@ -84,31 +85,38 @@ const ModalExercise: React.FC<ModalExerciseProps> = ({ open, handleClose, exerci
     }
     try {
       if (exercise && exercise.id) {
-        const response = await editExercise({ variables: { id: exercise.id, ...formData } });
+        const response = await updateExercise({
+          variables: { id: exercise.id, ...formData },
+          refetchQueries: [{ query: EXERCISE_QUERY }], 
+        });
         setSnackbarMessage(response.data.editExercise.message);
-        debugger
-        setSnackbarMessage("Exercício atualizado com sucesso!");
       } else {
-        const response = await createExercise({ variables: formData });
+        const response = await createExercise({ 
+          variables: formData, 
+          refetchQueries: [{ query: EXERCISE_QUERY}] 
+        });
         setSnackbarMessage(response.data.createExercise.message);
       }
       setOpenSnackbar(true);
     } catch (err: any) {
       setSnackbarMessage("Erro ao salvar exercício: " + err.message);
       setOpenSnackbar(true);
-    } finally {
-      handleClose();
-    }
+    } 
   };
   
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = e.target;
-    setFormData((prev) => ({
-      ...prev,
-      [name]: name === "time" ? Number(value) : value,
-    }));
+    setFormData((prev) => {
+      const newFormData = {
+        ...prev,
+        [name]: name === "time" ? Number(value) : value,
+      };
+      console.log("Novo formData:", newFormData);
+      return newFormData;
+    });
   };
+  
 
   return (
     <Modal open={open} onClose={handleClose}>
@@ -128,7 +136,7 @@ const ModalExercise: React.FC<ModalExerciseProps> = ({ open, handleClose, exerci
         }}
       >
         <Typography variant="h6" mb={2} color={colors.grey[100]}>
-          Adicionar Exercício
+          {exercise ? 'Editar exercício' : 'Criar exercício' }
         </Typography>
 
         <FormControl component="fieldset" margin="normal">
@@ -232,7 +240,7 @@ const ModalExercise: React.FC<ModalExerciseProps> = ({ open, handleClose, exerci
         </Button>
 
         <Backdrop
-          open={loading}
+          open={loading || loadingEdit }
           sx={{ color: "#fff", zIndex: theme.zIndex.drawer + 9999 }}
         >
           <CircularProgress color="inherit" />

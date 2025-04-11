@@ -1,7 +1,7 @@
 // src/services/GetData/useTrainingsData.ts
 import { gql, useQuery } from "@apollo/client";
 
-const GET_ALL_TRAININGS = gql`
+export const GET_ALL_TRAININGS = gql`
   query GetAllTrainings {
     getAllTrainings {
       id

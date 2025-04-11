@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
-const EXERCISE_QUERY = gql`
+export const EXERCISE_QUERY = gql`
   query getAllExercises {
     getAllExercises {
       id
