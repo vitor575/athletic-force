@@ -23,7 +23,7 @@ const Home = () => {
       </section>
       <section id="treinadores">
         <CardsTraineres  imagem={trainer1} titulo="Jeferson" descricao="Personal trainer de 10 anos na Athletic"/>
-        <CardsTraineres  imagem={trainer1} titulo="Sintia" descricao="Personal trainer de 5 anos na Athletic"/>
+        <CardsTraineres  imagem={trainer1} titulo="Cintia" descricao="Personal trainer de 5 anos na Athletic"/>
         <CardsTraineres  imagem={trainer1} titulo="Matheus" descricao="Personal trainer de 8 anos na Athletic "/>
       </section>
       <section id="contato">

@@ -66,6 +66,7 @@ const Contato: React.FC = () => {
               value={formContatoState.email}
               onChange={handleChange}
               required
+              
             />
             <TextField
               fullWidth
@@ -88,7 +89,7 @@ const Contato: React.FC = () => {
             margin="normal"
           />
           <Box sx={{ display: "flex", justifyContent: "end", mt: 2 }}>
-            <Button type="submit" variant="contained" color="error" sx={{backgroundColor: colors.primary?.[500], fontWeight: "bold", padding: "12px 24px" }}>
+            <Button type="submit" variant="contained" color="error" sx={{backgroundColor: colors.primary?.[500], fontWeight: "bold", padding: "12px 24px", border: `2px solid ${colors.blueAccent[600]}`}}>
               Enviar mensagem
             </Button>
           </Box>

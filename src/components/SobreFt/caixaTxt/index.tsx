@@ -28,9 +28,9 @@ const CaixaTxt: React.FC = () =>{
       <Box
         sx={{
           backgroundColor: "rgb(255, 255, 255)",
-          padding: "20px",
+          padding: "10px",
           borderRadius: "20px",
-          width: "140%",
+          width: "145%",
           boxShadow: "30px 5px 30px rgba(36, 36, 36, 0.184)",
           height: "300px",
           display: "flex",
@@ -62,9 +62,10 @@ const CaixaTxt: React.FC = () =>{
               outline: "none",
               fontSize: ".9em",
               fontWeight: 600,
+              padding: "0 10px",
             }}
           >
-            Athletic
+            Athletic 
           </Typography>
         </Typography>
 
