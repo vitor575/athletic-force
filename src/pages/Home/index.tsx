@@ -22,9 +22,9 @@ const Home = () => {
         <SobreFT />
       </section>
       <section id="treinadores">
-        <CardsTraineres  imagem={trainer1} titulo="Jeferson" descricao="Personal trainer de 10 anos na Zenfit"/>
-        <CardsTraineres  imagem={trainer2} titulo="Sintia" descricao="Personal trainer a mais de 5 anos na Zenfit"/>
-        <CardsTraineres  imagem={trainer3} titulo="Matheus" descricao="Personal trainer a mais de 8 anos na ZenFit "/>
+        <CardsTraineres  imagem={trainer1} titulo="Jeferson" descricao="Personal trainer de 10 anos na Athletic"/>
+        <CardsTraineres  imagem={trainer1} titulo="Sintia" descricao="Personal trainer de 5 anos na Athletic"/>
+        <CardsTraineres  imagem={trainer1} titulo="Matheus" descricao="Personal trainer de 8 anos na Athletic "/>
       </section>
       <section id="contato">
         <Contato/>

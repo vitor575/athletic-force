@@ -110,7 +110,13 @@ section {
   padding: 35px;
 }
 #contato {
-  height: 900px;
+  padding: 100px 0;
+}
+#treinadores {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 25px;
 }
 
 body {

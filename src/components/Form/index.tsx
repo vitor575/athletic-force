@@ -1,5 +1,6 @@
 import { TextField, Button, Paper, Typography, Box, useTheme} from "@mui/material";
 import { tokens } from "../../tema";
+
 interface FormProps {
   titulo: string;
   label1: string;
@@ -22,8 +23,7 @@ const FormPassword = ({ titulo, label1, label2, botao, type }: FormProps) => {
         padding: 6,
         borderRadius: 2,
         width: "95%",
-        height: "70vh",
-        bgcolor: colors.primary[300],
+        bgcolor: colors.primary[300], 
       }}
     >
       <Typography variant="h4" component="h2" sx={{ color: "white" }}>

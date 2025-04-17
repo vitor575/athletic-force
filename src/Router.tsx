@@ -1,7 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./components/Login";
 import ClientHome from "./pages/ClientHome/indes";
 import Pagamento from "./pages/Pagamento";
 import CronogramaTreino from "./pages/CronogramaTreino";
@@ -22,7 +21,6 @@ const App: React.FC = () => {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
    
             <Route element={<ProtectedRoute redirectPath="/login" />}>
               

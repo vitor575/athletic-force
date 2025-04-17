@@ -1,18 +1,21 @@
 import React from "react";
-import { Box, Typography, Button } from "@mui/material";
+import { Box, Typography, Button , useTheme } from "@mui/material";
 import { tokens } from "../../../tema";
-import { useTheme } from "@mui/material";
-const CaixaTxt = () => {
+
+
+
+
+
+const CaixaTxt: React.FC = () =>{
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const textsobre = {
-    textAlign: "left",
+    textAlign: "center",
     fontWeight: 600,
     fontSize: "1.2em",
     color: "rgb(85, 85, 85)",
-    width: "80%",
-    textAlignLast: "justifyContent",
+    width: "100%",
 
   };
   return (
@@ -24,11 +27,16 @@ const CaixaTxt = () => {
     >
       <Box
         sx={{
-          backgroundColor: "rgb(238, 238, 238)",
+          backgroundColor: "rgb(255, 255, 255)",
           padding: "20px",
           borderRadius: "20px",
-          width: "120%",
+          width: "140%",
           boxShadow: "30px 5px 30px rgba(36, 36, 36, 0.184)",
+          height: "300px",
+          display: "flex",
+          flexDirection: "column",
+          alignItems: "center",
+          justifyContent: "space-between"
         }}
       >
         <Typography
@@ -37,7 +45,6 @@ const CaixaTxt = () => {
             fontWeight: 600,
             fontSize: "2.5em",
             color: colors.primary?.[500],
-            margin: "5px 0 10px",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
@@ -51,13 +58,8 @@ const CaixaTxt = () => {
               overflow: "hidden",
               display: "inline-block",
               textTransform: "uppercase",
-              background: `linear-gradient(20deg, #fff,  ${colors.primary?.[500]})`,
-              backgroundSize: "400% 100%",
-              animation: "degrade 1500ms linear infinite alternate",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
+              color: colors.primary?.[500],
               outline: "none",
-              marginLeft: "15px",
               fontSize: ".9em",
               fontWeight: 600,
             }}
@@ -67,7 +69,7 @@ const CaixaTxt = () => {
         </Typography>
 
         <Typography sx={textsobre}>
-          ZenFit fundada em 2015, a Academia Zenfit tem a missão de promover
+          Athletic fundada em 2015, a Academia Athletic tem a missão de promover
           saúde e bem-estar em um ambiente acolhedor e inspirador.Com profissionais qualificados e estrutura moderna, buscamos
           transformar vidas através da atividade física e do autocuidado. Venha fazer parte dessa jornada!
         </Typography>
