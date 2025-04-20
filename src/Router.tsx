@@ -10,7 +10,7 @@ import ConfigClientPage from "./pages/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
 import EmpregadoDashboard from "./pages/EmpregadoDashboard";
 import DashboardAlunos from "./components/Dashboard/DashboardAlunos";
-import DashboardTreinos from "./components/Dashboard/DashboardRotinas";
+import DashboardAdminRoutines from "./components/Dashboard/DashboardAdminRoutines";
 import DashboardAdmin from "./components/Dashboard/DashboardAdminUser";
 import DashboardAdminExercise from "./components/Dashboard/DashboardAdminExercise";
 import DashboardAdminTrainings from "./components/Dashboard/DashboardAdminTrainings";
@@ -61,8 +61,8 @@ const App: React.FC = () => {
                   element={<DashboardAdminTrainings />}
                 />          
                 <Route
-                  path="/EmpregadoDashboard/treinos/:id"
-                  element={<DashboardTreinos />}
+                  path="/EmpregadoDashboard/DashboardAdminRoutines"
+                  element={<DashboardAdminRoutines />}
                 />
               </Route>
             </Route>

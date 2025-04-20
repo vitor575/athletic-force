@@ -14,8 +14,8 @@ import {
 import CheckBoxOutlineBlankIcon from "@mui/icons-material/CheckBoxOutlineBlank";
 import CheckBoxIcon from "@mui/icons-material/CheckBox";
 import { tokens } from "../../../../tema";
-import { CREATE_TRAINING } from "../../../../services/mutations/cadastratTreinos";
-import { EDIT_TRAINING } from "../../../../services/mutations/editarTreinos"; 
+import { CREATE_TRAINING } from "../../../../services/mutations/trainingMutations";
+import { EDIT_TRAINING } from "../../../../services/mutations/trainingMutations"; 
 import { useMutation } from "@apollo/client";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { EXERCISE_QUERY, useExercisesData } from "../../../../services/querrys/useExercisesData";
@@ -150,7 +150,6 @@ const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose, onTr
       );
       setOpenSnackbar(true);
       onTrainingCreated();
-      handleClose();
     } catch (err: any) {
       console.error("Erro ao salvar treino:", err);
       setSnackbarMessage("Erro ao salvar treino: " + err.message);

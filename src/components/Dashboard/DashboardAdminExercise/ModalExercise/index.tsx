@@ -17,9 +17,9 @@ import {
   Radio,
 } from "@mui/material";
 import { tokens } from "../../../../tema";
-import { CREATE_EXERCISE } from "../../../../services/mutations/cadastrarExercicio";
+import { CREATE_EXERCISE } from "../../../../services/mutations/exerciseMutations";
 import { useMutation } from "@apollo/client";
-import { EDIT_EXERCISE } from "../../../../services/mutations/editarExercicios";
+import { EDIT_EXERCISE } from "../../../../services/mutations/exerciseMutations";
 import { EXERCISE_QUERY } from "../../../../services/querrys/useExercisesData";
 
 interface ModalExerciseProps {
