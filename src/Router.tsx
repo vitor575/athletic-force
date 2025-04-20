@@ -5,6 +5,7 @@ import ClientHome from "./pages/ClientHome/indes";
 import Pagamento from "./pages/Pagamento";
 import CronogramaTreino from "./pages/CronogramaTreino";
 import Treino from "./components/Treino";
+import Login from "./components/Login";
 import ConfigClientPage from "./pages/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
 import EmpregadoDashboard from "./pages/EmpregadoDashboard";
@@ -21,6 +22,7 @@ const App: React.FC = () => {
         <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/login" element={<Login />} />
    
             <Route element={<ProtectedRoute redirectPath="/login" />}>
               

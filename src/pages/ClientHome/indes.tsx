@@ -14,6 +14,7 @@ import {
   useTheme,
 } from "@mui/material";
 import { tokens } from "../../tema";
+import { useClientData } from "../../services/querrys/useClientData";
 
 const ClientHome = () => {
   const navigate = useNavigate();
@@ -24,6 +25,9 @@ const ClientHome = () => {
   };
 
 
+  const { client, loading } = useClientData();
+
+  if (loading) return <Typography>Carregando...</Typography>;
   return (
     <Box
       sx={{
@@ -96,7 +100,7 @@ const ClientHome = () => {
           />
           <Box fontWeight="bold" >
             <Typography variant="h3" component="h2" sx={{ fontSize: "1.6em" }}>
-              Seja bem vindo.
+              Seja bem-vindo, {client.me.name}
             </Typography>
             <Button
               sx={{
@@ -142,7 +146,7 @@ const ClientHome = () => {
           destino="/clientHome/cronograma/Segunda-feira"
         />
         <CardCliente
-          titulo="Pagamentos pendentes"
+          titulo="Central de faturas"
           imagem={Pagamento}
           destino="/clientHome/pagamentos"
         />

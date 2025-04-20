@@ -12,7 +12,6 @@ const ConfiguracaoNav = () => {
       sx={{
         width: "100%",
         minHeight: "100vh",
-        borderRadius: "0 15px 15px 0",
         boxShadow: 2,
         padding: 2,
         bgcolor: colors.primary[300],

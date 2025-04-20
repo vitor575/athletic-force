@@ -1,18 +1,50 @@
+
+import { Box, Container } from "@mui/material";
 import ConfiguracaoNav from "../../components/ConfiguracaoNav";
 import Form from "../../components/Form";
 
-import "./ConfigClientPage.css";
-
 const ConfigClientPage = () => {
   return (
-    <main className="config-client-page">
-      <aside className="config-client-nav">
+    <Box
+      sx={{
+        display: "flex",
+        flexDirection: { xs: "column", md: "row" },
+        gap: 4,
+        minHeight: "100vh",
+        backgroundColor: "#eaeaea",
+        
+      }}
+    >
+      <Box
+        sx={{
+          flex: 1,
+          maxWidth: { xs: "100%", md: "25rem" },
+        }}
+      >
         <ConfiguracaoNav />
-      </aside>
-      <section className="config-client-content">
-        <Form titulo="Mudar senha" label1="Senha atual" label2="Nova senha" botao="Salvar" type="password"/>
-      </section>
-    </main>
+      </Box>
+
+      <Box
+        sx={{
+          flex: 2,
+          display: "flex",
+          flexDirection: "column",
+          justifyContent: "center",
+          gap: 4,
+          width: "100%",
+        }}
+      >
+        <Container >
+          <Form
+            titulo="Mudar senha"
+            label1="Senha atual"
+            label2="Nova senha"
+            botao="Salvar"
+            type="password"
+          />
+        </Container>
+      </Box>
+    </Box>
   );
 };
 
