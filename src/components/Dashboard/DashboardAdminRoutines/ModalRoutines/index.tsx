@@ -1,4 +1,3 @@
-// src/components/ModalRoutines.tsx
 import React, { useEffect, useState } from "react";
 import {
   Backdrop,
@@ -44,18 +43,15 @@ const ModalRoutines: React.FC<ModalRoutinesProps> = ({
   const { data, loading: loadingTrainings } = useTrainingsData();
   const trainings = data?.getAllTrainings || [];
 
-  // Estado do formulário e seleção
   const [selectedIds, setSelectedIds] = useState<string[]>([]);
   const [formData, setFormData] = useState({ name: "", description: "" });
   const [openSnackbar, setOpenSnackbar] = useState(false);
   const [snackbarMessage, setSnackbarMessage] = useState("");
 
-  // Mutações
   const [createRoutine, { loading: loadingCreate }] = useMutation(CREATE_ROUTINE);
   const [editRoutine, { loading: loadingEdit }] = useMutation(EDIT_ROUTINE);
   const loadingMutation = loadingCreate || loadingEdit;
 
-  // Popula campos ao editar
   useEffect(() => {
     if (routine) {
       setFormData({
