@@ -13,7 +13,7 @@ export const login = async (email: string, password: string) => {
         console.log(response);
         const token = response.data.token;
         Cookies.set('token', token, { expires: 7, path: '/' });
-
+        
     } catch (e) {
         console.log(e);
     }

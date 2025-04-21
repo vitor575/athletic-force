@@ -1,11 +1,11 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
-import Login from "./components/Login";
 import ClientHome from "./pages/ClientHome/indes";
 import Pagamento from "./pages/Pagamento";
 import CronogramaTreino from "./pages/CronogramaTreino";
 import Treino from "./components/Treino";
+import Login from "./components/Login";
 import ConfigClientPage from "./pages/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
 import EmpregadoDashboard from "./pages/EmpregadoDashboard";

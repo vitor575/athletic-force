@@ -1,5 +1,4 @@
-import React from "react";
-import "./Cards.css";
+
 import { Link } from "react-router-dom";
 import { Box, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../tema";
@@ -10,7 +9,7 @@ interface CardProps {
   destino: string;
 }
 
-const cardStyle = { width: "120px", height: "auto", marginBottom: "1rem" };
+const cardStyle = { width: "170px", height: "auto" };
 
 const CardCliente = ({ titulo, imagem, destino }: CardProps) => {
     const theme = useTheme();
@@ -44,7 +43,7 @@ const CardCliente = ({ titulo, imagem, destino }: CardProps) => {
         <Typography color={colors.grey[900]} fontWeight="bold" variant="h5">
           {titulo}
         </Typography>
-      </Box>
+      </Box>  
       <Box>
         <Link
           style={{

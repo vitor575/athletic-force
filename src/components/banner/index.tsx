@@ -16,7 +16,7 @@ const Banner = () => {
   }, [images.length]);
 
   return (
-    <Box sx={{ width: "100%", overflow: "hidden", borderRadius: "10px" }}>
+    <Box sx={{ width: "100%", overflow: "hidden"}}>
       <Box
         sx={{
           display: "flex",

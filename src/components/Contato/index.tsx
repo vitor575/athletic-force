@@ -1,7 +1,7 @@
 import React, { useState } from "react";
-import { Box, TextField, Button, Typography, Paper } from "@mui/material";
-import FotoContato from "./fotoContato";
+import { Box, TextField, Button, Paper, colors, useTheme } from "@mui/material";
 import logocontato from "../../img/logo3.png"
+import { tokens } from "../../tema";
 
 interface FormContact {
   email: string;
@@ -11,6 +11,8 @@ interface FormContact {
 }
 
 const Contato: React.FC = () => {
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   const [formContatoState, setFormContato] = useState<FormContact>({
     nome: "",
     email: "",
@@ -30,7 +32,6 @@ const Contato: React.FC = () => {
 
   return (
     <Box >
-      <FotoContato />
       <Paper
         elevation={3}
         sx={{
@@ -38,18 +39,14 @@ const Contato: React.FC = () => {
           borderRadius: 3,
           boxShadow: "0px 4px 60px rgba(177, 177, 177, 0.973)",
           width: "65%",
-          margin: "0 auto",
-          mt: -10,
-          position: "relative",
-          top: "-200px",
+          margin: "0 auto", 
+          justifyContent: "center",
+
         }}
       >
         <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-          <img src={logocontato} alt="logocontato" style={{ width: "20%", animation: "imgLogo 4s ease-in-out infinite" }} />
+          <img src={logocontato} alt="logocontato" style={{ width: "20%",  border: `3px solid ${colors.blueAccent[600]}`}} />
         </Box>
-        <Typography variant="h3" fontWeight={600} textAlign="center" color="error" gutterBottom>
-          CONTATO COM <span style={{ background: "linear-gradient(20deg, #fff, #ff0000)", WebkitBackgroundClip: "text", WebkitTextFillColor: "transparent" }}>ZENFIT</span>
-        </Typography>
         <form onSubmit={handleSubmit}>
           <TextField
             fullWidth
@@ -69,6 +66,7 @@ const Contato: React.FC = () => {
               value={formContatoState.email}
               onChange={handleChange}
               required
+              
             />
             <TextField
               fullWidth
@@ -91,7 +89,7 @@ const Contato: React.FC = () => {
             margin="normal"
           />
           <Box sx={{ display: "flex", justifyContent: "end", mt: 2 }}>
-            <Button type="submit" variant="contained" color="error" sx={{ fontWeight: "bold", padding: "12px 24px" }}>
+            <Button type="submit" variant="contained" color="error" sx={{backgroundColor: colors.primary?.[500], fontWeight: "bold", padding: "12px 24px", border: `2px solid ${colors.blueAccent[600]}`}}>
               Enviar mensagem
             </Button>
           </Box>

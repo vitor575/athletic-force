@@ -14,11 +14,11 @@ const SobreFT: React.FC = () => {
   return (
     <Box
       sx={{
-        margin: "50px",
+        margin: "10px",
         display: "flex",
         justifyContent: "center",
         alignItems: "center",
-        width: "95%",
+        width: "90%",
         marginBottom: "3%",
       }}
     >
@@ -28,7 +28,7 @@ const SobreFT: React.FC = () => {
         alt="imagem da caixa do sobre"
         className="imagemSobreTxt"
         sx={{
-          width: "55%",
+          width: "60%",
           borderRadius: "20px",
           boxShadow: `0px 4px 60px ${colors.blueAccent[600]}`,
         }}

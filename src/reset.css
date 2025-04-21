@@ -107,10 +107,19 @@ section {
   display: block;
 }
 #sobre  {
-  padding: 35px;
+  padding: 80px 35px;
 }
 #contato {
-  height: 900px;
+  padding: 100px 0;
+}
+#treinadores {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap: 25px;
+}
+.css-1ll44ll-MuiOutlinedInput-notchedOutline {
+  border-color: #6870fa !important;
 }
 
 body {
@@ -148,12 +157,9 @@ table {
 }
 
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #141b2d 46%, #6870fa 50%);
+  background: #3e4396;
   border-radius: 10px;
   border: 3px outset #ffffff;
   transition: 0.5s;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #6870fa 46%, #141b2d 50%);
-}

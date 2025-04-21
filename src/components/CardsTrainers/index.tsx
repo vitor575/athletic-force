@@ -1,8 +1,6 @@
-import "./styles.css";
-import { useLayoutEffect } from "react";
-import { gsap } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { Box, Typography, Paper , useTheme} from "@mui/material";
 import IconContato from "../IconContato";
+import { tokens } from "../../tema";
 
 interface CardHomeProps {
   imagem: string;
@@ -11,40 +9,53 @@ interface CardHomeProps {
 }
 
 const CardsTraineres = ({ imagem, titulo, descricao }: CardHomeProps) => {
-  useLayoutEffect(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    gsap.to(".cardHome-container", {
-      opacity: 1,
-      scrollTrigger: {
-        trigger: ".container-cx",
-        start: "top 700px",
-        end: "bottom 600px",
-        scrub: true,
-      },
-    });
-    return () => {
-      gsap.killTweensOf(".cardHome-container");
-    };
-  }, []);
-
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
   return (
-    <main className="cardHome-container">
-      <div className="container-cx">
-        <div className="cardHome-image">
-          <img src={imagem} alt={titulo} />
-        </div>
-        <div className="cardHome-titulo">
-          <h1>{titulo}</h1>
-        </div>
-        <div className="cardHome-text">
-          <p>{descricao}</p>
-        </div>
-        <div className="buttons">
-          <IconContato/>
-        </div>
-      </div>
-    </main>
+    <Paper
+      sx={{
+        width: "390px",
+        height: "520px",
+        padding: "30px 5px",
+        borderRadius: "20px",
+        textAlign: "center",
+        backgroundColor: "#fff",
+        boxShadow: "0px 4px 60px rgba(177, 177, 177, 0.973)",
+        transition: "box-shadow 0.4s ease",
+        "&:hover": {
+          boxShadow: `0px 4px 60px ${colors.blueAccent[500]}`,
+          transform: "scale(1.02)",
+          transition: "transform 600ms",
+        },
+      }}
+    >
+      <Box
+        component="img"
+        src={imagem}
+        alt={titulo}
+        sx={{
+          width: "80%",
+          borderRadius: "20px",
+          objectFit: "cover",
+        }}
+      />
+      <Typography
+        variant="h4"
+        sx={{
+          fontWeight: 600,
+          fontSize: "1.9em",
+          color:colors.primary[600],
+        }}
+      >
+        {titulo}
+      </Typography>
+      <Typography sx={{ fontSize: "1.3em", color:colors.primary[500] }}>
+        {descricao}
+      </Typography>
+      <Box>
+        <IconContato />
+      </Box>
+    </Paper>
   );
 };
 
