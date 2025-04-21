@@ -24,7 +24,7 @@ const App: React.FC = () => {
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
    
-            <Route element={<ProtectedRoute redirectPath="/login" />}>
+            <Route element={<ProtectedRoute redirectPath="/" />}>
               
               <Route path="/clientHome" element={<ClientHome />} />
               <Route path="/clientHome/pagamentos" element={<Pagamento />} />
