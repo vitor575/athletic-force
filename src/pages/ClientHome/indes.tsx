@@ -15,12 +15,14 @@ import {
 } from "@mui/material";
 import { tokens } from "../../tema";
 import { useClientData } from "../../services/querrys/useClientData";
+import Cookies from "js-cookie";
 
 const ClientHome = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const handleExit = () => {
+    Cookies.remove("token");
     navigate("/");
   };
 
