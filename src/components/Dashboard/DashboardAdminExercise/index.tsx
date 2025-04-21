@@ -1,11 +1,23 @@
 import React, { useState } from "react";
-import { Box, Button, Typography, useTheme, Backdrop, CircularProgress } from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  useTheme,
+  Backdrop,
+  CircularProgress,
+  Snackbar,
+  Alert,
+} from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { tokens } from "../../../tema";
 import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import { useExercisesData } from "../../../services/querrys/useExercisesData";
 import ModalExercise from "./ModalExercise";
+import { useMutation } from "@apollo/client";
+import { DELETE_EXERCISE } from "../../../services/mutations/exerciseMutations"; 
+import { EXERCISE_QUERY } from "../../../services/querrys/useExercisesData";
 
 const DashboardExercises: React.FC = () => {
   const theme = useTheme();
@@ -15,7 +27,6 @@ const DashboardExercises: React.FC = () => {
 
   const [openModal, setOpenModal] = useState(false);
   const [selectedExercise, setSelectedExercise] = useState<any>(null);
-  
 
   const handleOpenModalForCreate = () => {
     setSelectedExercise(null);
@@ -31,6 +42,27 @@ const DashboardExercises: React.FC = () => {
     setOpenModal(false);
     setSelectedExercise(null);
   };
+
+  const [deleteExercise, { loading: deleting }] = useMutation(DELETE_EXERCISE, {
+    refetchQueries: [{ query: EXERCISE_QUERY }],
+    awaitRefetchQueries: true,
+  });
+
+  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [snackbarMessage, setSnackbarMessage] = useState("");
+
+  const handleDelete = async (id: string) => {
+    try{
+        await deleteExercise({variables: { id }});
+        setSnackbarMessage("Exercício excluído com sucesso !");
+        setOpenSnackbar(true);
+    } catch (e) {
+      console.log(e);
+      setSnackbarMessage("Erro ao excluir exercício.");
+      setOpenSnackbar(true);
+    }
+    
+  }
 
   const CustomToolbar = () => (
     <Box sx={{ p: "10px 0" }}>
@@ -59,42 +91,75 @@ const DashboardExercises: React.FC = () => {
       headerName: "Gerenciar",
       flex: 1,
       renderCell: (params: any) => (
-        <Button
-          sx={{
-            backgroundColor: colors.greenAccent[600],
-            color: colors.grey[100],
-          }}
-          variant="contained"
-          onClick={() => handleOpenModalForEdit(params.row)}
-        >
-          <FitnessCenterOutlinedIcon />
-          <Typography ml="5px">Editar</Typography>
-        </Button>
+        <Box display="flex" gap={1}>
+          <Button
+            sx={{
+              backgroundColor: colors.greenAccent[600],
+              color: colors.grey[100],
+            }}
+            variant="contained"
+            onClick={() => handleOpenModalForEdit(params.row)}
+          >
+            <FitnessCenterOutlinedIcon />
+            <Typography ml="5px">Editar</Typography>
+          </Button>
+          <Button
+            disabled={deleting}
+            onClick={() => handleDelete(params.row.id)}
+            sx={{ backgroundColor: colors.redAccent[600], color: "#fff" }}
+          >
+            Excluir
+          </Button>
+        </Box>
       ),
     },
   ];
 
   return (
     <Box m="10px">
-      <Backdrop sx={{ color: "#fff", zIndex: theme.zIndex.drawer + 1 }} open={loading}>
+      <Backdrop
+        sx={{ color: "#fff", zIndex: theme.zIndex.drawer + 1 }}
+        open={loading || deleting}
+      >
         <CircularProgress color="inherit" />
       </Backdrop>
 
       <Typography variant="h3" fontSize="32px" m="0 0 0 10px">
         Exercícios
       </Typography>
-      <Typography variant="h4" fontSize="16px" m="10px 0 0 10px" color={colors.greenAccent[500]}>
+      <Typography
+        variant="h4"
+        fontSize="16px"
+        m="10px 0 0 10px"
+        color={colors.greenAccent[500]}
+      >
         Todos exercícios cadastrados até o momento.
       </Typography>
 
-      <Box m="10px 0 0 0" height="75vh" sx={{
+      <Box
+        m="10px 0 0 0"
+        height="75vh"
+        sx={{
           "& .MuiDataGrid-root": { border: "none" },
           "& .MuiDataGrid-cell": { border: "none" },
-          "& .MuiDataGrid-columnHeader": { backgroundColor: colors.blueAccent[700], borderBottom: "none" },
-          "& .MuiDataGrid-virtualScroller": { backgroundColor: colors.primary[400] },
-          "& .MuiDataGrid-footerContainer": { borderTop: "none", backgroundColor: colors.blueAccent[700] },
-        }}>
-        <DataGrid rows={exercicios} columns={colunas} slots={{ toolbar: CustomToolbar }} />
+          "& .MuiDataGrid-columnHeader": {
+            backgroundColor: colors.blueAccent[700],
+            borderBottom: "none",
+          },
+          "& .MuiDataGrid-virtualScroller": {
+            backgroundColor: colors.primary[400],
+          },
+          "& .MuiDataGrid-footerContainer": {
+            borderTop: "none",
+            backgroundColor: colors.blueAccent[700],
+          },
+        }}
+      >
+        <DataGrid
+          rows={exercicios}
+          columns={colunas}
+          slots={{ toolbar: CustomToolbar }}
+        />
       </Box>
 
       <ModalExercise
@@ -103,8 +168,22 @@ const DashboardExercises: React.FC = () => {
           refetch();
           handleCloseModal();
         }}
-        exercise={selectedExercise} 
+        exercise={selectedExercise}
       />
+      <Snackbar
+        open={openSnackbar}
+        autoHideDuration={3000}
+        onClose={() => setOpenSnackbar(false)}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setOpenSnackbar(false)}
+          severity={snackbarMessage.includes("Erro") ? "error" : "success"}
+          sx={{ width: "100%" }}
+        >
+          {snackbarMessage}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

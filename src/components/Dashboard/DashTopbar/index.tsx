@@ -4,12 +4,14 @@ import  LightModeOutlinedIcon  from "@mui/icons-material/LightModeOutlined";
 import  DarkModeOutlinedIcon  from "@mui/icons-material/DarkModeOutlined";
 import  NotificationsOutlinedIcon  from "@mui/icons-material/NotificationsOutlined";
 import  SettingsOutlinedIcon  from "@mui/icons-material/SettingsOutlined";
-import  PersonOutlinedIcon  from "@mui/icons-material/PersonOutlined";
+import ExitToAppIcon from '@mui/icons-material/ExitToApp';
 import  SearchIcon  from "@mui/icons-material/Search";
 import { useDispatch } from "react-redux";
 import { AppDispatch } from "../../../store";
 import { tokens } from "../../../tema";
 import { toggleColorMode } from "../../../store/reducers/temaSlice";
+import Cookies from "js-cookie";
+import { useNavigate } from "react-router-dom";
 
 
 const DashTopbar = () => {
@@ -17,6 +19,11 @@ const DashTopbar = () => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
     const dispatch = useDispatch<AppDispatch>();
+    const navigate = useNavigate()
+    const handleExit = () => {
+        Cookies.remove('token');
+        navigate('/')
+    }
 
     return (
         <Box display="flex" justifyContent="space-between" p={1.5} >
@@ -36,8 +43,8 @@ const DashTopbar = () => {
                 <IconButton>
                     <SettingsOutlinedIcon />
                 </IconButton>
-                <IconButton>
-                    <PersonOutlinedIcon />
+                <IconButton onClick={handleExit}>
+                    <ExitToAppIcon />
                 </IconButton>
             </Box>
         </Box>

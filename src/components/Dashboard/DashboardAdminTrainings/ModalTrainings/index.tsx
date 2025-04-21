@@ -134,6 +134,7 @@ const ModalTrainings: React.FC<ModalTrainingsProps> = ({ open, handleClose, onTr
           refetchQueries: [{ query: EXERCISE_QUERY }],
           awaitRefetchQueries: true,
         });
+        handleClose();
       } else {
         response = await createTraining({
           variables: {

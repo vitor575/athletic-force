@@ -98,10 +98,12 @@ const ModalExercise: React.FC<ModalExerciseProps> = ({ open, handleClose, exerci
         setSnackbarMessage(response.data.createExercise.message);
       }
       setOpenSnackbar(true);
+      handleClose();
     } catch (err: any) {
       setSnackbarMessage("Erro ao salvar exercício: " + err.message);
       setOpenSnackbar(true);
     } 
+    
   };
   
 
