@@ -2,7 +2,7 @@
 import Logo from "../../img/logo3.png";
 import user from "../../img/user.jpg";
 import { FaSignOutAlt } from "react-icons/fa";
-import CardCliente from "../../components/CardsCliente";
+import CardCliente from "../../components/AreaAluno/CardsCliente";
 import Calendario from "../../img/calendario.png";
 import Pagamento from "../../img/pagamento.png";
 import Configuracao from "../../img/configuracao.png";

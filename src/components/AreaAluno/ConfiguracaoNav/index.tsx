@@ -1,7 +1,7 @@
 import { List, ListItem, useTheme, ListItemButton, ListItemText, Paper, Box } from "@mui/material";
 import { Link } from "react-router-dom";
 import { FaSignOutAlt } from "react-icons/fa";
-import { tokens } from "../../tema";
+import { tokens } from "../../../tema";
 
 const ConfiguracaoNav = () => {
   const theme = useTheme();

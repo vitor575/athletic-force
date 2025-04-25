@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAppSelector } from '../../store';
+import { useAppSelector } from '../../../store';
 import { useParams } from 'react-router-dom';
 import {
   Box,
@@ -10,8 +10,12 @@ import {
   CardMedia,
   useTheme
 } from '@mui/material';
+import Checkbox from '@mui/material/Checkbox';
+import CheckBoxIcon from '@mui/icons-material/CheckBox';
+import CheckBoxOutlineBlankIcon from '@mui/icons-material/CheckBoxOutlineBlank';
+import { useState, useEffect } from 'react';
 
-import { tokens } from "../../tema"
+import { tokens } from "../../../tema"
 
 const Treino: React.FC = () => {
   const { dia } = useParams();
@@ -19,6 +23,26 @@ const Treino: React.FC = () => {
   const treinoDoDia = treinos.filter((treino) => treino.diaSemana === dia);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [concluidos, setConcluidos] = useState<number[]>([]);
+
+  const handleToggle = (index: number) => {
+    setConcluidos((prev) =>
+      prev.includes(index) ? prev.filter((i) => i !== index) : [...prev, index]
+    );
+  };
+  
+  useEffect(() => {
+    const dadosSalvos = localStorage.getItem('treinosConcluidos');
+    if (dadosSalvos) {
+      setConcluidos(JSON.parse(dadosSalvos));
+    }
+  }, []);
+
+  // Salva no localStorage sempre que mudar
+  useEffect(() => {
+    localStorage.setItem('treinosConcluidos', JSON.stringify(concluidos));
+  }, [concluidos]);
 
 
   return (
@@ -56,7 +80,7 @@ const Treino: React.FC = () => {
                 image={treino.imgem}
                 alt={treino.nome}
                 sx={{
-                  width: "10%",
+                  width: "8%",
                   objectFit: 'cover',
 
                 }}
@@ -64,13 +88,21 @@ const Treino: React.FC = () => {
 
               <Typography
                 variant="h4"
-                sx={{ fontWeight: 'bold', color:colors.primary[600] }}
+                sx={{ fontWeight: 'bold', color: colors.primary[600] }}
               >
                 {treino.nome}
               </Typography>
-              <Typography variant="h6" sx={{ color: colors.primary[600] }}>
+              <Typography variant="h4" sx={{ color: colors.primary[600] }}>
                 {treino.repeticoes} repetições
               </Typography>
+
+              <Checkbox
+                checked={concluidos.includes(index)}
+                onChange={() => handleToggle(index)}
+                icon={<CheckBoxOutlineBlankIcon />}
+                checkedIcon={<CheckBoxIcon sx={{ color: 'green' }} />}
+                sx={{ marginRight: 2 }}
+              />
 
             </Card>
           </ListItem>

@@ -1,6 +1,6 @@
 
 import { Box, Container } from "@mui/material";
-import ConfiguracaoNav from "../../components/ConfiguracaoNav";
+import ConfiguracaoNav from "../../components/AreaAluno/ConfiguracaoNav";
 import Form from "../../components/Form";
 
 const ConfigClientPage = () => {
