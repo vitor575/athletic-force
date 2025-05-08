@@ -106,6 +106,13 @@ nav,
 section {
   display: block;
 }
+#planos {
+  display: flex;
+  justify-content: center;
+  flex-direction: row;
+  gap:30px;
+  margin: 70px 0 0;
+}
 #sobre  {
   padding: 80px 35px;
 }

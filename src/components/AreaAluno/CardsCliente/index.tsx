@@ -1,7 +1,7 @@
 
 import { Link } from "react-router-dom";
 import { Box, Typography, useTheme } from "@mui/material";
-import { tokens } from "../../tema";
+import { tokens } from "../../../tema";
 
 interface CardProps {
   titulo: string;
