@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Outlet, useNavigate } from "react-router-dom";
 import { Box, Button, Typography, IconButton, Paper, useTheme } from "@mui/material";
 import { FaArrowLeft, FaArrowRight, FaSignOutAlt } from "react-icons/fa";

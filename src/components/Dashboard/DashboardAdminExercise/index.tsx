@@ -11,7 +11,6 @@ import {
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import { tokens } from "../../../tema";
-import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
 import AddIcon from "@mui/icons-material/Add";
 import { useExercisesData } from "../../../services/querrys/useExercisesData";
 import ModalExercise from "./ModalExercise";
@@ -91,7 +90,7 @@ const DashboardExercises: React.FC = () => {
       headerName: "Gerenciar",
       flex: 1,
       renderCell: (params: any) => (
-        <Box display="flex" gap={1}>
+        <Box display="flex" gap={1} mt={1}>
           <Button
             sx={{
               backgroundColor: colors.greenAccent[600],
@@ -100,7 +99,6 @@ const DashboardExercises: React.FC = () => {
             variant="contained"
             onClick={() => handleOpenModalForEdit(params.row)}
           >
-            <FitnessCenterOutlinedIcon />
             <Typography ml="5px">Editar</Typography>
           </Button>
           <Button

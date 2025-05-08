@@ -1,5 +1,5 @@
 import React from "react";
-import { Box, Typography, Button, keyframes, colors , useTheme} from "@mui/material";
+import { Box, Typography, Button, useTheme} from "@mui/material";
 import { tokens } from "../../tema";
 
 interface cardAssinaturaProps {
