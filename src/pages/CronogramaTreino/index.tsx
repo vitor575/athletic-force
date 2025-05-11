@@ -38,7 +38,7 @@ const CronogramaTreino: React.FC = () => {
         justifyContent: "space-between",
       }}
     >
-      <Box sx={{padding: "20px 0 0 15px" }}>
+      <Box sx={{ padding: "20px 20px 0 20px", display: "flex", justifyContent: "space-between"}}>
         <Button
           variant="contained"
           color="error"
@@ -48,6 +48,10 @@ const CronogramaTreino: React.FC = () => {
         >
           Voltar
         </Button>
+        <Button sx={{ bgcolor: colors.blueAccent[300], "&:hover": { bgcolor: colors.blueAccent[400] }, color: "#fff" }}>
+          Historico de Treinos
+        </Button>
+
       </Box>
       <Paper
         elevation={4}

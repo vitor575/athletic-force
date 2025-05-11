@@ -19,9 +19,9 @@ const Home = () => {
         <Banner />
       </section>
       <section id="planos">
-          <CardPlanos  plano="Plano Exemplo" descricao="Descrição do plano"  valor={99.99} page="Planos/Plano1"/> 
-          <CardPlanos  plano="Plano Exemplo" descricao="Descrição do plano" valor={150.00} page="Planos/Plano2" /> 
-          <CardPlanos  plano="Plano Exemplo" descricao="Descrição do plano" valor={250.00} page="Planos/Plano3" /> 
+          <CardPlanos  plano="Plano 1"  valor={99.99} page="Planos/Plano1"/> 
+          <CardPlanos  plano="Plano 2" valor={150.00} page="Planos/Plano2" /> 
+          <CardPlanos  plano="Plano 3" valor={250.00} page="Planos/Plano3" /> 
       </section>
       <section id="sobre">
 

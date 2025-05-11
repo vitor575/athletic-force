@@ -16,6 +16,7 @@ import {
 import { tokens } from "../../tema";
 import { useClientData } from "../../services/querrys/useClientData";
 import Cookies from "js-cookie";
+import { bgBG } from "@mui/material/locale";
 
 const ClientHome = () => {
   const navigate = useNavigate();
@@ -29,7 +30,7 @@ const ClientHome = () => {
 
   const { client, loading } = useClientData();
 
-  if (loading) return <Typography>Carregando...</Typography>;
+  if (loading) return <Typography sx={{ display: "none" }}>Carregando...</Typography>;
   return (
     <Box
       sx={{
@@ -130,6 +131,13 @@ const ClientHome = () => {
             </Button>
           </Box>
         </Box>
+      </Box>
+      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "5px" }}>
+        <Button onClick={() => window.location.href = "/clientHome/cronograma/Segunda-feira"} sx={{ bgcolor: colors.primary[600], display: "flex", justifyContent: "center", alignItems: "center", width: "75.5%", gap: "5px", padding: "10px", borderRadius: "10px", border: `3px solid ${colors.blueAccent[500]}`, }}>
+          <Typography sx={{color: colors.grey[900], fontFamily: 'Roboto',fontWeight: 'bold' }}>
+            Proximo treino
+          </Typography>
+        </Button>
       </Box>
       <Box
         sx={{

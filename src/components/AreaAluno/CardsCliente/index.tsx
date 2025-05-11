@@ -20,8 +20,8 @@ const CardCliente = ({ titulo, imagem, destino }: CardProps) => {
       sx={{
         bgcolor: colors.primary[600],
         width: "300px",
-        height: "400px",
-        borderRadius: "20px",
+        height: "350px",
+        borderRadius: "10px",
         display: "flex",
         flexDirection: "column",
         justifyContent: "space-around",
