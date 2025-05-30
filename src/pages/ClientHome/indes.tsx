@@ -7,16 +7,10 @@ import Calendario from "../../img/calendario.png";
 import Pagamento from "../../img/pagamento.png";
 import Configuracao from "../../img/configuracao.png";
 import { useNavigate } from "react-router-dom";
-import {
-  Box,
-  Button,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import {Box,Button,Typography,useTheme,} from "@mui/material";
 import { tokens } from "../../tema";
 import { useClientData } from "../../services/querrys/useClientData";
 import Cookies from "js-cookie";
-import { bgBG } from "@mui/material/locale";
 
 const ClientHome = () => {
   const navigate = useNavigate();
@@ -90,17 +84,6 @@ const ClientHome = () => {
             color: colors.grey[900],
           }}
         >
-          <Box
-            sx={{
-              border: `4px solid ${colors.blueAccent[600]}`,
-              borderRadius: "50%",
-              width: "50px",
-              height: "50px",
-            }}
-            component="img"
-            src={user}
-            alt="Imagem de avatar"
-          />
           <Box fontWeight="bold" >
             <Typography variant="h3" component="h2" sx={{ fontSize: "1.6em" }}>
               Seja bem-vindo, {client.me.name}
@@ -131,13 +114,6 @@ const ClientHome = () => {
             </Button>
           </Box>
         </Box>
-      </Box>
-      <Box sx={{ display: "flex", justifyContent: "center", alignItems: "center", gap: "5px" }}>
-        <Button onClick={() => window.location.href = "/clientHome/cronograma/Segunda-feira"} sx={{ bgcolor: colors.primary[600], display: "flex", justifyContent: "center", alignItems: "center", width: "75.5%", gap: "5px", padding: "10px", borderRadius: "10px", border: `3px solid ${colors.blueAccent[500]}`, }}>
-          <Typography sx={{color: colors.grey[900], fontFamily: 'Roboto',fontWeight: 'bold' }}>
-            Proximo treino
-          </Typography>
-        </Button>
       </Box>
       <Box
         sx={{

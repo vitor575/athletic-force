@@ -1,64 +1,116 @@
-import { List, ListItem, useTheme, ListItemButton, ListItemText, Paper, Box } from "@mui/material";
+import { useState } from "react";
+import {
+  List,
+  ListItem,
+  useTheme,
+  ListItemButton,
+  ListItemText,
+  Paper,
+  Box,
+  IconButton,
+} from "@mui/material";
 import { Link } from "react-router-dom";
-import { FaSignOutAlt } from "react-icons/fa";
 import { tokens } from "../../../tema";
+import Logo from "../../../img/logo3.png";
+import { FaUserCog, FaSignOutAlt } from "react-icons/fa";
+import { RiLockPasswordFill } from "react-icons/ri";
+import { GrDocumentUser } from "react-icons/gr";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 
-const ConfiguracaoNav = () => {
+interface ConfiguracaoNavProps {
+  setSelectedSection: (section: string) => void;
+  setIsCollapsed: (value: boolean) => void;
+  isCollapsed: boolean; // ✅ Recebido do pai agora
+}
+
+const ConfiguracaoNav = ({
+  setSelectedSection,
+  setIsCollapsed,
+  isCollapsed,
+}: ConfiguracaoNavProps) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+  const [selected, setSelected] = useState("perfil");
+
+  const buttonStyle = {
+    display: "flex",
+    justifyContent: isCollapsed ? "center" : "flex-start",
+    color: "#fff",
+    alignItems: "center",
+    px: 2,
+    textAlign: "left",
+  };
+
+  const renderItem = (key: string, icon: React.ReactNode, label: string) => (
+    <ListItem disablePadding sx={{ width: "100%" }} key={key}>
+      <ListItemButton
+        selected={selected === key}
+        onClick={() => {
+          setSelected(key);
+          setSelectedSection(key);
+        }}
+        sx={{
+          ...buttonStyle,
+          backgroundColor: selected === key ? colors.primary[600] : "transparent",
+          "&:hover": {
+            backgroundColor: colors.primary[500],
+          },
+        }}
+      >
+        {icon}
+        {!isCollapsed && (
+          <ListItemText primary={label} sx={{ marginLeft: "20px" }} />
+        )}
+      </ListItemButton>
+    </ListItem>
+  );
+
   return (
     <Paper
-      elevation={3}
       sx={{
-        width: "100%",
+        width: isCollapsed ? "80px" : "280px",
         minHeight: "100vh",
-        boxShadow: 2,
-        padding: 2,
         bgcolor: colors.primary[300],
         display: "flex",
         flexDirection: "column",
-        justifyContent: "space-between"
+        justifyContent: "space-between",
+        borderRadius: 0,
+        transition: "width 0.3s ease",
       }}
     >
-      <List sx={{ display: "flex", flexDirection: "column", gap: 2, flex: 1 }}>
-        <ListItem disablePadding>
-          <ListItemButton
-            sx={{
-              borderRadius: 2,  
-              bgcolor: colors.primary[600],
-              textAlign: "center",
-              border: `3px solid ${colors.blueAccent[500]}`,
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              "&:hover": {
-                transform: "scale(0.98)",
-                boxShadow: `0 0px 36px ${colors.blueAccent[300]}`,
-                bgcolor: colors.primary[600],
-              },
+      <Box p={2}>
+        <Box
+          display="flex"
+          justifyContent={isCollapsed ? "center" : "space-between"}
+          alignItems="center"
+          mb={3}
+        >
+          {!isCollapsed && (
+            <Box component="img" src={Logo} sx={{ width: "40px" }} />
+          )}
+          <IconButton
+            onClick={() => {
+              setIsCollapsed(!isCollapsed);
             }}
           >
-            <ListItemText primary="Editar senha" sx={{ color: "#fff" }} />
-          </ListItemButton>
-        </ListItem>
+            <MenuOutlinedIcon sx={{ color: "#fff" }} />
+          </IconButton>
+        </Box>
 
-        <ListItem disablePadding>
-          <ListItemButton
-            sx={{
-              borderRadius: 2,
-              textAlign: "center",
-              bgcolor: colors.primary[600],
-              transition: "transform 0.3s ease, box-shadow 0.3s ease",
-              border: `3px solid ${colors.blueAccent[500]}`,
-              "&:hover": {
-                transform: "scale(0.98)",
-                boxShadow: `0 0px 36px ${colors.blueAccent[300]}`,
-                bgcolor: colors.primary[600],
-              },
-            }}
-          >
-            <ListItemText primary="Mudar forma de pagamento" sx={{ color: "#fff" }} />
-          </ListItemButton>
-        </ListItem>
-      </List>
+        <List
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: 1,
+            flex: 1,
+            alignItems: "center",
+          }}
+        >
+          {renderItem("perfil", <FaUserCog size={20} />, "Perfil")}
+          {renderItem("trocarSenha", <RiLockPasswordFill size={20} />, "Trocar Senha")}
+          {renderItem("verPlano", <GrDocumentUser size={20} />, "Ver Plano")}
+        </List>
+      </Box>
 
       <Box sx={{ marginTop: "auto" }}>
         <ListItem disablePadding>
@@ -71,12 +123,12 @@ const ConfiguracaoNav = () => {
               justifyContent: "center",
               color: "#fff",
               alignItems: "center",
-
+              height: "70px"
             }}
           >
-            <FaSignOutAlt style={{ marginRight: 8, color: "#fff" }} /> Voltar
+            <FaSignOutAlt style={{ marginRight: isCollapsed ? 0 : 8 }} />
+            {!isCollapsed && "Voltar"}
           </ListItemButton>
-
         </ListItem>
       </Box>
     </Paper>

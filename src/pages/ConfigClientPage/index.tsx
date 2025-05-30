@@ -1,48 +1,48 @@
-
-import { Box, Container } from "@mui/material";
+import { Box, useTheme } from "@mui/material";
+import { useState } from "react";
 import ConfiguracaoNav from "../../components/AreaAluno/ConfiguracaoNav";
-import Form from "../../components/Form";
+import PerfilContent from "./PerfilContent";
+import TrocarSenhaContent from "./TrocarSenhaContent";
+import VerPlanoContent from "./VerPlanoContent";
+import { tokens } from "../../tema";
 
 const ConfigClientPage = () => {
+  const [selectedSection, setSelectedSection] = useState("perfil");
+  const [isCollapsed, setIsCollapsed] = useState(false);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
+
+  const renderContent = () => {
+    switch (selectedSection) {
+      case "perfil":
+        return <PerfilContent />;
+      case "trocarSenha":
+        return <TrocarSenhaContent />;
+      case "verPlano":
+        return <VerPlanoContent />;
+      default:
+        return <PerfilContent />;
+    }
+  };
+
   return (
-    <Box
-      sx={{
-        display: "flex",
-        flexDirection: { xs: "column", md: "row" },
-        gap: 4,
-        minHeight: "100vh",
-        backgroundColor: "#eaeaea",
-        
-      }}
-    >
-      <Box
-        sx={{
-          flex: 1,
-          maxWidth: { xs: "100%", md: "25rem" },
-        }}
-      >
-        <ConfiguracaoNav />
-      </Box>
+    <Box display="flex" sx={{bgcolor: colors.primary[600]}}>
+      <ConfiguracaoNav
+        setSelectedSection={setSelectedSection}
+        setIsCollapsed={setIsCollapsed}
+        isCollapsed={isCollapsed}
+      />
 
       <Box
-        sx={{
-          flex: 2,
-          display: "flex",
-          flexDirection: "column",
-          justifyContent: "center",
-          gap: 4,
-          width: "100%",
-        }}
+        flex={1}
+        display="flex"
+        minHeight="100vh"
+        padding={2}
+        
       >
-        <Container >
-          <Form
-            titulo="Mudar senha"
-            label1="Senha atual"
-            label2="Nova senha"
-            botao="Salvar"
-            type="password"
-          />
-        </Container>
+        <Box width="100%" maxWidth="1900px">
+          {renderContent()}
+        </Box>
       </Box>
     </Box>
   );
