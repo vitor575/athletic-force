@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
@@ -7,9 +7,9 @@ import { tokens } from "../../../tema";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
-import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
-import DirectionsRunIcon from '@mui/icons-material/DirectionsRun';
-import ViewDayIcon from '@mui/icons-material/ViewDay';
+import FormatListBulletedIcon from "@mui/icons-material/FormatListBulleted";
+import DirectionsRunIcon from "@mui/icons-material/DirectionsRun";
+import ViewDayIcon from "@mui/icons-material/ViewDay";
 
 interface ItemProps {
   title: string;
@@ -17,6 +17,11 @@ interface ItemProps {
   icon: React.ReactNode;
   selected: string;
   setSelected: (value: string) => void;
+}
+
+interface SidebarProps {
+  collapsed: boolean;
+  setCollapsed: (value: boolean) => void;
 }
 
 const Item = ({ title, to, icon, selected, setSelected }: ItemProps) => {
@@ -38,15 +43,15 @@ const Item = ({ title, to, icon, selected, setSelected }: ItemProps) => {
   );
 };
 
-const Sidebar = () => {
+const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [selected, setSelected] = useState("Alunos");
 
   return (
     <Box
       sx={{
+        height: "100%",
         "& .pro-sidebar-inner": {
           background: `${colors.primary[400]} !important`,
         },
@@ -64,17 +69,17 @@ const Sidebar = () => {
         },
       }}
     >
-      <ProSidebar collapsed={isCollapsed}>
+      <ProSidebar collapsed={collapsed}>
         <Menu iconShape="square">
           <MenuItem
-            onClick={() => setIsCollapsed(!isCollapsed)}
-            icon={isCollapsed ? <MenuOutlinedIcon /> : undefined}
+            onClick={() => setCollapsed(!collapsed)}
+            icon={collapsed ? <MenuOutlinedIcon /> : undefined}
             style={{
               margin: "10px 0 20px 0",
               color: colors.grey[100],
             }}
           >
-            {!isCollapsed && (
+            {!collapsed && (
               <Box
                 display="flex"
                 justifyContent="space-between"
@@ -88,14 +93,14 @@ const Sidebar = () => {
                 >
                   ADMIN
                 </Typography>
-                <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
+                <IconButton onClick={() => setCollapsed(!collapsed)}>
                   <MenuOutlinedIcon />
                 </IconButton>
               </Box>
             )}
           </MenuItem>
 
-          {!isCollapsed && (
+          {!collapsed && (
             <Box mb="25px">
               <Box display="flex" justifyContent="center" alignItems="center">
                 <img
@@ -127,7 +132,7 @@ const Sidebar = () => {
             </Box>
           )}
 
-          <Box paddingLeft={isCollapsed ? undefined : "10%"}>
+          <Box paddingLeft={collapsed ? undefined : "10%"}>
             <Typography
               variant="h6"
               color={colors.grey[300]}

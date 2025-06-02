@@ -1,17 +1,25 @@
-import { Backdrop, Box, Button, CircularProgress, Typography, useTheme } from "@mui/material";
+import {
+  Backdrop,
+  Box,
+  Button,
+  CircularProgress,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { DataGrid } from "@mui/x-data-grid";
 import { tokens } from "../../../tema";
-import FitnessCenterOutlinedIcon from '@mui/icons-material/FitnessCenterOutlined';
+import FitnessCenterOutlinedIcon from "@mui/icons-material/FitnessCenterOutlined";
 import { useNavigate } from "react-router-dom";
 import { useStudentData } from "../../../services/querrys/useStudentData";
 
-const DashboardAlunos = () => {
+const DashboardStudent = () => {
   const navigate = useNavigate();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const {data, loading } = useStudentData();
+  const { data, loading } = useStudentData();
 
-  const alunos = data?.findAllUsers.filter((user: any) => user.role === "STUDENT") || [];
+  const alunos =
+    data?.findAllUsers.filter((user: any) => user.role === "STUDENT") || [];
 
   const colunas = [
     {
@@ -32,7 +40,7 @@ const DashboardAlunos = () => {
     {
       field: "email",
       headerName: "Email",
-      flex: 1
+      flex: 1,
     },
     {
       field: "treinos",
@@ -41,24 +49,26 @@ const DashboardAlunos = () => {
       flex: 1,
       renderCell: (params: any) => {
         return (
-          <Button sx={{
-            backgroundColor: colors.greenAccent[600],
-             color: colors.grey[100]}}
+          <Button
+            sx={{
+              backgroundColor: colors.greenAccent[600],
+              color: colors.grey[100],
+            }}
             variant="contained"
             onClick={() => {
-              navigate(`/EmpregadoDashboard/treinos/${params.row.id}`)
+              navigate(`/EmpregadoDashboard/treinos/${params.row.id}`);
             }}
           >
-            <FitnessCenterOutlinedIcon/>
+            <FitnessCenterOutlinedIcon />
             <Typography m="0 0 0 5px">Acessar</Typography>
           </Button>
         );
-      }
-    }
+      },
+    },
   ];
 
   return (
-    <Box m="10px">
+    <Box>
       <Backdrop
         sx={{ color: "#fff", zIndex: theme.zIndex.drawer + 1 }}
         open={loading}
@@ -99,10 +109,10 @@ const DashboardAlunos = () => {
           },
         }}
       >
-        <DataGrid rows={alunos} columns={colunas} />
+    <DataGrid rows={alunos} columns={colunas} disableColumnResize={true} />
       </Box>
     </Box>
   );
 };
 
-export default DashboardAlunos;
+export default DashboardStudent;

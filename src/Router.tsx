@@ -9,11 +9,12 @@ import Login from "./components/Login";
 import ConfigClientPage from "./pages/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
 import EmpregadoDashboard from "./pages/EmpregadoDashboard";
-import DashboardAlunos from "./components/Dashboard/DashboardAlunos";
 import DashboardAdminRoutines from "./components/Dashboard/DashboardAdminRoutines";
 import DashboardAdmin from "./components/Dashboard/DashboardAdminUser";
 import DashboardAdminExercise from "./components/Dashboard/DashboardAdminExercise";
 import DashboardAdminTrainings from "./components/Dashboard/DashboardAdminTrainings";
+import SelectedStudent from "./components/Dashboard/DashboardStudent/SelectedStudent";
+import DashboardStudent from "./components/Dashboard/DashboardStudent";
 
 const App: React.FC = () => {
   return (
@@ -45,11 +46,15 @@ const App: React.FC = () => {
               >
                 <Route
                   index
-                  element={<DashboardAlunos />}
+                  element={<DashboardStudent />}
                 />
                 <Route
                   path="/EmpregadoDashboard/DashboardAdminUser"
                   element={<DashboardAdmin />}
+                />
+                <Route
+                  path="/EmpregadoDashboard/treinos/:id"
+                  element={<SelectedStudent />}
                 />
                 <Route
                   path="/EmpregadoDashboard/DashboardAdminExercise"

@@ -1,4 +1,3 @@
-// src/services/mutations/routineMutations.ts
 import { gql } from "@apollo/client";
 
 export const CREATE_ROUTINE = gql`
@@ -35,6 +34,15 @@ export const EDIT_ROUTINE = gql`
       isActive: $isActive
       trainingIds: $trainingIds
     ) {
+      status
+      message
+    }
+  }
+`;
+
+export const DEACTIVATE_ROUTINE = gql`
+  mutation DeactivateRoutine($id: String!) {
+    deactivatedRoutine(id: $id) {
       status
       message
     }

@@ -127,7 +127,7 @@ const DashboardExercises: React.FC = () => {
   );
 
   return (
-    <Box m="10px">
+    <Box>
       <Backdrop
         sx={{ color: "#fff", zIndex: theme.zIndex.drawer + 1 }}
         open={loading || deleting}
@@ -169,6 +169,7 @@ const DashboardExercises: React.FC = () => {
         <DataGrid
           rows={treinos}
           columns={colunas}
+          disableColumnResize={true}
           slots={{ toolbar: CustomToolbar }}
         />
       </Box>
