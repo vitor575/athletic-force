@@ -1,4 +1,3 @@
-// src/components/DashboardRoutines/DashboardRoutines.tsx
 import React, { useState } from "react";
 import {
   Box,
@@ -7,23 +6,39 @@ import {
   useTheme,
   Backdrop,
   CircularProgress,
+  Snackbar,
+  Alert,
 } from "@mui/material";
 import { DataGrid, GridColDef } from "@mui/x-data-grid";
 import AddIcon from "@mui/icons-material/Add";
 import { tokens } from "../../../tema";
 import { useRoutinesData } from "../../../services/querrys/useRoutinesData";
 import ModalRoutines from "./ModalRoutines";
+import { useMutation } from "@apollo/client";
+import { DEACTIVATE_ROUTINE } from "../../../services/mutations/routineMutations";
+import { ROUTINES_QUERY } from "../../../services/querrys/useRoutinesData";
 
 const DashboardRoutines: React.FC = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
-  // hook que busca todas as rotinas
   const { routines, loading, refetch } = useRoutinesData();
 
-  // estados para controlar modal e rotina selecionada
   const [openModal, setOpenModal] = useState(false);
   const [selectedRoutine, setSelectedRoutine] = useState<any>(null);
+  const [snackbar, setSnackbar] = useState<{
+    open: boolean;
+    message: string;
+    severity: "success" | "error";
+  }>({ open: false, message: "", severity: "success" });
+
+  const [deactivateRoutine, { loading: toggling }] = useMutation(
+    DEACTIVATE_ROUTINE,
+    {
+      refetchQueries: [{ query: ROUTINES_QUERY }],
+      awaitRefetchQueries: true,
+    }
+  );
 
   const handleOpenModalForCreate = () => {
     setSelectedRoutine(null);
@@ -44,7 +59,25 @@ const DashboardRoutines: React.FC = () => {
     refetch();
   };
 
-  // colunas idênticas ao estilo do Dashboard de Treinos
+  const handleToggleActive = async (id: string, currentlyActive: boolean) => {
+    try {
+      const { data } = await deactivateRoutine({
+        variables: { id, isActive: !currentlyActive },
+      });
+      setSnackbar({
+        open: true,
+        message: data.deactivatedRoutine.message,
+        severity: "success",
+      });
+    } catch (err: any) {
+      setSnackbar({
+        open: true,
+        message: "Erro ao alterar status: " + err.message,
+        severity: "error",
+      });
+    }
+  };
+
   const columns: GridColDef[] = [
     { field: "id", headerName: "ID", width: 70 },
     { field: "name", headerName: "Nome", flex: 1 },
@@ -60,22 +93,50 @@ const DashboardRoutines: React.FC = () => {
       headerName: "Gerenciar",
       flex: 1,
       renderCell: (params: any) => (
-        <Button
-          variant="contained"
+        <Box
           sx={{
-            backgroundColor: colors.greenAccent[600],
-            color: colors.grey[100],
-            "&:hover": { backgroundColor: colors.greenAccent[500] },
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
+            width: "100%",
+            height: "100%",
           }}
-          onClick={() => handleOpenModalForEdit(params.row)}
         >
-          Editar
-        </Button>
+          <Button
+            variant="contained"
+            size="small"
+            onClick={() =>
+              handleToggleActive(params.row.id, params.row.isActive)
+            }
+            sx={{
+              backgroundColor: params.row.isActive
+                ? colors.redAccent[600]
+                : colors.greenAccent[600],
+              "&:hover": {
+                backgroundColor: params.row.isActive
+                  ? colors.redAccent[700]
+                  : colors.greenAccent[700],
+              },
+            }}
+          >
+            {params.row.isActive ? "Desativar" : "Ativar"}
+          </Button>
+          <Button
+            variant="contained"
+            size="small"
+            onClick={() => handleOpenModalForEdit(params.row)}
+            sx={{
+              backgroundColor: colors.blueAccent[600],
+              "&:hover": { backgroundColor: colors.blueAccent[700] },
+            }}
+          >
+            Editar
+          </Button>
+        </Box>
       ),
     },
   ];
 
-  // toolbar com botão "Adicionar Rotina"
   const CustomToolbar = () => (
     <Box sx={{ p: "10px 0" }}>
       <Button
@@ -85,7 +146,6 @@ const DashboardRoutines: React.FC = () => {
         sx={{
           width: "25%",
           backgroundColor: colors.greenAccent[600],
-          color: colors.grey[100],
           "&:hover": { backgroundColor: colors.greenAccent[500] },
         }}
       >
@@ -95,10 +155,10 @@ const DashboardRoutines: React.FC = () => {
   );
 
   return (
-    <Box m="10px">
+    <Box>
       <Backdrop
         sx={{ color: "#fff", zIndex: theme.zIndex.drawer + 1 }}
-        open={loading}
+        open={loading || toggling}
       >
         <CircularProgress color="inherit" />
       </Backdrop>
@@ -137,6 +197,7 @@ const DashboardRoutines: React.FC = () => {
         <DataGrid
           rows={routines}
           columns={columns}
+          disableColumnResize={true}
           getRowId={(row) => row.id}
           slots={{ toolbar: CustomToolbar }}
         />
@@ -151,6 +212,21 @@ const DashboardRoutines: React.FC = () => {
         routine={selectedRoutine}
         onRoutineSaved={handleRoutineSaved}
       />
+
+      <Snackbar
+        open={snackbar.open}
+        autoHideDuration={3000}
+        onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+        anchorOrigin={{ vertical: "top", horizontal: "center" }}
+      >
+        <Alert
+          onClose={() => setSnackbar((s) => ({ ...s, open: false }))}
+          severity={snackbar.severity}
+          sx={{ width: "100%" }}
+        >
+          {snackbar.message}
+        </Alert>
+      </Snackbar>
     </Box>
   );
 };

@@ -165,6 +165,7 @@ const ModalRoutines: React.FC<ModalRoutinesProps> = ({
             rows={trainings}
             columns={colunas}
             checkboxSelection
+            disableColumnResize={true}
             getRowId={(row) => row.id}
             rowSelectionModel={selectedIds as GridRowSelectionModel}
             onRowSelectionModelChange={(newModel) =>
