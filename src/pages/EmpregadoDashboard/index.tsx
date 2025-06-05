@@ -19,7 +19,7 @@ const EmpregadoDashboard = () => {
         <Box>
           <Sidebar />
         </Box>
-        <Box flex={1}>
+        <Box flex='1' width='75%'>
           <DashTopbar />
           <Box m={2}>
             <Outlet />

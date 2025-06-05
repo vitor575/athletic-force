@@ -145,7 +145,7 @@ const DashboardExercises: React.FC = () => {
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
+            backgroundColor: colors.primary[400 ],
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",

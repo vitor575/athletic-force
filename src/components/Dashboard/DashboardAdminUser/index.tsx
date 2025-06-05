@@ -150,7 +150,7 @@ const DashboardAdmin: React.FC = () => {
               <TextField
                 fullWidth
                 variant="filled"
-                sx={{ gridColumn: "span 2" }}
+                sx={{ gridColumn: "span 4" }}
                 id="name"
                 name="name"
                 label="Nome"
@@ -179,7 +179,7 @@ const DashboardAdmin: React.FC = () => {
               <TextField
                 fullWidth
                 variant="filled"
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
                 id="password"
                 name="password"
                 label="Senha"
@@ -194,7 +194,7 @@ const DashboardAdmin: React.FC = () => {
               <TextField
                 fullWidth
                 variant="filled"
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
                 id="cpf"
                 name="cpf"
                 label="CPF"
@@ -208,7 +208,7 @@ const DashboardAdmin: React.FC = () => {
               <TextField
                 fullWidth
                 variant="filled"
-                sx={{ gridColumn: "span 4" }}
+                sx={{ gridColumn: "span 2" }}
                 id="cellphone"
                 name="cellphone"
                 label="Celular"
