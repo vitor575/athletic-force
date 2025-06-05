@@ -2,7 +2,6 @@ import { Typography, Paper, useTheme, Button } from "@mui/material";
 import { tokens } from "../../tema";
 import CheckTwoToneIcon from '@mui/icons-material/CheckTwoTone';
 import { useNavigate } from "react-router-dom";
-import { a } from "framer-motion/dist/types.d-B50aGbjN";
 
 
 interface CardPlanoProps {

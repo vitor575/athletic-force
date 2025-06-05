@@ -39,7 +39,6 @@ const Navbar = () => {
             marginRight: "45%",
           }}
         />
-
         <Box
           sx={{
             display: "flex",

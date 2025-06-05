@@ -1,10 +1,16 @@
 import React, { useState } from "react";
-import { Modal, Box, Typography, Button, useTheme } from "@mui/material";
+import {
+  Modal,
+  Box,
+  Typography,
+  Button,
+  useTheme,
+  TextField,
+} from "@mui/material";
 import { tokens } from "../../tema";
 import { useAuth } from "../../services/authentication/useAuth";
 import LoopIcon from "@mui/icons-material/Loop";
 import logo from "../../img/logo3.png";
-import CustomTextField from "../Dashboard/DashboardAdminUser/Textfield";
 import { keyframes } from "@mui/system";
 
 interface ModalLoginProps {
@@ -86,11 +92,23 @@ const ModalLogin: React.FC<ModalLoginProps> = ({ open, onClose }) => {
             borderRadius: 5,
           }}
         />
-        <CustomTextField
+        <TextField
+          variant="filled"
           label="Email"
           name="email"
           type="email"
           fullWidth
+          sx={{
+            "& .MuiInputBase-input": {
+              color: "white",
+            },
+            "& .MuiInputLabel-root": {
+              color: colors.grey[900],
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: colors.grey[700],
+            },
+          }}
           slotProps={{
             inputLabel: {
               sx: {
@@ -104,11 +122,23 @@ const ModalLogin: React.FC<ModalLoginProps> = ({ open, onClose }) => {
           onChange={(e) => setEmail(e.target.value)}
           required
         />
-        <CustomTextField
+        <TextField
+          variant="filled"
           label="Senha"
           name="password"
           type="password"
           fullWidth
+          sx={{
+            "& .MuiInputBase-input": {
+              color: "white",
+            },
+            "& .MuiInputLabel-root": {
+              color: colors.grey[900],
+            },
+            "& .MuiInputLabel-root.Mui-focused": {
+              color: colors.grey[700],
+            },
+          }}
           slotProps={{
             inputLabel: {
               sx: {
