@@ -28,3 +28,12 @@ export const EDIT_TRAINING = gql`
     }
   }
 `;
+
+export const DELETE_TRAINING = gql`
+  mutation DeleteTraining($id: String!) {
+    deleteTraining(id: $id) {
+      status
+      message
+    }
+  }
+`;

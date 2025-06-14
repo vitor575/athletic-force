@@ -1,7 +1,6 @@
-// src/services/querrys/useRoutinesData.ts
 import { gql, useQuery } from "@apollo/client";
 
-const ROUTINES_QUERY = gql`
+export const ROUTINES_QUERY = gql`
   query getAllRoutines {
     getAllRoutines {
       id

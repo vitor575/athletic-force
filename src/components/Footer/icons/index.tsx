@@ -2,7 +2,7 @@
 import { FaWhatsapp, FaFacebook, FaInstagram } from "react-icons/fa";
 import { FaTiktok } from "react-icons/fa6";
 import { Box, Stack, IconButton, useTheme } from "@mui/material";
-import { styled, keyframes } from "@mui/system";
+import { styled } from "@mui/system";
 import { tokens } from "../../../tema";
 
 
