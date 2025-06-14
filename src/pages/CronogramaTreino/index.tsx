@@ -1,140 +1,50 @@
-import React, { useState, useEffect } from "react";
-import { Outlet, useNavigate } from "react-router-dom";
-import { Box, Button, Typography, IconButton, Paper, useTheme } from "@mui/material";
-import { FaArrowLeft, FaArrowRight, FaSignOutAlt } from "react-icons/fa";
+import { Box, useTheme } from "@mui/material";
+import { useState } from "react";
+import NavTreino from "../../pages/CronogramaTreino/NavTreino";
 import { tokens } from "../../tema";
+import Treinos from "./Treinos";
+import Calendario from "./Calendario";
 
-const CronogramaTreino: React.FC = () => {
-  const diaSemana = ["Segunda-feira", "Terça-feira", "Quarta-feira", "Quinta-feira", "Sexta-feira"];
-  const navigate = useNavigate();
-  const [diaAtual, setDiaAtual] = useState(0);
-
-  const handleExit = () => navigate("/clientHome");
-
-  const handlePrevious = () => {
-    const newIndex = diaAtual === 0 ? diaSemana.length - 1 : diaAtual - 1;
-    setDiaAtual(newIndex);
-    navigate(`/clientHome/cronograma/${diaSemana[newIndex]}`);
-  };
-
-  const handleNext = () => {
-    const newIndex = diaAtual === diaSemana.length - 1 ? 0 : diaAtual + 1;
-    setDiaAtual(newIndex);
-    navigate(`/clientHome/cronograma/${diaSemana[newIndex]}`);
-  };
-
-
-
+const ConfigClientPage = () => {
+  const [selectedSection, setSelectedSection] = useState("perfil");
+  const [isCollapsed, setIsCollapsed] = useState(false);
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+ 
+
+  const renderContent = () => {
+    switch (selectedSection) {
+      case "treinos":
+        return <Treinos />;
+      case "calendario":
+        return <Calendario />;
+      default:
+        return <Treinos />;
+    }
+  };
+
 
   return (
-    <Box
-      sx={{
-        minHeight: "100vh",
-        bgcolor: colors.primary[500],
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-      }}
-    >
-      <Box sx={{ padding: "20px 20px 0 20px", display: "flex", justifyContent: "space-between"}}>
-        <Button
-          variant="contained"
-          color="error"
-          startIcon={<FaSignOutAlt />}
-          onClick={handleExit}
-          sx={{ bgcolor: colors.blueAccent[300], "&:hover": { bgcolor: colors.blueAccent[400] } }}
-        >
-          Voltar
-        </Button>
-        <Button sx={{ bgcolor: colors.blueAccent[300], "&:hover": { bgcolor: colors.blueAccent[400] }, color: "#fff" }}>
-          Historico de Treinos
-        </Button>
+    <Box display="flex" sx={{bgcolor: colors.primary[600]}}>
+      <NavTreino
+        setSelectedSection={setSelectedSection}
+        setIsCollapsed={setIsCollapsed}
+        isCollapsed={isCollapsed}
+      />
 
-      </Box>
-      <Paper
-        elevation={4}
-        sx={{
-          width: "100%",
-          height: "90vh",
-          display: "flex",
-
-          flexDirection: "column",
-          gap: .5,
-          p: 2,
-          bgcolor: colors.primary[500],
-        }}
+      <Box
+        flex={1}
+        display="flex"
+        minHeight="100vh"
+        padding={2}
+        
       >
-        {/* Conteúdo dos treinos (Outlet) */}
-        <Paper
-          elevation={3}
-          sx={{
-            p: 2,
-            borderRadius: 2,
-            flex: 1,
-            overflowY: "auto",
-          }}
-        >
-          <Outlet />
-        </Paper>
-        <Paper
-          elevation={2}
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            p: 1,
-            borderRadius: 2,
-            bgcolor: colors.blueAccent[300],
-            flexShrink: 0,
-            flexWrap: "wrap",
-            gap: 2,
-            width: "100%",
-          }}
-        >
-          <IconButton
-            onClick={handlePrevious}
-            sx={{
-              bgcolor: colors.primary[500],
-              color: "#fff",
-              fontSize: 28,
-              "&:hover": {
-                bgcolor: colors.primary[600],
-              },
-            }}
-          >
-            <FaArrowLeft />
-          </IconButton>
-
-          <Typography
-            variant="h4"
-            fontWeight="bold"
-            color={colors.blueAccent[900]}
-            textAlign="center"
-            sx={{ flex: 1 }}
-          >
-            {diaSemana[diaAtual]}
-          </Typography>
-
-          <IconButton
-            onClick={handleNext}
-            sx={{
-              bgcolor: colors.primary[500],
-              color: "#fff",
-              fontSize: 28,
-              "&:hover": {
-                bgcolor: colors.primary[600],
-              },
-            }}
-          >
-            <FaArrowRight />
-          </IconButton>
-        </Paper>
-      </Paper>
+        <Box width="100%" maxWidth="1900px">
+          {renderContent()}
+        </Box>
+      </Box>
     </Box>
-
   );
 };
 
-export default CronogramaTreino;
+export default ConfigClientPage;

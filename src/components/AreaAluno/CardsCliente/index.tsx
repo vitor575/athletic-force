@@ -9,7 +9,7 @@ interface CardProps {
   destino: string;
 }
 
-const cardStyle = { width: "170px", height: "auto" };
+const cardStyle = { width: "180px", height: "auto" };
 
 const CardCliente = ({ titulo, imagem, destino }: CardProps) => {
     const theme = useTheme();
@@ -19,8 +19,8 @@ const CardCliente = ({ titulo, imagem, destino }: CardProps) => {
     <Box
       sx={{
         bgcolor: colors.primary[600],
-        width: "300px",
-        height: "350px",
+        width: "350px",
+        height: "450px",
         borderRadius: "10px",
         display: "flex",
         flexDirection: "column",

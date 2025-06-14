@@ -3,8 +3,8 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ClientHome from "./pages/ClientHome/indes";
 import Pagamento from "./pages/Pagamento";
-import CronogramaTreino from "./pages/CronogramaTreino";
-import Treino from "./components/AreaAluno/Treino";
+import CronogramaTreino from "./pages/CronogramaTreino/index";
+
 import Login from "./components/Login";
 import ConfigClientPage from "./pages/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
@@ -34,8 +34,8 @@ const App: React.FC = () => {
                 element={<CronogramaTreino />}
               >
                 <Route
-                  path="/clientHome/cronograma/:dia"
-                  element={<Treino />}
+                  index
+                  element={<CronogramaTreino />}
                 />
               </Route>
 

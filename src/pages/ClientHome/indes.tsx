@@ -129,7 +129,7 @@ const ClientHome = () => {
         <CardCliente
           titulo="Cronograma de treinos"
           imagem={Calendario}
-          destino="/clientHome/cronograma/Segunda-feira"
+          destino="/clientHome/cronograma/"
         />
         <CardCliente
           titulo="Central de faturas"
