@@ -15,7 +15,8 @@ import { tokens } from "../../tema";
 import img from "../../img/supino.jpg"; // Imagem padrão
 
 const Treinos: React.FC = () => {
-    const { nextTraining, loading } = useNextTraining();
+
+    const { nextTraining, loading, error } = useNextTraining();
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -73,7 +74,7 @@ const Treinos: React.FC = () => {
                 <Paper
                     sx={{
                         padding: 1,
-                        backgroundColor: "#1e1e2f",
+                        bgcolor: colors.primary[300],
                         color: "#fff",
                         display: "flex",
                         gap: 3,
@@ -98,6 +99,7 @@ const Treinos: React.FC = () => {
                         sx={{
                             bgcolor: colors.greenAccent[500],
                             ":hover": { bgcolor: colors.greenAccent[600] },
+                            marginRight: 2
                         }}
                         onClick={handleOpenModal}
                     >
@@ -122,25 +124,21 @@ const Treinos: React.FC = () => {
                         bgcolor: colors.primary[500],
                         color: colors.grey[100],
                         boxShadow: 24,
-                        px: 3,
+                        p: 2,
                         borderRadius: 2,
-                        display: "flex",
-                        flexDirection: "row",
                         alignItems: "center",
-                        width: "70%",
-                        height: "55vh",
+                        width: "50%",
+                        height: "90vh",
                         gap: 2,
                     }}
                 >
 
                     <Box sx={{ display: "flex", flexDirection: "column", alignItems: "center" }}>
-                        {/* <Typography variant="h6" sx={{ color: colors.greenAccent[500] }}>{nextTraining.name}</Typography> */}
-
                         <Box
                             component="img"
                             src={nextTraining.imageUrl || img}
                             alt={`Imagem do treino ${nextTraining.name}`}
-                            sx={{ width: 275, height: 275, borderRadius: 1, objectFit: "cover" }}
+                            sx={{ width: 275, height: 275, borderRadius: 100, objectFit: "cover" }}
                         />
                     </Box>
                     <Box>
@@ -152,6 +150,16 @@ const Treinos: React.FC = () => {
                             value={peso}
                             onChange={(e) => setPeso(e.target.value)}
                             InputLabelProps={{ style: { color: colors.blueAccent[500] } }}
+                            sx={{
+                                "& .MuiInputBase-root": {
+                                    height: "50px", // altura do input
+                                    fontSize: "0.8rem", // tamanho da fonte do input
+                                    color: "#fff",
+                                },
+                                "& .MuiInputLabel-root": {
+                                    fontSize: "0.75rem", // tamanho da label
+                                }
+                            }}
                         />
                         <TextField
                             fullWidth
@@ -161,6 +169,16 @@ const Treinos: React.FC = () => {
                             value={series}
                             onChange={(e) => setSeries(e.target.value)}
                             InputLabelProps={{ style: { color: colors.blueAccent[500] } }}
+                            sx={{
+                                "& .MuiInputBase-root": {
+                                    height: "50px", // altura do input
+                                    fontSize: "0.8rem", // tamanho da fonte do input
+                                    color: "#fff",
+                                },
+                                "& .MuiInputLabel-root": {
+                                    fontSize: "0.75rem", // tamanho da label
+                                }
+                            }}
                         />
                         <TextField
                             fullWidth
@@ -170,11 +188,22 @@ const Treinos: React.FC = () => {
                             value={repeticoes}
                             onChange={(e) => setRepeticoes(e.target.value)}
                             InputLabelProps={{ style: { color: colors.blueAccent[500] } }}
+                            sx={{
+                                "& .MuiInputBase-root": {
+                                    height: "50px", // altura do input
+                                    fontSize: "0.8rem", // tamanho da fonte do input
+                                    color: "#fff",
+                                },
+                                "& .MuiInputLabel-root": {
+                                    fontSize: "0.75rem", // tamanho da label
+                                }
+                            }}
                         />
+
 
                         <Box mt={2} display="flex" justifyContent="end">
                             <Button type="submit" variant="contained" disabled={saving}>
-                                {saving ? "Salvando..." : "Salvar"}
+                                {saving ? "Salvando..." : "Proximo treino "}
                             </Button>
                         </Box>
                     </Box>

@@ -72,7 +72,7 @@ const TreinoNav = ({ setSelectedSection, setIsCollapsed, isCollapsed }: TreinoNa
           color: "#fff",
           justifyContent: isCollapsed ? "center" : "flex-start",
           px: 2,
-          backgroundColor: selected === key ? colors.primary[600] : "transparent",
+          backgroundColor: selected === key ? colors.primary[500] : "transparent",
           "&:hover": {
             backgroundColor: colors.primary[500],
           },

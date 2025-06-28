@@ -25,7 +25,7 @@ const ConfigClientPage = () => {
 
 
   return (
-    <Box display="flex" sx={{bgcolor: colors.primary[600]}}>
+    <Box display="flex" sx={{bgcolor: colors.primary[500]}}>
       <NavTreino
         setSelectedSection={setSelectedSection}
         setIsCollapsed={setIsCollapsed}
