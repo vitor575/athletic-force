@@ -7,6 +7,14 @@ query getMyNextTraining {
       id
       name
       description
+      exercises {
+        id
+        name
+        muscleGroup
+        qtdSets
+        qtdReps
+        time
+      }
     }
   }
 }
