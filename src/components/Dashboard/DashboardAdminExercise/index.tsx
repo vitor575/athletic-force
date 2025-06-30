@@ -135,7 +135,7 @@ const DashboardExercises: React.FC = () => {
       </Typography>
 
       <Box
-        m="10px 0 0 0"
+        m="10px"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": { border: "none" },
@@ -145,7 +145,7 @@ const DashboardExercises: React.FC = () => {
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
+            backgroundColor: colors.primary[400 ],
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",

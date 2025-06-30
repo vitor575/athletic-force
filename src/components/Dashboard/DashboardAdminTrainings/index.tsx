@@ -148,7 +148,7 @@ const DashboardExercises: React.FC = () => {
       </Typography>
 
       <Box
-        m="10px 0 0 0"
+        m="10px"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": { border: "none" },

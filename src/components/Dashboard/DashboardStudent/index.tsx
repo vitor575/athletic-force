@@ -87,14 +87,14 @@ const DashboardStudent = () => {
         Todos alunos da academia
       </Typography>
       <Box
-        m="10px 0 0 0"
+        m="10px"
         height="75vh"
         sx={{
           "& .MuiDataGrid-root": {
             border: "none",
           },
           "& .MuiDataGrid-cell": {
-            border: "none",
+            borderBottom: "none",
           },
           "& .MuiDataGrid-columnHeader": {
             backgroundColor: colors.blueAccent[700],
@@ -109,7 +109,7 @@ const DashboardStudent = () => {
           },
         }}
       >
-    <DataGrid rows={alunos} columns={colunas} disableColumnResize={true} />
+        <DataGrid rows={alunos} columns={colunas} disableColumnResize={true} />
       </Box>
     </Box>
   );

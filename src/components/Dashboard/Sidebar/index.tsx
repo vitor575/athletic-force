@@ -19,11 +19,6 @@ interface ItemProps {
   setSelected: (value: string) => void;
 }
 
-interface SidebarProps {
-  collapsed: boolean;
-  setCollapsed: (value: boolean) => void;
-}
-
 const Item = ({ title, to, icon, selected, setSelected }: ItemProps) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -43,10 +38,11 @@ const Item = ({ title, to, icon, selected, setSelected }: ItemProps) => {
   );
 };
 
-const Sidebar = ({ collapsed, setCollapsed }: SidebarProps) => {
+const Sidebar = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [selected, setSelected] = useState("Alunos");
+  const [collapsed, setCollapsed] = useState(false);
 
   return (
     <Box
