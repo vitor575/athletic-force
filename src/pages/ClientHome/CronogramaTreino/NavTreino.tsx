@@ -13,8 +13,8 @@ import {
 import { Link } from "react-router-dom";
 import { FaDumbbell, FaCalendarAlt, FaClock, FaSignOutAlt } from "react-icons/fa";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { tokens } from "../../tema";
-import Logo from "../../img/logo3.png";
+import { tokens } from "../../../tema";
+import Logo from "../../../img/logo3.png";
 
 interface TreinoNavProps {
   setSelectedSection: (section: string) => void;

@@ -15,7 +15,7 @@ export const useClientData = () => {
 
     return {
         client: data,
-        loading,
+        loading,  
         refetch
     }
 }

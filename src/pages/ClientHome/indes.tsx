@@ -5,7 +5,7 @@ import Calendario from "../../img/calendario.png";
 import Pagamento from "../../img/pagamento.png";
 import Configuracao from "../../img/configuracao.png";
 import { useNavigate } from "react-router-dom";
-import {Box,Button,Typography,useTheme,} from "@mui/material";
+import { Box, Button, Typography, useTheme, Backdrop, CircularProgress} from "@mui/material";
 import { tokens } from "../../tema";
 import { useClientData } from "../../services/querrys/useClientData";
 import Cookies from "js-cookie";
@@ -22,7 +22,13 @@ const ClientHome = () => {
 
   const { client, loading } = useClientData();
 
-  if (loading) return <Typography sx={{ display: "none" }}>Carregando...</Typography>;
+  if (loading) {
+    return (
+      <Backdrop sx={{ color: "#fff", background: "##00000047" }} open>
+        <CircularProgress color="inherit" />
+      </Backdrop>
+    );
+  }
   return (
     <Box
       sx={{

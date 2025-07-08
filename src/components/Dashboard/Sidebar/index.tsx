@@ -105,7 +105,7 @@ const Sidebar = () => {
                   height="100px"
                   src={`https://github.com/MaxMLira.png`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
-                />
+                />  
               </Box>
               <Box textAlign="center">
                 <Typography

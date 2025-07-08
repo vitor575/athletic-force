@@ -2,11 +2,10 @@ import React from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ClientHome from "./pages/ClientHome/indes";
-import Pagamento from "./pages/Pagamento";
-import CronogramaTreino from "./pages/CronogramaTreino/index";
-
+import Pagamento from "./pages/ClientHome/CronogramaTreino";
+import CronogramaTreino from "./pages/ClientHome/CronogramaTreino/index";
 import Login from "./components/Login";
-import ConfigClientPage from "./pages/ConfigClientPage";
+import ConfigClientPage from "./pages/ClientHome/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
 import EmpregadoDashboard from "./pages/EmpregadoDashboard";
 import DashboardAdminRoutines from "./components/Dashboard/DashboardAdminRoutines";

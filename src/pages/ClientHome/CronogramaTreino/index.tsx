@@ -1,7 +1,7 @@
 import { Box, useTheme, Fab, Modal, Typography, Paper, List, ListItem, ListItemText } from "@mui/material";
 import { useState } from "react";
-import { tokens } from "../../tema";
-import NavTreino from "../../pages/CronogramaTreino/NavTreino";
+import { tokens } from "../../../tema";
+import NavTreino from "./NavTreino";
 import Treinos from "./Treinos";
 import Calendario from "./Calendario";
 import { BsJournalCheck } from "react-icons/bs";

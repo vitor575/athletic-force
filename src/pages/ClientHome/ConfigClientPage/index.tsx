@@ -1,10 +1,10 @@
 import { Box, useTheme } from "@mui/material";
 import { useState } from "react";
-import ConfiguracaoNav from "../../components/AreaAluno/ConfiguracaoNav";
+import ConfiguracaoNav from "../../../components/AreaAluno/ConfiguracaoNav";
 import PerfilContent from "./PerfilContent";
 import TrocarSenhaContent from "./TrocarSenhaContent";
 import VerPlanoContent from "./VerPlanoContent";
-import { tokens } from "../../tema";
+import { tokens } from "../../../tema";
 
 const ConfigClientPage = () => {
   const [selectedSection, setSelectedSection] = useState("perfil");
@@ -26,7 +26,7 @@ const ConfigClientPage = () => {
   };
 
   return (
-    <Box display="flex" sx={{bgcolor: colors.primary[600]}}>
+    <Box display="flex" sx={{bgcolor: colors.primary[500]}}>
       <ConfiguracaoNav
         setSelectedSection={setSelectedSection}
         setIsCollapsed={setIsCollapsed}

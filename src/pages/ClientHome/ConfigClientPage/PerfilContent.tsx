@@ -13,8 +13,8 @@ import {
   TextField,
   Avatar,
 } from "@mui/material";
-import { useClientPerfil } from "../../services/querrys/useClientPerfil";
-import { tokens } from "../../tema";
+import { useClientPerfil } from "../../../services/querrys/useClientPerfil";
+import { tokens } from "../../../tema";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { FaAddressCard } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
@@ -88,16 +88,17 @@ const PerfilUsuario = () => {
   }
 
   return (
-    <Box>
+    <Box sx={{p:5}}>
       <Typography
         variant="h4"
         sx={{
           color: colors.greenAccent[500],
-          mb: 4,
-          mt: 4
         }}
       >
         Perfil do Aluno
+      </Typography>
+      <Typography variant="body1" sx={{ mb: 2, color: colors.grey[900] }}>
+        Visualize e gerencie as informações do seu perfil.
       </Typography>
 
 
