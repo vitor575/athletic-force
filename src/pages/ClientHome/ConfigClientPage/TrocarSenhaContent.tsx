@@ -51,7 +51,7 @@ const TrocarSenhaContent = () => {
   };
 
   return (
-    <Box sx={{ p: 5 }}>
+    <Box sx={{ p: 2 }}>
       <Typography variant="h4" sx={{ color: colors.greenAccent[500] }}>
         Trocar Senha
       </Typography>

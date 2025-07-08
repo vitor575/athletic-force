@@ -5,6 +5,7 @@ import NavTreino from "./NavTreino";
 import Treinos from "./Treinos";
 import Calendario from "./Calendario";
 import { BsJournalCheck } from "react-icons/bs";
+import DashTopbar from "../../../components/Dashboard/DashTopbar";
 
 const ConfigClientPage = () => {
   const [selectedSection, setSelectedSection] = useState("perfil");
@@ -33,10 +34,11 @@ const ConfigClientPage = () => {
         setSelectedSection={setSelectedSection}
         setIsCollapsed={setIsCollapsed}
         isCollapsed={isCollapsed}
-      />
+        />
 
-      <Box flex={1} display="flex" minHeight="100vh" padding={2} position="relative">
+      <Box flex={1} display="flex" minHeight="100vh" padding={1} position="relative">
         <Box width="100%" maxWidth="1900px">
+        <DashTopbar />
           {renderContent()}
         </Box>
 
@@ -57,7 +59,7 @@ const ConfigClientPage = () => {
               transform: 'translate(-50%, -50%)',
               bgcolor: 'background.paper',
               boxShadow: 24,
-              p: 4,
+              p: 2,
               borderRadius: 2,
               maxHeight: '80vh',
               overflowY: 'auto',

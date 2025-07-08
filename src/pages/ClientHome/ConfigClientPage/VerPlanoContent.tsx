@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Card, CardContent, Button, List, ListItem, ListItemIcon, ListItemText, Divider, useTheme } from "@mui/material";
+import { Box, Typography, Card, CardContent, Button, List, ListItem, ListItemIcon, ListItemText, Divider, useTheme, CssBaseline } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'; // Ícone mais moderno
 import { tokens } from "../../../tema"; // Supondo que você use o tema
 
@@ -25,7 +25,8 @@ const VerPlanoContent = () => {
   };
 
   return (
-    <Box sx={{ py: 1, px: 5, mx: 'auto' }}>
+    <Box sx={{ py: 1, px: 2, mx: 'auto' }}>
+      <CssBaseline/>
       <Typography
         variant="h4"
         sx={{ color: colors.greenAccent[500] }}

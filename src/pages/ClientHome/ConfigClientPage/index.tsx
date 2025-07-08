@@ -5,6 +5,7 @@ import PerfilContent from "./PerfilContent";
 import TrocarSenhaContent from "./TrocarSenhaContent";
 import VerPlanoContent from "./VerPlanoContent";
 import { tokens } from "../../../tema";
+import DashTopbar from "../../../components/Dashboard/DashTopbar";
 
 const ConfigClientPage = () => {
   const [selectedSection, setSelectedSection] = useState("perfil");
@@ -37,10 +38,11 @@ const ConfigClientPage = () => {
         flex={1}
         display="flex"
         minHeight="100vh"
-        padding={2}
+        padding={1}
         
       >
         <Box width="100%" maxWidth="1900px">
+          <DashTopbar/>
           {renderContent()}
         </Box>
       </Box>

@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Box, Typography, useTheme, Tooltip, IconButton } from "@mui/material";
+import { Box, Typography, useTheme, Tooltip, IconButton, CssBaseline } from "@mui/material";
 import { tokens } from "../../../tema";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
@@ -71,74 +71,79 @@ const Calendario: React.FC = () => {
     const handleAnoProximo = () => setAnoAtual((a) => a + 1);
 
     return (
-        <Box sx={{ padding: 4, backgroundColor: "#fff", borderRadius: 2 }}>
-            <Typography variant="h4" gutterBottom sx={{ color: colors.greenAccent[500] }}>
-                Calendário - Horário da Academia
-            </Typography>
+        <Box sx={{ m: 1.5, p: 3, backgroundColor: "#fff", borderRadius: 2 }}>
+            <CssBaseline />
+            <Box sx={{display:"flex", justifyContent:"space-between"}}>
+
+                <Typography variant="h4" gutterBottom sx={{ color: colors.greenAccent[500] }}>
+                    Calendário - Horário da Academia
+                </Typography>
+                <Box
+                    sx={{
+                        display: "flex",
+                        justifyContent: "flex-end",
+                        alignItems: "center",
+                        gap: 1,
+                        marginBottom: 2,
+                        flexWrap: "wrap",
+                        fontSize: "0.9rem",
+                    }}
+                >
+                    {/* Botões ano */}
+                    <IconButton
+                        onClick={handleAnoAnterior}
+                        aria-label="Ano anterior"
+                        size="small"
+                        sx={{ color: colors.primary[500] }}
+                    >
+                        <ArrowBackIosNewIcon fontSize="small" />
+                    </IconButton>
+                    <Typography
+                        variant="subtitle2"
+                        sx={{ minWidth: 50, textAlign: "center", userSelect: "none" }}
+                    >
+                        {anoAtual}
+                    </Typography>
+                    <IconButton
+                        onClick={handleAnoProximo}
+                        aria-label="Próximo ano"
+                        size="small"
+                        sx={{ color: colors.primary[500] }}
+                    >
+                        <ArrowForwardIosIcon fontSize="small" />
+                    </IconButton>
+
+                    {/* Espaço entre ano e mês */}
+                    <Box sx={{ width: 12 }} />
+
+                    {/* Botões mês */}
+                    <IconButton
+                        onClick={handleMesAnterior}
+                        aria-label="Mês anterior"
+                        size="small"
+                        sx={{ color: colors.primary[500] }}
+                    >
+                        <ArrowBackIosNewIcon fontSize="small" />
+                    </IconButton>
+                    <Typography
+                        variant="subtitle2"
+                        sx={{ minWidth: 80, textAlign: "center", userSelect: "none" }}
+                    >
+                        {nomeMeses[mesAtual]}
+                    </Typography>
+                    <IconButton
+                        onClick={handleMesProximo}
+                        aria-label="Próximo mês"
+                        size="small"
+                        sx={{ color: colors.primary[500] }}
+                    >
+                        <ArrowForwardIosIcon fontSize="small" />
+                    </IconButton>
+                </Box>
+            </Box>
 
             {/* Controles de navegação alinhados à direita e menores */}
-            <Box
-                sx={{
-                    display: "flex",
-                    justifyContent: "flex-end",
-                    alignItems: "center",
-                    gap: 1,
-                    marginBottom: 2,
-                    flexWrap: "wrap",
-                    fontSize: "0.9rem",
-                }}
-            >
-                {/* Botões ano */}
-                <IconButton
-                    onClick={handleAnoAnterior}
-                    aria-label="Ano anterior"
-                    size="small"
-                    sx={{ color: colors.primary[500] }}
-                >
-                    <ArrowBackIosNewIcon fontSize="small" />
-                </IconButton>
-                <Typography
-                    variant="subtitle2"
-                    sx={{ minWidth: 50, textAlign: "center", userSelect: "none" }}
-                >
-                    {anoAtual}
-                </Typography>
-                <IconButton
-                    onClick={handleAnoProximo}
-                    aria-label="Próximo ano"
-                    size="small"
-                    sx={{ color: colors.primary[500] }}
-                >
-                    <ArrowForwardIosIcon fontSize="small" />
-                </IconButton>
 
-                {/* Espaço entre ano e mês */}
-                <Box sx={{ width: 12 }} />
-
-                {/* Botões mês */}
-                <IconButton
-                    onClick={handleMesAnterior}
-                    aria-label="Mês anterior"
-                    size="small"
-                    sx={{ color: colors.primary[500] }}
-                >
-                    <ArrowBackIosNewIcon fontSize="small" />
-                </IconButton>
-                <Typography
-                    variant="subtitle2"
-                    sx={{ minWidth: 80, textAlign: "center", userSelect: "none" }}
-                >
-                    {nomeMeses[mesAtual]}
-                </Typography>
-                <IconButton
-                    onClick={handleMesProximo}
-                    aria-label="Próximo mês"
-                    size="small"
-                    sx={{ color: colors.primary[500] }}
-                >
-                    <ArrowForwardIosIcon fontSize="small" />
-                </IconButton>
-            </Box>
 
             {/* Cabeçalho dos dias da semana */}
             <Box
@@ -238,7 +243,7 @@ const Calendario: React.FC = () => {
 
             <Box
                 sx={{
-                    marginTop: 3,
+                    marginTop: 2,
                     color: colors.primary[500],
                     fontStyle: "italic",
                     textAlign: "center",

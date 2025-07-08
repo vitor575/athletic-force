@@ -88,7 +88,7 @@ const PerfilUsuario = () => {
   }
 
   return (
-    <Box sx={{p:5}}>
+    <Box sx={{p:2}}>
       <Typography
         variant="h4"
         sx={{

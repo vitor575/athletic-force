@@ -14,7 +14,7 @@ import { Link } from "react-router-dom";
 import { FaDumbbell, FaCalendarAlt, FaClock, FaSignOutAlt } from "react-icons/fa";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import { tokens } from "../../../tema";
-import Logo from "../../../img/logo3.png";
+import Logo from "../../../img/logo3.png"; // Seu logo, já está aqui
 
 interface TreinoNavProps {
   setSelectedSection: (section: string) => void;
@@ -29,6 +29,11 @@ const TreinoNav = ({ setSelectedSection, setIsCollapsed, isCollapsed }: TreinoNa
   const [isTraining, setIsTraining] = useState(false);
   const [time, setTime] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
+
+  // NOVO: Dados de exemplo para o aluno - Você pode passar isso via props,
+  // ou buscar de um contexto/API real.
+  const alunoNome = "Vitor";
+  const alunoProfileImage = "https://github.com/MaxMLira.png"; // Exemplo de URL de imagem de perfil
 
   const startTraining = () => {
     if (!intervalRef.current) {
@@ -95,9 +100,11 @@ const TreinoNav = ({ setSelectedSection, setIsCollapsed, isCollapsed }: TreinoNa
         justifyContent: "space-between",
         borderRadius: 0,
         transition: "width 0.3s ease",
+        boxShadow: "none",
       }}
     >
       <Box p={2}>
+        {/* Cabeçalho superior: Logo e botão de colapsar */}
         <Box
           display="flex"
           justifyContent={isCollapsed ? "center" : "space-between"}
@@ -109,6 +116,28 @@ const TreinoNav = ({ setSelectedSection, setIsCollapsed, isCollapsed }: TreinoNa
             <MenuOutlinedIcon sx={{ color: "#fff" }} />
           </IconButton>
         </Box>
+
+        {!isCollapsed && (
+          <Box mb="25px" textAlign="center">
+            <Box display="flex" justifyContent="center" alignItems="center" mb={1}>
+              <img
+                alt="profile-user"
+                width="150px" // Ajustei o tamanho da imagem
+                height="150px"
+                src={alunoProfileImage}
+                style={{ cursor: "pointer", borderRadius: "50%", objectFit: "cover" }}
+              />
+            </Box>
+            <Typography
+              variant="h4" // Ajustei a variante para Aluno: Vitor
+              color={colors.grey[900]}
+              fontWeight="bold"
+              sx={{ m: "0 0 5px 0" }} // Margem inferior para separar do próximo texto
+            >
+               {alunoNome}
+            </Typography>
+          </Box>
+        )}
 
         <List sx={{ gap: 1, display: "flex", flexDirection: "column" }}>
           {renderItem("cronograma", <FaDumbbell size={20} />, "Treinos")}
@@ -146,7 +175,7 @@ const TreinoNav = ({ setSelectedSection, setIsCollapsed, isCollapsed }: TreinoNa
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
-            to="/clientHome"
+            to="/clientHome" // Ou sua rota de logout
             sx={{
               color: "#fff",
               justifyContent: "center",
