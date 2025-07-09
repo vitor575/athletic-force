@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Box, Typography, useTheme, Tooltip, IconButton, CssBaseline } from "@mui/material";
-import { tokens } from "../../../tema";
+import { tokens } from "../../../../tema";
 import ArrowBackIosNewIcon from "@mui/icons-material/ArrowBackIosNew";
 import ArrowForwardIosIcon from "@mui/icons-material/ArrowForwardIos";
 

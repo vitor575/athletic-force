@@ -1,4 +1,4 @@
-// src/components/Treinos/Treinos.tsx (ou o nome do seu componente principal de cronograma)
+// src/components/Treinos/Treinos.tsx
 import React, { useState } from "react";
 import {
     Backdrop,
@@ -10,12 +10,10 @@ import {
     useTheme,
     CssBaseline,
 } from "@mui/material";
-import { useNextTraining } from "../../../services/querrys/useNextTraining"; // Seu hook existente
-import { tokens }  from "../../../tema";
-import img  from "../../../img/supino.jpg";
-import TrainingSessionPage from "../../../components/AreaAluno/TrainingSessionPage/TrainingSessionPage";
-import DashTopbar from "../../../components/Dashboard/DashTopbar";
-// Ajuste o caminho conforme necessário
+import { useNextTraining } from "../../../../services/querrys/useNextTraining"; // Seu hook existente
+import { tokens } from "../../../../tema";
+import img from "../../../../img/supino.jpg";
+import TrainingSessionPage from "./TrainingSessionPage/TrainingSessionPage";
 
 // Defina uma interface para o tipo de treino que você espera de useNextTraining
 interface TrainingDetails {
@@ -62,7 +60,6 @@ const Treinos: React.FC = () => {
         refetch(); // Opcional: Refetch o próximo treino após um ser finalizado
     };
 
-
     // Renderiza a tela da sessão de treino se isTrainingActive for true
     // Passamos o activeTrainingData completo para TrainingSessionPage
     if (isTrainingActive && activeTrainingData) {
@@ -74,11 +71,47 @@ const Treinos: React.FC = () => {
         );
     }
 
-    // Se não estiver ativo, renderiza o cronograma normal
-    if (loading) return <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open><CircularProgress color="inherit" /></Backdrop>;
-    if (error) return <Box sx={{ p: 2, m: "40px 100px 0", bgcolor: colors.greenAccent[500], borderRadius: 2, color: "#fff", textAlign: "center" }}><Typography variant="h6">Erro ao carregar treino ou sem treinos disponíveis.</Typography></Box>;
-    if (!nextTraining) return <Box sx={{ p: 2, m: "40px 100px 0", bgcolor: colors.grey[800], borderRadius: 2, color: "#fff", textAlign: "center" }}><Typography variant="h6">Nenhum treino disponível no momento.</Typography></Box>;
+    // Se estiver carregando, mostra o Backdrop
+    if (loading) {
+        return (
+            <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
+                <CircularProgress color="inherit" />
+            </Backdrop>
+        );
+    }
 
+    // SE HOUVER UM ERRO (INCLUINDO "Training not found" vindo do backend como erro GraphQL)
+    if (error) {
+        // Verifica se a mensagem de erro específica "Training not found" está presente
+        // Isso é crucial para distinguir um "sem treino" de um erro técnico
+        const isNotFound = error.message.includes("Training not found");
+        const displayMessage = isNotFound
+            ? "Nenhum treino agendado para você no momento."
+            : "Ocorreu um erro ao carregar treinos. Por favor, tente novamente mais tarde.";
+
+        return (
+            <Box sx={{ p: 2, m: "40px 100px 0", bgcolor: colors.redAccent[700], borderRadius: 2, color: "#fff", textAlign: "center" }}>
+                <Typography variant="h6">{displayMessage}</Typography>
+                <Button onClick={() => refetch()} sx={{ mt: 2, bgcolor: colors.grey[700], color: "#fff" }}>
+                    Tentar Novamente
+                </Button>
+            </Box>
+        );
+    }
+
+    // Se NÃO HÁ ERRO e nextTraining é null/undefined (o backend retornou null para 'data' sem erro GraphQL)
+    // Esta condição só será atingida se o backend *não* retornar um erro GraphQL
+    // mas sim { data: { getMyNextTraining: null } }.
+    if (!nextTraining) {
+        return (
+            <Box sx={{ p: 2, m: "40px 100px 0", bgcolor: colors.grey[800], borderRadius: 2, color: "#fff", textAlign: "center" }}>
+                <Typography variant="h6">Nenhum treino disponível no momento.</Typography>
+                <Button onClick={() => refetch()} sx={{ mt: 2, bgcolor: colors.grey[700], color: "#fff" }}>
+                    Atualizar
+                </Button>
+            </Box>
+        );
+    }
 
     return (
         <Box sx={{ color: colors.grey[900], p: 2}}>

@@ -13,13 +13,13 @@ import {
   TextField,
   Avatar,
 } from "@mui/material";
-import { useClientPerfil } from "../../../services/querrys/useClientPerfil";
-import { tokens } from "../../../tema";
+import { useClientPerfil } from "../../../../services/querrys/useClientPerfil";
+import { tokens } from "../../../../tema";
 import { FaMapLocationDot } from "react-icons/fa6";
 import { FaAddressCard } from "react-icons/fa";
 import { IoLogoWhatsapp } from "react-icons/io";
 import { MdMarkEmailRead } from "react-icons/md";
-const PerfilUsuario = () => {
+const PerfilAluno = () => {
   const { client, loading } = useClientPerfil();
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
@@ -195,4 +195,4 @@ const PerfilUsuario = () => {
   );
 };
 
-export default PerfilUsuario;
+export default PerfilAluno;

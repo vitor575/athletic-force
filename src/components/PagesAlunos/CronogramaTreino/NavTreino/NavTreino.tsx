@@ -12,9 +12,10 @@ import {
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { FaDumbbell, FaCalendarAlt, FaClock, FaSignOutAlt } from "react-icons/fa";
+import { useClientPerfil } from "../../../../services/querrys/useClientPerfil";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
-import { tokens } from "../../../tema";
-import Logo from "../../../img/logo3.png"; // Seu logo, já está aqui
+import { tokens } from "../../../../tema";
+import Logo from "../../../../img/logo3.png"; // Seu logo, já está aqui
 
 interface TreinoNavProps {
   setSelectedSection: (section: string) => void;
@@ -29,10 +30,7 @@ const TreinoNav = ({ setSelectedSection, setIsCollapsed, isCollapsed }: TreinoNa
   const [isTraining, setIsTraining] = useState(false);
   const [time, setTime] = useState(0);
   const intervalRef = useRef<NodeJS.Timeout | null>(null);
-
-  // NOVO: Dados de exemplo para o aluno - Você pode passar isso via props,
-  // ou buscar de um contexto/API real.
-  const alunoNome = "Vitor";
+  const { client } = useClientPerfil();
   const alunoProfileImage = "https://github.com/MaxMLira.png"; // Exemplo de URL de imagem de perfil
 
   const startTraining = () => {
@@ -122,19 +120,21 @@ const TreinoNav = ({ setSelectedSection, setIsCollapsed, isCollapsed }: TreinoNa
             <Box display="flex" justifyContent="center" alignItems="center" mb={1}>
               <img
                 alt="profile-user"
-                width="150px" // Ajustei o tamanho da imagem
+                width="150px" 
                 height="150px"
                 src={alunoProfileImage}
                 style={{ cursor: "pointer", borderRadius: "50%", objectFit: "cover" }}
               />
             </Box>
+            <Typography sx={{color:colors.greenAccent[500]}}>
+              Aluno
+            </Typography>
             <Typography
               variant="h4" // Ajustei a variante para Aluno: Vitor
               color={colors.grey[900]}
               fontWeight="bold"
-              sx={{ m: "0 0 5px 0" }} // Margem inferior para separar do próximo texto
             >
-               {alunoNome}
+               {client?.name}
             </Typography>
           </Box>
         )}

@@ -16,9 +16,9 @@ import {
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline';
 import RadioButtonUncheckedIcon from '@mui/icons-material/RadioButtonUnchecked';
 
-import { tokens } from "../../../tema";
-import img from "../../../img/supino.jpg"; // Imagem padrão, se trainingData.imageUrl não existir
-import { FINISH_TRAINING } from "../../../services/mutations/finishTraining";
+import { tokens } from "../../../../../tema";
+import img from "../../../../../img/supino.jpg"; // Imagem padrão, se trainingData.imageUrl não existir
+import { FINISH_TRAINING } from "../../../../../services/mutations/finishTraining";
 import { useMutation } from "@apollo/client";
 
 // Interface para individual exercise data received from the backend

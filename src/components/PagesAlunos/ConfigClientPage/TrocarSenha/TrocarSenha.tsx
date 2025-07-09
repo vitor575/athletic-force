@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import { Box, Typography, TextField, Button, Stack, Alert, useTheme } from "@mui/material";
-import { tokens } from "../../../tema";
+import { tokens } from "../../../../tema";
 
-const TrocarSenhaContent = () => {
+const TrocarSenha = () => {
   const [currentPassword, setCurrentPassword] = useState('');
   const [newPassword, setNewPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
@@ -118,4 +118,4 @@ const TrocarSenhaContent = () => {
   );
 };
 
-export default TrocarSenhaContent;
+export default TrocarSenha;

@@ -1,9 +1,9 @@
 import React from 'react';
 import { Box, Typography, Card, CardContent, Button, List, ListItem, ListItemIcon, ListItemText, Divider, useTheme, CssBaseline } from "@mui/material";
 import CheckCircleOutlineIcon from '@mui/icons-material/CheckCircleOutline'; // Ícone mais moderno
-import { tokens } from "../../../tema"; // Supondo que você use o tema
+import { tokens } from "../../../../tema"; // Supondo que você use o tema
 
-const VerPlanoContent = () => {
+const PagePlano = () => {
   // Supondo que você tenha acesso ao seu tema
   // Se não tiver, pode remover useTheme e colors e usar cores diretas (ex: 'primary')
   const theme = useTheme();
@@ -104,4 +104,4 @@ const VerPlanoContent = () => {
   );
 };
 
-export default VerPlanoContent;
+export default PagePlano;

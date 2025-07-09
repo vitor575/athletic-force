@@ -1,11 +1,11 @@
 import { Box, useTheme } from "@mui/material";
 import { useState } from "react";
-import ConfiguracaoNav from "../../../components/AreaAluno/ConfiguracaoNav";
-import PerfilContent from "./PerfilContent";
-import TrocarSenhaContent from "./TrocarSenhaContent";
-import VerPlanoContent from "./VerPlanoContent";
+import ConfiguracaoNav from "../../AreaAluno/ConfiguracaoNav";
+import PerfilContent from "./PerfilAluno/PerfilAluno";
+import TrocarSenhaContent from "./TrocarSenha/TrocarSenha";
+import VerPlanoContent from "./PagePlano/PagePlano";
 import { tokens } from "../../../tema";
-import DashTopbar from "../../../components/Dashboard/DashTopbar";
+import DashTopbar from "../../Dashboard/DashTopbar";
 
 const ConfigClientPage = () => {
   const [selectedSection, setSelectedSection] = useState("perfil");
