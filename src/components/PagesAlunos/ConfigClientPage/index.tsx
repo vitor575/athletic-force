@@ -1,6 +1,6 @@
 import { Box, useTheme } from "@mui/material";
 import { useState } from "react";
-import ConfiguracaoNav from "../../AreaAluno/ConfiguracaoNav";
+import ConfiguracaoNav from "./ConfiguracaoNav";
 import PerfilContent from "./PerfilAluno/PerfilAluno";
 import TrocarSenhaContent from "./TrocarSenha/TrocarSenha";
 import VerPlanoContent from "./PagePlano/PagePlano";

@@ -1,6 +1,6 @@
 
 import { Box, Typography, Button, Paper, useTheme, keyframes } from "@mui/material";
-import { tokens } from "../../../tema";
+import { tokens } from "../../../../tema";
 
 
 

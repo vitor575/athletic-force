@@ -35,7 +35,7 @@ interface TrainingDetails {
 }
 
 const Treinos: React.FC = () => {
-    const { nextTraining, loading, error, refetch } = useNextTraining(); // Mantenha o refetch aqui, pode ser útil
+    const { nextTraining, loading, error, refetch } = useNextTraining(); 
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
 
@@ -82,26 +82,31 @@ const Treinos: React.FC = () => {
 
     // SE HOUVER UM ERRO (INCLUINDO "Training not found" vindo do backend como erro GraphQL)
     if (error) {
-        // Verifica se a mensagem de erro específica "Training not found" está presente
-        // Isso é crucial para distinguir um "sem treino" de um erro técnico
+  
         const isNotFound = error.message.includes("Training not found");
-        const displayMessage = isNotFound
-            ? "Nenhum treino agendado para você no momento."
-            : "Ocorreu um erro ao carregar treinos. Por favor, tente novamente mais tarde.";
+
+        let displayMessage: string;
+        let showRefreshButton: boolean;
+
+        if (isNotFound) {
+            displayMessage = "Você não tem treino agendado no momento. Por favor, fale com seu instrutor.";
+            showRefreshButton = false; 
+        } else {
+            displayMessage = "Ocorreu um erro ao carregar seus treinos. Por favor, tente novamente.";
+            showRefreshButton = true;
+        }
 
         return (
-            <Box sx={{ p: 2, m: "40px 100px 0", bgcolor: colors.redAccent[700], borderRadius: 2, color: "#fff", textAlign: "center" }}>
+            <Box sx={{ p: 2, m: "40px 100px 0", borderRadius: 2, color: "#fff", textAlign: "center" }}>
                 <Typography variant="h6">{displayMessage}</Typography>
-                <Button onClick={() => refetch()} sx={{ mt: 2, bgcolor: colors.grey[700], color: "#fff" }}>
-                    Tentar Novamente
-                </Button>
+                {showRefreshButton && (
+                    <Button onClick={() => refetch()} sx={{ mt: 2, bgcolor: colors.greenAccent[500], color: "#fff" }}>
+                        Tentar Novamente
+                    </Button>
+                )}
             </Box>
         );
     }
-
-    // Se NÃO HÁ ERRO e nextTraining é null/undefined (o backend retornou null para 'data' sem erro GraphQL)
-    // Esta condição só será atingida se o backend *não* retornar um erro GraphQL
-    // mas sim { data: { getMyNextTraining: null } }.
     if (!nextTraining) {
         return (
             <Box sx={{ p: 2, m: "40px 100px 0", bgcolor: colors.grey[800], borderRadius: 2, color: "#fff", textAlign: "center" }}>
@@ -114,8 +119,8 @@ const Treinos: React.FC = () => {
     }
 
     return (
-        <Box sx={{ color: colors.grey[900], p: 2}}>
-            <CssBaseline/>
+        <Box sx={{ color: colors.grey[900], p: 2 }}>
+            <CssBaseline />
             <Typography variant="h3" gutterBottom sx={{ color: colors.greenAccent[500] }}>Cronograma de Treino</Typography>
             <Box sx={{ display: "flex", justifyContent: "space-between", alignItems: "center", mb: 3, flexDirection: { xs: "column", md: "row" } }}>
                 <Typography variant="h6">Confira os detalhes do seu próximo treino e prepare-se para começar!</Typography>

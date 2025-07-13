@@ -1,5 +1,5 @@
 // ProtectedRoute.tsx
-import React, { FC, JSX } from 'react';
+import { FC, JSX } from 'react';
 import { Navigate, Outlet } from 'react-router-dom';
 import Cookies from 'js-cookie';
 

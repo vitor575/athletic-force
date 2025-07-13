@@ -25,8 +25,8 @@ const PagePlano = () => {
   };
 
   return (
-    <Box sx={{ py: 1, px: 2, mx: 'auto' }}>
-      <CssBaseline/>
+    <Box sx={{ py: .5, px: 2, mx: 'auto' }}>
+      <CssBaseline />
       <Typography
         variant="h4"
         sx={{ color: colors.greenAccent[500] }}
@@ -41,7 +41,7 @@ const PagePlano = () => {
         backgroundColor: theme.palette.background.paper, // Usa a cor de papel do tema
         borderRadius: '12px',
       }}>
-        <CardContent sx={{ p: 5 }}>
+        <CardContent sx={{ px: 5 }}>
           <Typography variant="h5" sx={{ fontWeight: 'bold', color: colors.blueAccent[200] }}>
             {planoAtual.nome}
           </Typography>
@@ -57,7 +57,7 @@ const PagePlano = () => {
 
           <Divider sx={{ mb: 1, bgcolor: colors.grey[200] }} />
 
-          <Box sx={{ display: 'flex', alignItems: 'baseline', my: 3}}>
+          <Box sx={{ display: 'flex', alignItems: 'baseline', my: 2 }}>
             <Typography variant="h3" sx={{ fontWeight: '600', color: colors.blueAccent[200] }}>
               R$ {planoAtual.preco}
             </Typography>
@@ -66,7 +66,7 @@ const PagePlano = () => {
             </Typography>
           </Box>
 
-          <Typography variant="h6" sx={{ mt: 1,color: colors.greenAccent[500] }}>
+          <Typography variant="h6" sx={{ color: colors.greenAccent[500] }}>
             Benefícios incluídos:
           </Typography>
 
@@ -86,7 +86,7 @@ const PagePlano = () => {
             fullWidth
             size="large"
             sx={{
-              mt: 1,
+              mt: .5,
               py: 1.5,
               fontSize: '1rem',
               fontWeight: 'bold',

@@ -1,8 +1,8 @@
 import { Box, Button, Typography, Stack, Paper, useTheme } from "@mui/material";
 import { FaSignOutAlt } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
-import CardPagamento from "../../AreaAluno/CardPagamento";
-import CardAssinatura from "../../AreaAluno/CardAssinatura";
+import CardPagamento from "./CardPagamento";
+import CardAssinatura from "./CardAssinatura";
 import { tokens } from "../../../tema";
 
 const Pagamento = () => {

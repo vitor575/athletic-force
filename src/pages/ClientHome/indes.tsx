@@ -1,11 +1,18 @@
 import Logo from "../../img/logo3.png";
 import { FaSignOutAlt } from "react-icons/fa";
-import CardCliente from "../../components/AreaAluno/CardsCliente";
+import CardCliente from "../../components/CardsCliente";
 import Calendario from "../../img/calendario.png";
 import Pagamento from "../../img/pagamento.png";
 import Configuracao from "../../img/configuracao.png";
 import { useNavigate } from "react-router-dom";
-import { Box, Button, Typography, useTheme, Backdrop, CircularProgress} from "@mui/material";
+import {
+  Box,
+  Button,
+  Typography,
+  useTheme,
+  Backdrop,
+  CircularProgress,
+} from "@mui/material";
 import { tokens } from "../../tema";
 import { useClientData } from "../../services/querrys/useClientData";
 import Cookies from "js-cookie";
@@ -19,16 +26,8 @@ const ClientHome = () => {
     navigate("/");
   };
 
-
   const { client, loading } = useClientData();
 
-  if (loading) {
-    return (
-      <Backdrop sx={{ color: "#fff", background: "##00000047" }} open>
-        <CircularProgress color="inherit" />
-      </Backdrop>
-    );
-  }
   return (
     <Box
       sx={{
@@ -38,9 +37,16 @@ const ClientHome = () => {
         display: "flex",
         flexDirection: "column",
         gap: "2rem",
+        position: "relative",
       }}
       component="main"
     >
+      {loading && (
+        <Backdrop sx={{ color: "#fff", zIndex: (theme) => theme.zIndex.drawer + 1 }} open>
+          <CircularProgress color="inherit" />
+        </Backdrop>
+      )}
+
       <Box
         sx={{
           display: "flex",
@@ -68,8 +74,6 @@ const ClientHome = () => {
             src={Logo}
             alt="Logo"
           />
-          <Box>
-          </Box>
         </Box>
         <Box
           sx={{
@@ -88,9 +92,9 @@ const ClientHome = () => {
             color: colors.grey[900],
           }}
         >
-          <Box fontWeight="bold" >
+          <Box fontWeight="bold">
             <Typography variant="h3" component="h2" sx={{ fontSize: "1.6em" }}>
-              Seja bem-vindo, {client.me.name}
+              Seja bem-vindo, {client?.me?.name}
             </Typography>
             <Button
               sx={{
@@ -109,7 +113,6 @@ const ClientHome = () => {
                   bgcolor: colors.blueAccent[400],
                   transform: "scale(0.9)",
                 },
-
               }}
               onClick={handleExit}
             >
@@ -119,6 +122,7 @@ const ClientHome = () => {
           </Box>
         </Box>
       </Box>
+
       <Box
         sx={{
           display: "flex",
