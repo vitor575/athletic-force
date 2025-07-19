@@ -1,4 +1,4 @@
-// src/components/TrainingSessionPage/TrainingSessionPage.tsx
+// src/components/Treinos/TrainingSessionPage/TrainingSessionPage.tsx
 
 import React, { useState, useEffect } from "react";
 import {
@@ -20,10 +20,11 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 import { tokens } from "../../../../../tema";
 import { FINISH_TRAINING } from "../../../../../services/mutations/finishTraining";
+import { GET_MY_NEXT_TRAINING } from "../../../../../services/querrys/useNextTraining"; // Importe a query
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
 
-// Interfaces
+// Interfaces (mantidas as suas)
 interface Exercise {
     id: string;
     name: string;
@@ -31,9 +32,6 @@ interface Exercise {
     qtdSets: number;
     qtdReps: number;
     time: number;
-    recommendedSets?: string;
-    recommendedReps?: string;
-    recommendedLoad?: number;
 }
 
 interface TrainingData {
@@ -62,12 +60,12 @@ interface TrainingSessionPageProps {
 const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData, onTrainingFinished }) => {
     const theme = useTheme();
     const colors = tokens(theme.palette.mode);
-    const [finishTraining] = useMutation(FINISH_TRAINING);
+    const [finishTraining, { loading }] = useMutation(FINISH_TRAINING);
+
 
     const [exerciseSeriesData, setExerciseSeriesData] = useState<ExerciseSeriesData>({});
     const [submitMessage, setSubmitMessage] = useState<{ type: "success" | "error"; text: string } | null>(null);
     const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
-    const [saving, setSaving] = useState(false);
     const navigate = useNavigate();
 
     const handleExit = () => {
@@ -188,58 +186,53 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
         }
     };
 
-    const formatTrainingDataForApi = () => {
-        return {
+    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+        event.preventDefault();
+        if (!validateForm()) {
+            return;
+        }
+
+        setSubmitMessage(null);
+
+        const dataToSubmit = {
             trainingId: trainingData.id,
             exercises: trainingData.exercises.map(exercise => ({
                 exerciseId: exercise.id,
                 series: exerciseSeriesData[exercise.id]?.map(serie => ({
-                    repetitions: serie.repeticoes ?? 0,
-                    weight: serie.peso ?? 0,
+                    repetitions: Number(serie.repeticoes) || 0,
+                    weight: Number(serie.peso) || 0,
                 })) || [],
             })),
         };
-    };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setSubmitMessage(null);
+        console.log("📤 Enviando para a mutation finishTraining:", dataToSubmit);
 
-        if (!validateForm()) return;
-
-        setSaving(true);
         try {
-            const dataToSubmit = formatTrainingDataForApi();
-            const { data } = await finishTraining({
+            const result = await finishTraining({
                 variables: { trainingFinished: dataToSubmit },
-                refetchQueries: ['GetTrainingHistory']
+                refetchQueries: [
+                    { query: GET_MY_NEXT_TRAINING } // Usar o objeto da query para refetch
+                ],
             });
 
-            setSubmitMessage({ type: "success", text: data.finishTraining.message || "Treino finalizado com sucesso!" });
-            setSaving(false);
-
-            setTimeout(() => {
+            if (result.data) {
+                console.log("✅ Treino finalizado com sucesso:", result.data);
+                setSubmitMessage({ type: "success", text: "Treino finalizado com sucesso!" });
                 onTrainingFinished();
-            }, 2000);
+            } else {
+                console.error("❌ A API retornou um erro. Verifique a aba 'Network' no dev tools.", result);
+                setSubmitMessage({ type: "error", text: "Ocorreu um erro no servidor ao salvar o treino." });
+            }
 
-        } catch (err: any) {
-            console.error("Erro ao finalizar treino:", err);
-            const errorMessage = err.graphQLErrors?.[0]?.message || "Ocorreu um erro. Tente novamente.";
-            setSubmitMessage({ type: "error", text: `Erro: ${errorMessage}` });
-            setSaving(false);
+        } catch (networkError) {
+            console.error("❌ Erro de rede ou outro erro crítico:", networkError);
+            setSubmitMessage({ type: "error", text: "Erro de comunicação com o servidor. Tente novamente." });
         }
     };
 
-    if (!trainingData || !trainingData.exercises || trainingData.exercises.length === 0) {
-        return (
-            <Box display="flex" justifyContent="center" alignItems="center" height="100%">
-                <Typography variant="h6">Nenhum dado de treino disponível.</Typography>
-            </Box>
-        );
-    }
-
     const exercise = trainingData.exercises[currentExerciseIndex];
     const totalExercises = trainingData.exercises.length;
+    const series = exerciseSeriesData[exercise.id] || [];
 
     const columns: GridColDef[] = [
         {
@@ -250,8 +243,7 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
                     <Typography sx={{ color: colors.grey[900], fontWeight: "bold" }}>{params.row.id + 1}ª</Typography>
                 )
             )
-        }
-        ,
+        },
         {
             field: 'repeticoes', headerName: 'Repetições', width: 290, flex: 1,
             sortable: false,
@@ -277,8 +269,7 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
                         sx={{ "& .MuiInputBase-input": { color: colors.grey[100], bgcolor: colors.grey[900], borderRadius: 1.5 } }}
                     />
                 )
-        }
-        ,
+        },
         {
             field: 'status', headerName: 'Status', width: 100, flex: 0.5,
             sortable: false, align: 'center', headerAlign: 'center',
@@ -292,8 +283,7 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
                         )}
                     </IconButton>
                 )
-        }
-        ,
+        },
         {
             field: 'actions', headerName: 'Ações', width: 100, flex: .5,
             sortable: false, align: 'center', headerAlign: 'center',
@@ -323,11 +313,9 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
                 }
             }
         }
-
     ];
 
     const paginationModel = { page: 0, pageSize: 6 };
-    const series = exerciseSeriesData[exercise.id] || [];
     const rows = [
         ...series.map((serie, index) => ({
             id: index,
@@ -336,13 +324,13 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
             completed: serie.completed,
             isAddButtonRow: false
         })),
-        { id: series.length, isAddButtonRow: true } // Essa é a linha do botão
+        { id: series.length, isAddButtonRow: true }
     ];
 
     return (
         <Box component="form" onSubmit={handleSubmit} sx={{ px: 1.5, color: colors.grey[900], bgcolor: colors.primary[500] }}>
             {submitMessage && (
-                <Alert severity={submitMessage.type} sx={{ mb: 1 , width: "97%"}}>
+                <Alert severity={submitMessage.type} sx={{ mb: 1, width: "97%" }}>
                     {submitMessage.text}
                 </Alert>
             )}
@@ -389,17 +377,17 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
                     <Box sx={{ display: "flex", gap: 4 }}>
                         <Box display="flex" justifyContent="flex-end" alignItems="center" gap={2}>
                             {currentExerciseIndex > 0 && (
-                                <Button type="button" variant="contained" onClick={handlePrevious} sx={{ bgcolor: colors.blueAccent[600], ":hover": { bgcolor: colors.blueAccent[500] } }}>
-                                    Treino Anterior
+                                <Button type="button" variant="contained" onClick={handlePrevious} sx={{ bgcolor: colors.blueAccent[400], ":hover": { bgcolor: colors.blueAccent[500] } }}>
+                                    Exercício Anterior
                                 </Button>
                             )}
                             {currentExerciseIndex < totalExercises - 1 ? (
                                 <Button type="button" variant="contained" onClick={handleNext} sx={{ bgcolor: colors.blueAccent[400], ":hover": { bgcolor: colors.blueAccent[500] } }}>
-                                    Próximo treino
+                                    Próximo Exercício
                                 </Button>
                             ) : (
-                                <Button type="submit" variant="contained" disabled={saving} sx={{ bgcolor: colors.greenAccent[500], ":hover": { bgcolor: colors.greenAccent[600] } }}>
-                                    {saving ? <CircularProgress size={24} sx={{ color: "#fff" }} /> : "Finalizar Treino"}
+                                <Button type="submit" variant="contained" disabled={loading} sx={{bgcolor:colors.greenAccent[500], ":hover": { bgcolor: colors.greenAccent[700] } }}>
+                                    {loading ? <CircularProgress size={24} sx={{ color: "#fff" , }} /> : "Finalizar Treino"}
                                 </Button>
                             )}
                         </Box>

@@ -1,6 +1,6 @@
 import { gql, useQuery } from "@apollo/client";
 
-const GET_MY_NEXT_TRAINING = gql`
+export const GET_MY_NEXT_TRAINING = gql`
 query getMyNextTraining {
   getMyNextTraining {
     training {
@@ -21,7 +21,9 @@ query getMyNextTraining {
 `;
 
 export const useNextTraining = () => {
-  const { data, loading, error, refetch } = useQuery(GET_MY_NEXT_TRAINING);
+  const { data, loading, error, refetch } = useQuery(GET_MY_NEXT_TRAINING, {
+    fetchPolicy: "cache-first",
+  });
 
   return {
     nextTraining: data?.getMyNextTraining?.training,
