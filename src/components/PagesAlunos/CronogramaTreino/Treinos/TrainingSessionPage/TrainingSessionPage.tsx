@@ -246,64 +246,98 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
             field: 'serie', headerName: 'Série', width: 70, flex: 0.5,
             sortable: false, align: 'center', headerAlign: 'center',
             renderCell: (params: GridRenderCellParams) => (
-                <Typography sx={{ color: colors.grey[900], fontWeight: "bold" }}>{params.row.id + 1}ª</Typography>
+                params.row.isAddButtonRow ? null : (
+                    <Typography sx={{ color: colors.grey[900], fontWeight: "bold" }}>{params.row.id + 1}ª</Typography>
+                )
             )
-        },
+        }
+        ,
         {
             field: 'repeticoes', headerName: 'Repetições', width: 290, flex: 1,
             sortable: false,
-            renderCell: (params: GridRenderCellParams) => (
-                <TextField
-                    fullWidth type="number" size="small"
-                    value={params.value ?? ""}
-                    onChange={(e) => handleSeriesInputChange(exercise.id, params.row.id, 'repeticoes', e.target.value)}
-                    sx={{ "& .MuiInputBase-input": { color: colors.grey[100], bgcolor: colors.grey[900], borderRadius: 1.5 } }}
-                />
-            )
+            renderCell: (params: GridRenderCellParams) =>
+                params.row.isAddButtonRow ? null : (
+                    <TextField
+                        fullWidth type="number" size="small"
+                        value={params.value ?? ""}
+                        onChange={(e) => handleSeriesInputChange(exercise.id, params.row.id, 'repeticoes', e.target.value)}
+                        sx={{ "& .MuiInputBase-input": { color: colors.grey[100], bgcolor: colors.grey[900], borderRadius: 1.5 } }}
+                    />
+                )
         },
         {
             field: 'peso', headerName: 'Peso (kg)', width: 290, flex: 1,
             sortable: false,
-            renderCell: (params: GridRenderCellParams) => (
-                <TextField
-                    fullWidth type="number" size="small"
-                    value={params.value ?? ""}
-                    onChange={(e) => handleSeriesInputChange(exercise.id, params.row.id, 'peso', e.target.value)}
-                    sx={{ "& .MuiInputBase-input": { color: colors.grey[100], bgcolor: colors.grey[900], borderRadius: 1.5 } }}
-                />
-            )
-        },
+            renderCell: (params: GridRenderCellParams) =>
+                params.row.isAddButtonRow ? null : (
+                    <TextField
+                        fullWidth type="number" size="small"
+                        value={params.value ?? ""}
+                        onChange={(e) => handleSeriesInputChange(exercise.id, params.row.id, 'peso', e.target.value)}
+                        sx={{ "& .MuiInputBase-input": { color: colors.grey[100], bgcolor: colors.grey[900], borderRadius: 1.5 } }}
+                    />
+                )
+        }
+        ,
         {
             field: 'status', headerName: 'Status', width: 100, flex: 0.5,
             sortable: false, align: 'center', headerAlign: 'center',
-            renderCell: (params: GridRenderCellParams) => (
-                <IconButton onClick={() => handleToggleSerieCompleted(exercise.id, params.row.id)}>
-                    {params.row.completed ? (
-                        <CheckCircleOutlineIcon sx={{ color: colors.greenAccent[500] }} />
-                    ) : (
-                        <RadioButtonUncheckedIcon sx={{ color: colors.grey[900] }} />
-                    )}
-                </IconButton>
-            )
-        },
-        {
-            field: 'actions', headerName: 'Ações', width: 100, flex: 0.5,
-            sortable: false, align: 'center', headerAlign: 'center',
-            renderCell: (params: GridRenderCellParams) => (
-                <IconButton onClick={() => handleRemoveSerie(exercise.id, params.row.id)} size="small">
-                    <DeleteIcon sx={{ color: colors.blueAccent[500] }} />
-                </IconButton>
-            )
+            renderCell: (params: GridRenderCellParams) =>
+                params.row.isAddButtonRow ? null : (
+                    <IconButton onClick={() => handleToggleSerieCompleted(exercise.id, params.row.id)}>
+                        {params.row.completed ? (
+                            <CheckCircleOutlineIcon sx={{ color: colors.greenAccent[500] }} />
+                        ) : (
+                            <RadioButtonUncheckedIcon sx={{ color: colors.grey[900] }} />
+                        )}
+                    </IconButton>
+                )
         }
+        ,
+        {
+            field: 'actions', headerName: 'Ações', width: 100, flex: .5,
+            sortable: false, align: 'center', headerAlign: 'center',
+            renderCell: (params: GridRenderCellParams) => {
+                if (params.row.isAddButtonRow) {
+                    return (
+                        <IconButton
+                            aria-label="adicionar série"
+                            onClick={() => handleAddSerie(exercise.id)}
+                            sx={{
+                                bgcolor: colors.greenAccent[500],
+                                color: colors.grey[900],
+                                "&:hover": { bgcolor: colors.greenAccent[400] },
+                                width: 27,
+                                height: 27,
+                            }}
+                        >
+                            <AddIcon fontSize="small" />
+                        </IconButton>
+                    );
+                } else {
+                    return (
+                        <IconButton onClick={() => handleRemoveSerie(exercise.id, params.row.id)} size="small">
+                            <DeleteIcon sx={{ color: colors.blueAccent[500] }} />
+                        </IconButton>
+                    );
+                }
+            }
+        }
+
     ];
 
     const paginationModel = { page: 0, pageSize: 6 };
-    const rows = exerciseSeriesData[exercise.id]?.map((serie, index) => ({
-        id: index,
-        peso: serie.peso,
-        repeticoes: serie.repeticoes,
-        completed: serie.completed,
-    })) || [];
+    const series = exerciseSeriesData[exercise.id] || [];
+    const rows = [
+        ...series.map((serie, index) => ({
+            id: index,
+            peso: serie.peso,
+            repeticoes: serie.repeticoes,
+            completed: serie.completed,
+            isAddButtonRow: false
+        })),
+        { id: series.length, isAddButtonRow: true } // Essa é a linha do botão
+    ];
 
     return (
         <Box component="form" onSubmit={handleSubmit} sx={{ px: 1.5, color: colors.grey[900], bgcolor: colors.primary[500] }}>
@@ -352,20 +386,7 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
                             Cancelar
                         </Button>
                     </Box>
-
                     <Box sx={{ display: "flex", gap: 4 }}>
-                        <IconButton
-                            aria-label="adicionar série"
-                            onClick={() => handleAddSerie(exercise.id)}
-                            sx={{
-                                bgcolor: colors.greenAccent[500],
-                                color: colors.grey[900],
-                                "&:hover": { bgcolor: colors.greenAccent[400] },
-                                width: 40, height: 40,
-                            }}
-                        >
-                            <AddIcon />
-                        </IconButton>
                         <Box display="flex" justifyContent="flex-end" alignItems="center" gap={2}>
                             {currentExerciseIndex > 0 && (
                                 <Button type="button" variant="contained" onClick={handlePrevious} sx={{ bgcolor: colors.blueAccent[600], ":hover": { bgcolor: colors.blueAccent[500] } }}>

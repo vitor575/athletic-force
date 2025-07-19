@@ -1,11 +1,11 @@
-import { Box, useTheme, Fab, Modal, Typography, Paper, List, ListItem, ListItemText } from "@mui/material";
+import { Box, useTheme, Fab, Modal, Typography, Paper} from "@mui/material";
 import { useState } from "react";
-import { tokens } from "../../../tema";
-import NavTreino from "./NavTreino/NavTreino";
-import Treinos from "./Treinos/Treinos";
-import Calendario from "./Calendario/Calendario";
+import { tokens } from "../../tema";
+import NavTreino from "./CronogramaTreino/NavTreino/NavTreino";
+import Treinos from "./CronogramaTreino/Treinos/Treinos";
+import Calendario from "./CronogramaTreino/Calendario/Calendario";
 import { BsJournalCheck } from "react-icons/bs";
-import DashTopbar from "../../Dashboard/DashTopbar";
+import DashTopbar from "../Dashboard/DashTopbar";
 
 const ConfigClientPage = () => {
   const [selectedSection, setSelectedSection] = useState("perfil");

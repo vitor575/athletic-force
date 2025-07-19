@@ -3,7 +3,7 @@ import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home";
 import ClientHome from "./pages/ClientHome/indes";
 import Pagamento from "./components/PagesAlunos/Pagamento/Pagamento";
-import CronogramaTreino from "./components/PagesAlunos/CronogramaTreino/index";
+import CronogramaTreino from "./components/PagesAlunos/index";
 import Login from "./components/Login";
 import ConfigClientPage from "./components/PagesAlunos/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
@@ -21,49 +21,27 @@ const App: React.FC = () => {
       <Router>
         <main>
           <Routes>
+            {/* Rotas públicas */}
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
 
+            {/* Rotas protegidas */}
             <Route element={<ProtectedRoute redirectPath="/" />}>
 
+              {/* Área do cliente */}
               <Route path="/clientHome" element={<ClientHome />} />
               <Route path="/clientHome/pagamentos" element={<Pagamento />} />
               <Route path="/clientHome/configuration" element={<ConfigClientPage />} />
-              <Route
-                path="/clientHome/cronograma"
-                element={<CronogramaTreino />}
-              >
-              </Route>
+              <Route path="/clientHome/cronograma" element={<CronogramaTreino />} />
 
-              <Route
-                path="/EmpregadoDashboard"
-                element={<EmpregadoDashboard />}
-              >
-                <Route
-                  index
-                  element={<DashboardStudent />}
-                />
-                <Route
-                  path="/EmpregadoDashboard/DashboardAdminUser"
-                  element={<DashboardAdmin />}
-                />
-                <Route
-                  path="/EmpregadoDashboard/treinos/:id"
-                  element={<SelectedStudent />}
-                />
-                <Route
-                  path="/EmpregadoDashboard/DashboardAdminExercise"
-                  element={<DashboardAdminExercise />}
-                />
-
-                <Route
-                  path="/EmpregadoDashboard/DashboardAdminTrainings"
-                  element={<DashboardAdminTrainings />}
-                />
-                <Route
-                  path="/EmpregadoDashboard/DashboardAdminRoutines"
-                  element={<DashboardAdminRoutines />}
-                />
+              {/* Área do funcionário/admin */}
+              <Route path="/EmpregadoDashboard" element={<EmpregadoDashboard />}>
+                <Route index element={<DashboardStudent />} />
+                <Route path="DashboardAdminUser" element={<DashboardAdmin />} />
+                <Route path="treinos/:id" element={<SelectedStudent />} />
+                <Route path="DashboardAdminExercise" element={<DashboardAdminExercise />} />
+                <Route path="DashboardAdminTrainings" element={<DashboardAdminTrainings />} />
+                <Route path="DashboardAdminRoutines" element={<DashboardAdminRoutines />} />
               </Route>
             </Route>
           </Routes>
