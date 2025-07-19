@@ -342,7 +342,7 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({ trainingData,
     return (
         <Box component="form" onSubmit={handleSubmit} sx={{ px: 1.5, color: colors.grey[900], bgcolor: colors.primary[500] }}>
             {submitMessage && (
-                <Alert severity={submitMessage.type} sx={{ mb: 1 }}>
+                <Alert severity={submitMessage.type} sx={{ mb: 1 , width: "97%"}}>
                     {submitMessage.text}
                 </Alert>
             )}
