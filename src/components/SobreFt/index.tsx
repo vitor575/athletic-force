@@ -20,6 +20,13 @@ const SobreFT: React.FC = () => {
         alignItems: "center",
         width: "90%",
         marginBottom: "3%",
+        [theme.breakpoints.down("md")]: {
+          display: "block",
+          marginBottom: "0%",
+          margin: "0px",
+          width: "100%",
+
+        },
       }}
     >
       <Box
@@ -31,6 +38,10 @@ const SobreFT: React.FC = () => {
           width: "60%",
           borderRadius: "20px",
           boxShadow: `0px 4px 60px ${colors.blueAccent[600]}`,
+          [theme.breakpoints.down("md")]: {
+            width: "100%",
+            margin: "0px 0px 10px"
+          },
         }}
       />
       <CaixaTxt />

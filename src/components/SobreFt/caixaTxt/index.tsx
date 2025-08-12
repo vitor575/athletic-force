@@ -1,21 +1,27 @@
 import React from "react";
-import { Box, Typography, Button , useTheme } from "@mui/material";
+import { Box, Typography, Button, useTheme } from "@mui/material";
 import { tokens } from "../../../tema";
 
 
 
 
 
-const CaixaTxt: React.FC = () =>{
+const CaixaTxt: React.FC = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
 
   const textsobre = {
-    textAlign: "center",
+    textAlign: "justify",
     fontWeight: 600,
     fontSize: "1.2em",
     color: "rgb(85, 85, 85)",
     width: "100%",
+    [theme.breakpoints.down("lg")]: {
+      fontSize: "1.9em",
+    },
+    [theme.breakpoints.down("md")]: {
+      fontSize: "1.4em",
+    },
 
   };
   return (
@@ -23,12 +29,15 @@ const CaixaTxt: React.FC = () =>{
       sx={{
         position: "relative",
         right: 140,
+        [theme.breakpoints.down("md")]: {
+          right: 0,
+
+        },
       }}
     >
       <Box
         sx={{
           backgroundColor: "rgb(255, 255, 255)",
-          padding: "10px",
           borderRadius: "20px",
           width: "145%",
           boxShadow: "30px 5px 30px rgba(36, 36, 36, 0.184)",
@@ -36,7 +45,16 @@ const CaixaTxt: React.FC = () =>{
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
-          justifyContent: "space-between"
+          justifyContent: "center",
+          gap: 3,
+          p: 4,
+          [theme.breakpoints.down("md")]: {
+            gap: 1,
+            width: "100%",
+            height: "100%",
+            p: 3
+          },
+
         }}
       >
         <Typography
@@ -48,25 +66,17 @@ const CaixaTxt: React.FC = () =>{
             display: "flex",
             alignItems: "center",
             justifyContent: "center",
+            [theme.breakpoints.down("lg")]: {
+              fontSize: "2.6em",
+            },
+            [theme.breakpoints.down("md")]: {
+              fontSize: "1.6em",
+            },
+
+
           }}
         >
-          Conheça a história da
-          <Typography
-            component="span"
-            sx={{
-              whiteSpace: "nowrap",
-              overflow: "hidden",
-              display: "inline-block",
-              textTransform: "uppercase",
-              color: colors.primary?.[500],
-              outline: "none",
-              fontSize: ".9em",
-              fontWeight: 600,
-              padding: "0 10px",
-            }}
-          >
-            Athletic 
-          </Typography>
+          Sobre a ATHLETIC
         </Typography>
 
         <Typography sx={textsobre}>
@@ -74,26 +84,6 @@ const CaixaTxt: React.FC = () =>{
           saúde e bem-estar em um ambiente acolhedor e inspirador.Com profissionais qualificados e estrutura moderna, buscamos
           transformar vidas através da atividade física e do autocuidado. Venha fazer parte dessa jornada!
         </Typography>
-
-        <Box sx={{ display: "flex", justifyContent: "center" }}>
-          <Button
-            sx={{
-              padding: "10px 30px",
-              fontSize: "1.1em",
-              borderRadius: "10px",
-              backgroundColor: colors.primary?.[500],
-              color: "#ffffff",
-              border: "none",
-              "&:hover": {
-                backgroundColor: colors.blueAccent[400],
-                transform: "scale(1.1)",
-                transition: "300ms",
-              },
-            }}
-          >
-            Saiba Mais
-          </Button>
-        </Box>
       </Box>
     </Box>
   );

@@ -106,7 +106,7 @@ nav,
 section {
   display: block;
 }
-.css-vp839k-MuiTypography-root{
+.css-vp839k-MuiTypography-root {
   display: flex;
   justify-content: center;
 }
@@ -115,11 +115,17 @@ section {
   display: flex;
   justify-content: center;
   flex-direction: row;
-  gap:30px;
+  gap: 30px;
   margin: 70px 0 0;
 }
-#sobre  {
+#sobre {
   padding: 80px 35px;
+}
+@media (max-width: 768px) {
+  /* md no MUI é 900px */
+  #sobre {
+    padding: 60px 15px;
+  }
 }
 #contato {
   padding: 100px 0;
@@ -175,5 +181,41 @@ table {
   transition: 0.5s;
 }
 
+.css-1umw9bq-MuiSvgIcon-root {
+  font-size: 2.9rem !important;
+}
+.css-ij6izv-MuiButtonBase-root-MuiIconButton-root {
+  background: #1f2a40 !important;
+  border: 1px solid #535ac8 !important;
+}
 
-
+@media (max-width: 768px) {
+  .css-gcjjdm {
+    width: 500px !important;
+  }
+  .css-linmts {
+    margin: 10px 140px !important;
+  }
+}
+@media (max-width: 490px) {
+  .css-linmts {
+    width: 130px !important;
+    margin: 10px 65px !important;
+  }
+  .css-gcjjdm {
+    width: 340px !important;
+  }
+}
+@media (max-width: 320px) {
+  .css-linmts {
+    width: 90px !important;
+    margin: 10px 60px !important;
+  }
+  .css-gcjjdm {
+    width: 270px !important;
+    height: 450px !important;
+  }
+  .css-12w2qzm-MuiFormControl-root-MuiTextField-root {
+    margin-top: 10px !important ;
+  }
+}

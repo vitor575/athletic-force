@@ -31,7 +31,11 @@ const Contato: React.FC = () => {
   };
 
   return (
-    <Box >
+    <Box sx={{
+      [theme.breakpoints.down("md")]: {
+        padding: "0 20px"
+      },
+    }}>
       <Paper
         elevation={3}
         sx={{
@@ -39,13 +43,20 @@ const Contato: React.FC = () => {
           borderRadius: 3,
           boxShadow: "0px 4px 60px rgba(177, 177, 177, 0.973)",
           width: "65%",
-          margin: "0 auto", 
+          margin: "0 auto",
           justifyContent: "center",
+          [theme.breakpoints.down("md")]: {
+            width: "100%",
+            p: 2
+          },
 
         }}
       >
         <Box sx={{ display: "flex", justifyContent: "center", mb: 2 }}>
-          <img src={logocontato} alt="logocontato" style={{ width: "20%",  border: `3px solid ${colors.blueAccent[600]}`}} />
+          <img src={logocontato} alt="logocontato" style={{
+            width: "20%",
+            border: `3px solid ${colors.blueAccent[600]}`,
+          }} />
         </Box>
         <form onSubmit={handleSubmit}>
           <TextField
@@ -66,7 +77,7 @@ const Contato: React.FC = () => {
               value={formContatoState.email}
               onChange={handleChange}
               required
-              
+
             />
             <TextField
               fullWidth
@@ -88,8 +99,20 @@ const Contato: React.FC = () => {
             required
             margin="normal"
           />
-          <Box sx={{ display: "flex", justifyContent: "end", mt: 2 }}>
-            <Button type="submit" variant="contained" color="error" sx={{backgroundColor: colors.primary?.[500], fontWeight: "bold", padding: "12px 24px", border: `2px solid ${colors.blueAccent[600]}`}}>
+          <Box sx={{
+            display: "flex", justifyContent: "end", mt: 2, [theme.breakpoints.down("sm")]: {
+              justifyContent: "center"
+            },
+          }}>
+            <Button type="submit" variant="contained" color="error" sx={{
+              backgroundColor: colors.primary?.[500],
+              fontWeight: "bold",
+              padding: "12px 24px",
+              border: `2px solid ${colors.blueAccent[600]}`,
+              [theme.breakpoints.down("md")]: {
+                padding: "9px 19px",
+              },
+            }}>
               Enviar mensagem
             </Button>
           </Box>
