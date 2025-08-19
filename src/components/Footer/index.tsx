@@ -21,8 +21,16 @@ const Footer: React.FC = () => {
         <TextFooter />
       </Container>
 
-      <Box sx={{ bgcolor: colors.primary[500], py: 3, mt: 4 }}>
-        <Typography variant="body2" color="#fff" align="center" fontWeight="bold">
+      <Box sx={{
+        bgcolor: colors.primary[500], py: 3, mt: 4,
+
+      }}>
+        <Typography variant="body2" color="#fff" align="center" fontWeight="bold"
+          sx={{
+            [theme.breakpoints.down("md")]: {
+              margin:"20px"
+            },
+          }}>
           Copyright © 2024. Athletic Academy. Todos os direitos reservados
         </Typography>
       </Box>

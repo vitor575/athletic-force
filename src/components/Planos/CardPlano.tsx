@@ -45,6 +45,7 @@ const CardPlano = ({ plano, valor, page }: CardPlanoProps) => {
                 transition: "0.6s ease-in-out",
                 flexDirection: "column",
                 display: "flex",
+                cursor: "pointer",
                 justifyContent: "space-between",
                 flex: 1,
                 [theme.breakpoints.down("md")]: {

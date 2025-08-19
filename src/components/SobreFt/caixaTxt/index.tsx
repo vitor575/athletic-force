@@ -20,7 +20,10 @@ const CaixaTxt: React.FC = () => {
       fontSize: "1.9em",
     },
     [theme.breakpoints.down("md")]: {
-      fontSize: "1.4em",
+      fontSize: "1.9em",
+    },
+    [theme.breakpoints.down("sm")]: {
+      fontSize: "1.1em",
     },
 
   };
@@ -70,7 +73,10 @@ const CaixaTxt: React.FC = () => {
               fontSize: "2.6em",
             },
             [theme.breakpoints.down("md")]: {
-              fontSize: "1.6em",
+              fontSize: "2.8em",
+            },
+            [theme.breakpoints.down("sm")]: {
+              fontSize: "1.4em",
             },
 
 

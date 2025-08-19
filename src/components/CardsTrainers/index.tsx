@@ -1,4 +1,4 @@
-import { Box, Typography, Paper , useTheme} from "@mui/material";
+import { Box, Typography, Paper, useTheme } from "@mui/material";
 import IconContato from "../IconContato";
 import { tokens } from "../../tema";
 
@@ -19,6 +19,7 @@ const CardsTraineres = ({ imagem, titulo, descricao }: CardHomeProps) => {
         padding: "30px 5px",
         borderRadius: "20px",
         textAlign: "center",
+        cursor: "pointer",
         backgroundColor: "#fff",
         boxShadow: "0px 4px 60px rgba(177, 177, 177, 0.973)",
         transition: "box-shadow 0.4s ease",
@@ -27,6 +28,18 @@ const CardsTraineres = ({ imagem, titulo, descricao }: CardHomeProps) => {
           transform: "scale(1.02)",
           transition: "transform 600ms",
         },
+        [theme.breakpoints.down("md")]: {
+          width: "100%",
+          padding: "35px 0px",
+          margin: "40px 0"
+        },
+        [theme.breakpoints.down("sm")]: {
+          width: "88%",
+          padding: "35px 0px",
+          margin: "40px 0"
+        },
+      
+
       }}
     >
       <Box
@@ -37,6 +50,7 @@ const CardsTraineres = ({ imagem, titulo, descricao }: CardHomeProps) => {
           width: "80%",
           borderRadius: "20px",
           objectFit: "cover",
+
         }}
       />
       <Typography
@@ -44,12 +58,13 @@ const CardsTraineres = ({ imagem, titulo, descricao }: CardHomeProps) => {
         sx={{
           fontWeight: 600,
           fontSize: "1.9em",
-          color:colors.primary[600],
+          color: colors.primary[600],
+       
         }}
       >
         {titulo}
       </Typography>
-      <Typography sx={{ fontSize: "1.3em", color:colors.primary[500] }}>
+      <Typography sx={{ fontSize: "1.3em", color: colors.primary[500], }}>
         {descricao}
       </Typography>
       <Box>

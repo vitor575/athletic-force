@@ -23,6 +23,16 @@ const IconsFooter = () => {
       borderRadius: "50%",
       padding: 10,
     },
+    [theme.breakpoints.down("sm")]: {
+      width: 70,
+      height: 70,
+      fontSize: "3em",
+    },
+    [theme.breakpoints.down("md")]: {
+      width: 80,
+      height: 80,
+      fontSize: "3.7em",
+    },
   }));
 
   return (
@@ -38,9 +48,9 @@ const IconsFooter = () => {
         transition: "400ms",
       }}
     >
-      <Stack direction="row" spacing={10}>
+      <Stack direction="row" style={{ gap: 10 }}>
         <StyledIconButton>
-          <FaWhatsapp  />
+          <FaWhatsapp />
         </StyledIconButton>
         <StyledIconButton>
           <FaFacebook />

@@ -196,6 +196,10 @@ table {
   .css-linmts {
     margin: 10px 140px !important;
   }
+  .css-1vs4f6n-MuiStack-root>:not(style)~:not(style)
+ {
+    margin-top: 0px !important;
+}
 }
 @media (max-width: 490px) {
   .css-linmts {
