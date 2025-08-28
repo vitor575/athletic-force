@@ -9,8 +9,8 @@ import {
 } from "@mui/material";
 import { tokens } from "../../tema";
 import { useAuth } from "../../services/authentication/useAuth";
-import LoopIcon from "@mui/icons-material/Loop";
 import logo from "../../img/logo3.png";
+import { CircularProgress } from "@mui/material";
 import { keyframes } from "@mui/system";
 
 interface ModalLoginProps {
@@ -152,17 +152,22 @@ const ModalLogin: React.FC<ModalLoginProps> = ({ open, onClose }) => {
           onChange={(e) => setSenha(e.target.value)}
           required
         />
-        {loading && (
-          <LoopIcon
-            fontSize="large"
+        {loading ? (
+          <Button
+            type="submit"
+            variant="contained"
+            disabled
             sx={{
-              margin: "0 300px",
-              animation: `${spin} 2s linear infinite`,
-              color: "white",
+              mt: 4,
+              bgcolor: colors.blueAccent[500],
+              display: "flex",
+              justifyContent: "center",
+              alignItems: "center",
             }}
-          />
-        )}
-        {!loading && (
+          >
+            <CircularProgress size={24} sx={{ color: "white" }} />
+          </Button>
+        ) : (
           <Button
             type="submit"
             variant="contained"
@@ -171,6 +176,7 @@ const ModalLogin: React.FC<ModalLoginProps> = ({ open, onClose }) => {
             Entrar
           </Button>
         )}
+
       </Box>
     </Modal>
   );

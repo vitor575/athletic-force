@@ -1,9 +1,5 @@
 import Logo from "../../img/logo3.png";
 import { FaSignOutAlt } from "react-icons/fa";
-import CardCliente from "../../components/CardsCliente";
-import Calendario from "../../img/calendario.png";
-import Pagamento from "../../img/pagamento.png";
-import Configuracao from "../../img/configuracao.png";
 import { useNavigate } from "react-router-dom";
 import {
   Box,
@@ -16,6 +12,7 @@ import {
 import { tokens } from "../../tema";
 import { useClientData } from "../../services/querrys/useClientData";
 import Cookies from "js-cookie";
+import ListaClientes from "../../components/CardsCliente/ListaClientes";
 
 const ClientHome = () => {
   const navigate = useNavigate();
@@ -69,7 +66,18 @@ const ClientHome = () => {
         >
           <Box
             component="img"
-            sx={{ width: "80px", marginLeft: "60px" }}
+            sx={{
+              width: "80px",
+              marginLeft: "60px",
+              [theme.breakpoints.down("md")]: {
+                width: "70px",
+                marginLeft: "10px"
+              },
+              [theme.breakpoints.down("sm")]: {
+                width: "60px",
+                marginLeft: "0px"
+              },
+            }}
             border={`1px solid ${colors.blueAccent[500]}`}
             src={Logo}
             alt="Logo"
@@ -90,11 +98,21 @@ const ClientHome = () => {
             transition: "transform 0.2s ease, box-shadow 0.2s ease",
             position: "relative",
             color: colors.grey[900],
+            [theme.breakpoints.down("sm")]: {
+              width: "75%",
+              padding: "28px 5px",
+              borderRadius: "10px",
+            },
           }}
         >
           <Box fontWeight="bold">
-            <Typography variant="h3" component="h2" sx={{ fontSize: "1.6em" }}>
-              Seja bem-vindo, {client?.me?.name}
+            <Typography variant="h3" component="h2" sx={{
+              fontSize: "1.6em",
+              [theme.breakpoints.down("sm")]: {
+                fontSize: "1.1em",
+              },
+            }}>
+              Bem-vindo, {client?.me?.name}
             </Typography>
             <Button
               sx={{
@@ -112,6 +130,16 @@ const ClientHome = () => {
                 "&:hover": {
                   bgcolor: colors.blueAccent[400],
                   transform: "scale(0.9)",
+                },
+                [theme.breakpoints.down("md")]: {
+                  width: "100px",
+                  height: "47px",
+                  fontSize: "1.5rem",
+                },
+                [theme.breakpoints.down("sm")]: {
+                  width: "60px",
+                  height: "40px",
+                  fontSize: "1em",
                 },
               }}
               onClick={handleExit}
@@ -131,24 +159,19 @@ const ClientHome = () => {
           gap: "3rem",
           margin: "0rem 4rem",
           flexWrap: "wrap",
+          [theme.breakpoints.down("md")]: {
+            margin: "4rem 1rem",
+            gap: "2rem",
+          },
+          [theme.breakpoints.down("sm")]: {
+            margin: "4rem 1rem",
+            gap: "1rem",
+          },
+       
         }}
         className="cards-container"
       >
-        <CardCliente
-          titulo="Cronograma de treinos"
-          imagem={Calendario}
-          destino="/clientHome/cronograma/"
-        />
-        <CardCliente
-          titulo="Central de faturas"
-          imagem={Pagamento}
-          destino="/clientHome/pagamentos"
-        />
-        <CardCliente
-          titulo="Configuração da conta"
-          imagem={Configuracao}
-          destino="/clientHome/configuration"
-        />
+        <ListaClientes />
       </Box>
     </Box>
   );

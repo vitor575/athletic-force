@@ -12,8 +12,8 @@ interface CardProps {
 const cardStyle = { width: "180px", height: "auto" };
 
 const CardCliente = ({ titulo, imagem, destino }: CardProps) => {
-    const theme = useTheme();
-    const colors = tokens(theme.palette.mode);
+  const theme = useTheme();
+  const colors = tokens(theme.palette.mode);
 
   return (
     <Box
@@ -34,16 +34,29 @@ const CardCliente = ({ titulo, imagem, destino }: CardProps) => {
           transform: "scale(0.95)",
           boxShadow: `0 0px 36px ${colors.blueAccent[300]}`,
         },
+        [theme.breakpoints.down("md")]: {
+          width: "300px",
+          height: "400px",
+        },
+        [theme.breakpoints.down("sm")]: {
+          width: "290px",
+          height: "380px",
+        },
       }}
     >
       <Box>
         <Box component="img" sx={cardStyle} src={imagem} alt={titulo} />
       </Box>
       <Box textAlign="center">
-        <Typography color={colors.grey[900]} fontWeight="bold" variant="h5">
+        <Typography sx={{
+          color: colors.grey[900], fontSize: "1.5em",
+          [theme.breakpoints.down("sm")]: {
+            fontSize: "1.2em"
+          },
+        }} fontWeight="bold">
           {titulo}
         </Typography>
-      </Box>  
+      </Box>
       <Box>
         <Link
           style={{
