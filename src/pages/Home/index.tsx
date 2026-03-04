@@ -1,5 +1,5 @@
 
-import Banner from "../../components/banner";
+import Banner from "../../components/Banner";
 import SobreFT from "../../components/SobreFt";
 import Contato from "../../components/Contato";
 import Footer from "../../components/Footer";
