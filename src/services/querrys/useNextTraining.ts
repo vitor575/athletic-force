@@ -1,23 +1,31 @@
 import { gql, useQuery } from "@apollo/client";
 
 export const GET_MY_NEXT_TRAINING = gql`
-query getMyNextTraining {
-  getMyNextTraining {
-    training {
-      id
-      name
-      description
-      exercises {
+  query getMyNextTraining {
+    getMyNextTraining {
+      training {
         id
         name
-        muscleGroup
-        qtdSets
-        qtdReps
+        description
+        exercises {
+          id
+          name
+          muscleGroup
+          qtdSets
+          qtdReps
+          time
+        }
+      }
+      executionsHistory {
+        exerciseId
+        sets {
+          reps
+          weight
+        }
         time
       }
     }
   }
-}
 `;
 
 export const useNextTraining = () => {
@@ -27,9 +35,9 @@ export const useNextTraining = () => {
 
   return {
     nextTraining: data?.getMyNextTraining?.training,
+    executionsHistory: data?.getMyNextTraining?.executionsHistory,
     loading,
     error,
     refetch,
   };
 };
-
