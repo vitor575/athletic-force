@@ -13,7 +13,6 @@
     "@types/react-router-dom": "^5.3.3",
     "axios": "^1.7.9",
     "bootstrap": "^5.3.3",
-    "cra-template-typescript": "1.2.0",
     "formik": "^2.4.6",
     "framer-motion": "^12.5.0",
     "graphql": "^16.10.0",
@@ -39,8 +38,9 @@
   },
   "eslintConfig": {
     "extends": [
-      "react-app",
-      "react-app/jest"
+      "eslint:recommended",
+      "plugin:react/recommended",
+      "plugin:react-hooks/recommended"
     ]
   },
   "browserslist": {
