@@ -1,8 +1,8 @@
 
-import Banner from "../../components/Banner/index";
-import SobreFT from "../../components/SobreFt/index";
-import Contato from "../../components/Contato/index";
-import Footer from "../../components/Footer/index";
+import Banner from "../../components/Banner/";
+import SobreFT from "../../components/SobreFt/";
+import Contato from "../../components/Contato/";
+import Footer from "../../components/Footer/";
 import Navbar from "../../components/NavBar/NavBar";
 import Planos from "../../components/Planos/Planos";
 import ListaTrainers from "../../components/CardsTrainers/ListaTrainers";

@@ -1,50 +1,105 @@
-import React from "react";
+import React, { Suspense, lazy } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import Home from "./pages/Home";
-import ClientHome from "./pages/ClientHome/indes";
-import Pagamento from "./components/PagesAlunos/Pagamento/Pagamento";
-import CronogramaTreino from "./components/PagesAlunos/index";
-import Login from "./components/Login";
-import ConfigClientPage from "./components/PagesAlunos/ConfigClientPage";
 import ProtectedRoute from "./components/protectedRoute";
-import EmpregadoDashboard from "./pages/EmpregadoDashboard";
-import DashboardAdminRoutines from "./components/Dashboard/DashboardAdminRoutines";
-import DashboardAdmin from "./components/Dashboard/DashboardAdminUser";
-import DashboardAdminExercise from "./components/Dashboard/DashboardAdminExercise";
-import DashboardAdminTrainings from "./components/Dashboard/DashboardAdminTrainings";
-import SelectedStudent from "./components/Dashboard/DashboardStudent/SelectedStudent";
-import DashboardStudent from "./components/Dashboard/DashboardStudent";
+
+// Lazy loading components
+const Home = lazy(() => import("./pages/Home"));
+const ClientHome = lazy(() => import("./pages/ClientHome/indes"));
+const Pagamento = lazy(
+  () => import("./components/PagesAlunos/Pagamento/Pagamento"),
+);
+const CronogramaTreino = lazy(() => import("./components/PagesAlunos/index"));
+const Login = lazy(() => import("./components/Login"));
+const ConfigClientPage = lazy(
+  () => import("./components/PagesAlunos/ConfigClientPage"),
+);
+const EmpregadoDashboard = lazy(() => import("./pages/EmpregadoDashboard"));
+const DashboardAdminRoutines = lazy(
+  () => import("./components/Dashboard/DashboardAdminRoutines"),
+);
+const DashboardAdmin = lazy(
+  () => import("./components/Dashboard/DashboardAdminUser"),
+);
+const DashboardAdminExercise = lazy(
+  () => import("./components/Dashboard/DashboardAdminExercise"),
+);
+const DashboardAdminTrainings = lazy(
+  () => import("./components/Dashboard/DashboardAdminTrainings"),
+);
+const SelectedStudent = lazy(
+  () => import("./components/Dashboard/DashboardStudent/SelectedStudent"),
+);
+const DashboardStudent = lazy(
+  () => import("./components/Dashboard/DashboardStudent"),
+);
+
+const LoadingFallback = () => (
+  <div
+    style={{
+      display: "flex",
+      justifyContent: "center",
+      alignItems: "center",
+      height: "100vh",
+      fontSize: "1.2rem",
+      color: "#666",
+    }}
+  >
+    Carregando...
+  </div>
+);
 
 const App: React.FC = () => {
   return (
     <div className="App">
       <Router>
         <main>
-          <Routes>
-            {/* Rotas públicas */}
-            <Route path="/" element={<Home />} />
-            <Route path="/login" element={<Login />} />
+          <Suspense fallback={<LoadingFallback />}>
+            <Routes>
+              {/* Rotas públicas */}
+              <Route path="/" element={<Home />} />
+              <Route path="/login" element={<Login />} />
 
-            {/* Rotas protegidas */}
-            <Route element={<ProtectedRoute redirectPath="/" />}>
+              {/* Rotas protegidas */}
+              <Route element={<ProtectedRoute redirectPath="/" />}>
+                {/* Área do cliente */}
+                <Route path="/clientHome" element={<ClientHome />} />
+                <Route path="/clientHome/pagamentos" element={<Pagamento />} />
+                <Route
+                  path="/clientHome/configuration"
+                  element={<ConfigClientPage />}
+                />
+                <Route
+                  path="/clientHome/cronograma"
+                  element={<CronogramaTreino />}
+                />
 
-              {/* Área do cliente */}
-              <Route path="/clientHome" element={<ClientHome />} />
-              <Route path="/clientHome/pagamentos" element={<Pagamento />} />
-              <Route path="/clientHome/configuration" element={<ConfigClientPage />} />
-              <Route path="/clientHome/cronograma" element={<CronogramaTreino />} />
-
-              {/* Área do funcionário/admin */}
-              <Route path="/EmpregadoDashboard" element={<EmpregadoDashboard />}>
-                <Route index element={<DashboardStudent />} />
-                <Route path="DashboardAdminUser" element={<DashboardAdmin />} />
-                <Route path="treinos/:id" element={<SelectedStudent />} />
-                <Route path="DashboardAdminExercise" element={<DashboardAdminExercise />} />
-                <Route path="DashboardAdminTrainings" element={<DashboardAdminTrainings />} />
-                <Route path="DashboardAdminRoutines" element={<DashboardAdminRoutines />} />
+                {/* Área do funcionário/admin */}
+                <Route
+                  path="/EmpregadoDashboard"
+                  element={<EmpregadoDashboard />}
+                >
+                  <Route index element={<DashboardStudent />} />
+                  <Route
+                    path="DashboardAdminUser"
+                    element={<DashboardAdmin />}
+                  />
+                  <Route path="treinos/:id" element={<SelectedStudent />} />
+                  <Route
+                    path="DashboardAdminExercise"
+                    element={<DashboardAdminExercise />}
+                  />
+                  <Route
+                    path="DashboardAdminTrainings"
+                    element={<DashboardAdminTrainings />}
+                  />
+                  <Route
+                    path="DashboardAdminRoutines"
+                    element={<DashboardAdminRoutines />}
+                  />
+                </Route>
               </Route>
-            </Route>
-          </Routes>
+            </Routes>
+          </Suspense>
         </main>
       </Router>
     </div>
