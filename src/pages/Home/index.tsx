@@ -1,4 +1,3 @@
-
 import Banner from "../../components/Banner/";
 import SobreFT from "../../components/SobreFt/";
 import Contato from "../../components/Contato/";
