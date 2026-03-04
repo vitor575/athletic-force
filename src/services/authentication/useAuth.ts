@@ -10,25 +10,37 @@ export const useAuth = () => {
   const navigate = useNavigate();
 
   const authenticate = async (email: string, senha: string) => {
+    setLoginError("");
     if (!email || !senha) {
       setLoginError("Email e senha são obrigatórios.");
       return;
     }
     try {
-      Cookies.remove('token');
+      Cookies.remove("token");
       await login(email, senha);
       const { data } = await refetch();
       if (data && data.me) {
         const user = data.me;
-        if (user.role === 'Employee' || user.role === 'Professor' || user.role === 'Admin') {
-          navigate('/EmpregadoDashboard');
-        } else if (user.role === 'Student') {
+        if (
+          user.role === "Employee" ||
+          user.role === "Professor" ||
+          user.role === "Admin"
+        ) {
+          navigate("/EmpregadoDashboard");
+        } else if (user.role === "Student") {
           navigate("/clientHome");
         }
+      } else {
+        setLoginError("Falha ao obter dados do usuário.");
       }
     } catch (e: any) {
       console.error(e);
-      setLoginError("Erro ao efetuar o login. Verifique suas credenciais.");
+      if (e.response && e.response.status === 401) {
+        setLoginError("Email ou senha inválidos.");
+      } else {
+        setLoginError("Erro ao efetuar o login. Tente novamente mais tarde.");
+      }
+      throw e; // Re-throw to let the caller (ModalLogin) know it failed
     }
   };
 
