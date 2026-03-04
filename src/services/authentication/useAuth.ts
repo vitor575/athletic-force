@@ -40,7 +40,7 @@ export const useAuth = () => {
       } else {
         setLoginError("Erro ao efetuar o login. Tente novamente mais tarde.");
       }
-      throw e; // Re-throw to let the caller (ModalLogin) know it failed
+      throw e;
     }
   };
 
