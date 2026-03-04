@@ -1,8 +1,7 @@
 import React, { useState } from "react";
-import { ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
+import { Sidebar as ProSidebar, Menu, MenuItem } from "react-pro-sidebar";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { Link } from "react-router-dom";
-import "react-pro-sidebar/dist/css/styles.css";
 import { tokens } from "../../../tema";
 import PeopleOutlinedIcon from "@mui/icons-material/PeopleOutlined";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
@@ -31,9 +30,9 @@ const Item = ({ title, to, icon, selected, setSelected }: ItemProps) => {
         setSelected(title);
       }}
       icon={icon}
+      component={<Link to={to} />}
     >
       <Typography>{title}</Typography>
-      <Link to={to} />
     </MenuItem>
   );
 };
@@ -47,26 +46,30 @@ const Sidebar = () => {
   return (
     <Box
       sx={{
-        height: "100%",
-        "& .pro-sidebar-inner": {
-          background: `${colors.primary[400]} !important`,
+        display: "flex",
+        height: "100vh",
+        "& .ps-sidebar-container": {
+          backgroundColor: `${colors.primary[400]} !important`,
         },
-        "& .pro-icon-wrapper": {
+        "& .ps-menu-button": {
+          padding: "5px 35px 5px 20px !important",
           backgroundColor: "transparent !important",
         },
-        "& .pro-inner-item": {
-          padding: "5px 35px 5px 20px !important",
-        },
-        "& .pro-inner-item:hover": {
+        "& .ps-menu-button:hover": {
           color: "#868dfb !important",
+          backgroundColor: "transparent !important",
         },
-        "& .pro-menu-item.active": {
+        "& .ps-menu-item.ps-active .ps-menu-button": {
           color: "#6870fa !important",
         },
       }}
     >
-      <ProSidebar collapsed={collapsed}>
-        <Menu iconShape="square">
+      <ProSidebar
+        collapsed={collapsed}
+        backgroundColor={colors.primary[400]}
+        style={{ border: "none" }}
+      >
+        <Menu>
           <MenuItem
             onClick={() => setCollapsed(!collapsed)}
             icon={collapsed ? <MenuOutlinedIcon /> : undefined}
@@ -105,7 +108,7 @@ const Sidebar = () => {
                   height="100px"
                   src={`https://github.com/MaxMLira.png`}
                   style={{ cursor: "pointer", borderRadius: "50%" }}
-                />  
+                />
               </Box>
               <Box textAlign="center">
                 <Typography
