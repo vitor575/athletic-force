@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from "react";
 import {
   Backdrop,
@@ -16,7 +15,6 @@ import { tokens } from "../../../../tema";
 import { FaDumbbell, FaClock, FaCalendarAlt } from "react-icons/fa";
 import img from "../../../../img/supino.jpg";
 import TrainingSessionPage from "./TrainingSessionPage/TrainingSessionPage";
-
 
 interface TrainingDetails {
   id: string;
@@ -59,15 +57,6 @@ const Treinos: React.FC<TreinosProps> = ({ onSessionStateChange }) => {
   const muscleGroups = new Set(
     nextTraining?.exercises?.map((ex: any) => ex.muscleGroup),
   );
-
-  useEffect(() => {
-    console.log("Treinos - Estado do useNextTraining:", {
-      nextTraining,
-      loading,
-      error,
-    });
-
-  }, [nextTraining, loading, error]);
 
   useEffect(() => {
     onSessionStateChange?.(isTrainingActive);
