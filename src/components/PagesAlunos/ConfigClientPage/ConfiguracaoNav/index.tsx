@@ -8,7 +8,7 @@ import {
   Paper,
   Box,
   IconButton,
-  Typography
+  Typography,
 } from "@mui/material";
 import { Link } from "react-router-dom";
 import { tokens } from "../../../../tema";
@@ -35,7 +35,7 @@ const ConfiguracaoNav = ({
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [selected, setSelected] = useState("perfil");
-  
+
   const buttonStyle = {
     display: "flex",
     justifyContent: isCollapsed ? "center" : "flex-start",
@@ -45,7 +45,7 @@ const ConfiguracaoNav = ({
     textAlign: "left",
   };
   const { client } = useClientPerfil();
-  
+
   const renderItem = (key: string, icon: React.ReactNode, label: string) => (
     <ListItem disablePadding sx={{ width: "100%" }} key={key}>
       <ListItemButton
@@ -56,7 +56,8 @@ const ConfiguracaoNav = ({
         }}
         sx={{
           ...buttonStyle,
-          backgroundColor: selected === key ? colors.primary[600] : "transparent",
+          backgroundColor:
+            selected === key ? colors.primary[600] : "transparent",
           "&:hover": {
             backgroundColor: colors.primary[500],
           },
@@ -111,16 +112,24 @@ const ConfiguracaoNav = ({
             alignItems: "center",
           }}
         >
-
           {!isCollapsed && (
             <Box mb="25px" textAlign="center">
-              <Box display="flex" justifyContent="center" alignItems="center" mb={1}>
+              <Box
+                display="flex"
+                justifyContent="center"
+                alignItems="center"
+                mb={1}
+              >
                 <img
                   alt="profile-user"
                   width="150px"
                   height="150px"
                   src={alunoProfileImage}
-                  style={{ cursor: "pointer", borderRadius: "50%", objectFit: "cover" }}
+                  style={{
+                    cursor: "pointer",
+                    borderRadius: "50%",
+                    objectFit: "cover",
+                  }}
                 />
               </Box>
               <Typography sx={{ color: colors.greenAccent[500] }}>
@@ -137,7 +146,11 @@ const ConfiguracaoNav = ({
           )}
 
           {renderItem("perfil", <FaUserCog size={20} />, "Perfil")}
-          {renderItem("trocarSenha", <RiLockPasswordFill size={20} />, "Trocar Senha")}
+          {renderItem(
+            "trocarSenha",
+            <RiLockPasswordFill size={20} />,
+            "Trocar Senha",
+          )}
           {renderItem("verPlano", <GrDocumentUser size={20} />, "Ver Plano")}
         </List>
       </Box>
@@ -146,14 +159,14 @@ const ConfiguracaoNav = ({
         <ListItem disablePadding>
           <ListItemButton
             component={Link}
-            to="/clientHome"
+            to="/clientHome/cronograma"
             sx={{
               borderRadius: 2,
               display: "flex",
               justifyContent: "center",
               color: "#fff",
               alignItems: "center",
-              height: "70px"
+              height: "70px",
             }}
           >
             <FaSignOutAlt style={{ marginRight: isCollapsed ? 0 : 8 }} />

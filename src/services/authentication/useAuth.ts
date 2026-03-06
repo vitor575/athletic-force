@@ -28,7 +28,7 @@ export const useAuth = () => {
         ) {
           navigate("/EmpregadoDashboard");
         } else if (user.role === "Student") {
-          navigate("/clientHome");
+          navigate("/clientHome/cronograma");
         }
       } else {
         setLoginError("Falha ao obter dados do usuário.");

@@ -85,7 +85,7 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
   const navigate = useNavigate();
 
   const handleExit = () => {
-    navigate("/clientHome");
+    navigate("/clientHome/cronograma");
   };
 
   useEffect(() => {
@@ -254,10 +254,11 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
       onSubmit={handleSubmit}
       sx={{
         bgcolor: colors.primary[500],
-        height: "100vh", 
+        height: "100vh",
+        width: "70vw",
         display: "flex",
         flexDirection: "column",
-        overflow: "hidden", 
+        overflow: "hidden",
       }}
     >
       <Box
@@ -266,7 +267,7 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
           px: 1,
           display: "flex",
           flexDirection: "column",
-          overflow: "hidden", 
+          overflow: "hidden",
         }}
       >
         <Paper
@@ -279,7 +280,7 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
             p: 1.5,
             display: "flex",
             flexDirection: "column",
-            overflow: "hidden", 
+            overflow: "hidden",
             mb: 0.5,
           }}
         >

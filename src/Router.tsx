@@ -1,13 +1,13 @@
 import React, { Suspense, lazy } from "react";
-import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
+import {
+  BrowserRouter as Router,
+  Routes,
+  Route,
+  Navigate,
+} from "react-router-dom";
 import ProtectedRoute from "./components/protectedRoute";
 
-// Lazy loading components
 const Home = lazy(() => import("./pages/Home"));
-const ClientHome = lazy(() => import("./pages/ClientHome/indes"));
-const Pagamento = lazy(
-  () => import("./components/PagesAlunos/Pagamento/Pagamento"),
-);
 const CronogramaTreino = lazy(() => import("./components/PagesAlunos/index"));
 const Login = lazy(() => import("./components/Login"));
 const ConfigClientPage = lazy(
@@ -62,8 +62,10 @@ const App: React.FC = () => {
               {/* Rotas protegidas */}
               <Route element={<ProtectedRoute redirectPath="/" />}>
                 {/* Área do cliente */}
-                <Route path="/clientHome" element={<ClientHome />} />
-                <Route path="/clientHome/pagamentos" element={<Pagamento />} />
+                <Route
+                  path="/clientHome"
+                  element={<Navigate to="/clientHome/cronograma" replace />}
+                />
                 <Route
                   path="/clientHome/configuration"
                   element={<ConfigClientPage />}

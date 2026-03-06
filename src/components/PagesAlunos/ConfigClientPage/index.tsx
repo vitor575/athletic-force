@@ -3,7 +3,6 @@ import { useState } from "react";
 import ConfiguracaoNav from "./ConfiguracaoNav";
 import PerfilContent from "./PerfilAluno/PerfilAluno";
 import TrocarSenhaContent from "./TrocarSenha/TrocarSenha";
-import VerPlanoContent from "./PagePlano/PagePlano";
 import { tokens } from "../../../tema";
 import DashTopbar from "../../Dashboard/DashTopbar";
 
@@ -19,8 +18,6 @@ const ConfigClientPage = () => {
         return <PerfilContent />;
       case "trocarSenha":
         return <TrocarSenhaContent />;
-      case "verPlano":
-        return <VerPlanoContent />;
       default:
         return <PerfilContent />;
     }

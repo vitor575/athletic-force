@@ -11,7 +11,7 @@ import {
   useTheme,
   Drawer,
 } from "@mui/material";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import {
   FaDumbbell,
   FaCalendarAlt,
@@ -20,6 +20,8 @@ import {
 } from "react-icons/fa";
 import { useClientPerfil } from "../../../../services/querrys/useClientPerfil";
 import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
+import SettingsIcon from "@mui/icons-material/Settings";
+import Cookies from "js-cookie";
 import { tokens } from "../../../../tema";
 import Logo from "../../../../img/logo3.png";
 
@@ -45,7 +47,13 @@ const TreinoNav = ({
   const [time, setTime] = useState(0);
   const intervalRef = useRef<any>(null);
   const { client } = useClientPerfil();
-  const alunoProfileImage = "https://github.com/MaxMLira.png"; // Exemplo de URL de imagem de perfil
+  const navigate = useNavigate();
+  const alunoProfileImage = "https://github.com/MaxMLira.png";
+
+  const handleLogout = () => {
+    Cookies.remove("token");
+    navigate("/");
+  };
 
   const startTraining = () => {
     if (!intervalRef.current) {
@@ -175,6 +183,11 @@ const TreinoNav = ({
         >
           {renderItem("treinos", <FaDumbbell size={18} />, "Treinos")}
           {renderItem("calendario", <FaCalendarAlt size={18} />, "Calendário")}
+          {renderItem(
+            "configuracoes",
+            <SettingsIcon sx={{ fontSize: 18 }} />,
+            "Configurações",
+          )}
 
           <ListItem disablePadding>
             <ListItemButton
@@ -278,8 +291,7 @@ const TreinoNav = ({
 
           {!isCollapsed && (
             <IconButton
-              component={Link}
-              to="/clientHome"
+              onClick={handleLogout}
               sx={{
                 color: colors.blueAccent[200],
                 "&:hover": { color: colors.redAccent[400] },
