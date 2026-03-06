@@ -1,5 +1,3 @@
-// src/components/Treinos/TrainingSessionPage/TrainingSessionPage.tsx
-
 import React, { useState, useEffect } from "react";
 import {
   Box,
@@ -10,20 +8,20 @@ import {
   useTheme,
   Alert,
   IconButton,
+  Paper,
 } from "@mui/material";
-import { DataGrid, GridColDef, GridRenderCellParams } from "@mui/x-data-grid";
 import CheckCircleOutlineIcon from "@mui/icons-material/CheckCircleOutline";
 import RadioButtonUncheckedIcon from "@mui/icons-material/RadioButtonUnchecked";
 import AddIcon from "@mui/icons-material/Add";
 import DeleteIcon from "@mui/icons-material/Delete";
+import ArrowBackIcon from "@mui/icons-material/ArrowBack";
 
-import { tokens } from "../../../../../tema";
 import { FINISH_TRAINING } from "../../../../../services/mutations/finishTraining";
-import { GET_MY_NEXT_TRAINING } from "../../../../../services/querrys/useNextTraining"; // Importe a query
+import { GET_MY_NEXT_TRAINING } from "../../../../../services/querrys/useNextTraining";
 import { useMutation } from "@apollo/client";
 import { useNavigate } from "react-router-dom";
+import { tokens } from "../../../../../tema";
 
-// Interfaces (mantidas as suas)
 interface Exercise {
   id: string;
   name: string;
@@ -74,7 +72,6 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
   const [finishTraining, { loading }] = useMutation(FINISH_TRAINING);
-
   const [exerciseSeriesData, setExerciseSeriesData] =
     useState<ExerciseSeriesData>({});
   const [cardioTimes, setCardioTimes] = useState<{
@@ -161,15 +158,7 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
   const handleRemoveSerie = (exerciseId: string, serieIndex: number) => {
     setExerciseSeriesData((prevData) => {
       const series = prevData[exerciseId] || [];
-      if (series.length <= 1) {
-        setSubmitMessage({
-          type: "error",
-          text: "Cada exercício deve ter pelo menos uma série.",
-        });
-        setTimeout(() => setSubmitMessage(null), 3000);
-        return prevData;
-      }
-
+      if (series.length <= 1) return prevData;
       return {
         ...prevData,
         [exerciseId]: series.filter((_, index) => index !== serieIndex),
@@ -182,66 +171,21 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
     if (
       exercise.time > 0 &&
       (cardioTimes[exercise.id] === null || isNaN(cardioTimes[exercise.id]!))
-    ) {
+    )
       return false;
-    }
     const seriesData = exerciseSeriesData[exercise.id];
     if (!seriesData) return false;
-    for (const serie of seriesData) {
-      if (
-        serie.peso === null ||
-        isNaN(serie.peso) ||
-        serie.repeticoes === null ||
-        isNaN(serie.repeticoes)
-      ) {
-        return false;
-      }
-    }
-    return true;
-  };
-
-  const validateForm = (): boolean => {
-    for (const exercise of trainingData.exercises) {
-      if (
-        exercise.time > 0 &&
-        (cardioTimes[exercise.id] === null || isNaN(cardioTimes[exercise.id]!))
-      ) {
-        setSubmitMessage({
-          type: "error",
-          text: `Por favor, preencha o tempo de cardio para: ${exercise.name}.`,
-        });
-        return false;
-      }
-      const seriesData = exerciseSeriesData[exercise.id];
-      if (!seriesData) {
-        setSubmitMessage({
-          type: "error",
-          text: `Dados não encontrados para o exercício: ${exercise.name}.`,
-        });
-        return false;
-      }
-      for (const serie of seriesData) {
-        if (
-          serie.peso === null ||
-          isNaN(serie.peso) ||
-          serie.repeticoes === null ||
-          isNaN(serie.repeticoes)
-        ) {
-          setSubmitMessage({
-            type: "error",
-            text: `Por favor, preencha todos os campos no exercício: ${exercise.name}.`,
-          });
-          return false;
-        }
-      }
-    }
-    return true;
+    return seriesData.every(
+      (s) =>
+        s.peso !== null &&
+        !isNaN(s.peso) &&
+        s.repeticoes !== null &&
+        !isNaN(s.repeticoes),
+    );
   };
 
   const handlePrevious = () => {
-    if (currentExerciseIndex > 0) {
-      setCurrentExerciseIndex((prev) => prev - 1);
-    }
+    if (currentExerciseIndex > 0) setCurrentExerciseIndex((prev) => prev - 1);
   };
 
   const handleNext = () => {
@@ -258,12 +202,8 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
     }
   };
 
-  const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    if (!validateForm()) {
-      return;
-    }
-
+  const handleSubmit = async (event?: React.SyntheticEvent) => {
+    if (event) event.preventDefault();
     setSubmitMessage(null);
 
     const dataToSubmit = {
@@ -279,39 +219,21 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
       })),
     };
 
-    console.log("📤 Enviando para a mutation finishTraining:", dataToSubmit);
-
     try {
       const result = await finishTraining({
         variables: { trainingFinished: dataToSubmit },
-        refetchQueries: [
-          { query: GET_MY_NEXT_TRAINING }, // Usar o objeto da query para refetch
-        ],
+        refetchQueries: [{ query: GET_MY_NEXT_TRAINING }],
       });
 
       if (result.data) {
-        console.log("✅ Treino finalizado com sucesso:", result.data);
         setSubmitMessage({
           type: "success",
           text: "Treino finalizado com sucesso!",
         });
         onTrainingFinished();
-      } else {
-        console.error(
-          "❌ A API retornou um erro. Verifique a aba 'Network' no dev tools.",
-          result,
-        );
-        setSubmitMessage({
-          type: "error",
-          text: "Ocorreu um erro no servidor ao salvar o treino.",
-        });
       }
-    } catch (networkError) {
-      console.error("❌ Erro de rede ou outro erro crítico:", networkError);
-      setSubmitMessage({
-        type: "error",
-        text: "Erro de comunicação com o servidor. Tente novamente.",
-      });
+    } catch (e) {
+      setSubmitMessage({ type: "error", text: "Erro ao salvar o treino." });
     }
   };
 
@@ -326,345 +248,461 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
     return `${set.weight}kg x ${set.reps}`;
   };
 
-  const columns: GridColDef[] = [
-    {
-      field: "serie",
-      headerName: "Série",
-      width: 70,
-      flex: 0.4,
-      sortable: false,
-      align: "center",
-      headerAlign: "center",
-      renderCell: (params: GridRenderCellParams) =>
-        params.row.isAddButtonRow ? null : (
-          <Typography sx={{ color: colors.grey[900], fontWeight: "bold" }}>
-            {params.row.id + 1}ª
-          </Typography>
-        ),
-    },
-    {
-      field: "anterior",
-      headerName: "Anterior",
-      width: 100,
-      flex: 0.6,
-      sortable: false,
-      renderCell: (params: GridRenderCellParams) =>
-        params.row.isAddButtonRow ? null : (
-          <Typography
-            sx={{
-              color: colors.blueAccent[500],
-              fontWeight: "500",
-              fontSize: "0.9rem",
-            }}
-          >
-            {getPreviousSetInfo(exercise.id, params.row.id)}
-          </Typography>
-        ),
-    },
-    {
-      field: "repeticoes",
-      headerName: "Repetições",
-      width: 290,
-      flex: 1,
-      sortable: false,
-      renderCell: (params: GridRenderCellParams) =>
-        params.row.isAddButtonRow ? null : (
-          <TextField
-            fullWidth
-            type="number"
-            size="small"
-            value={params.value ?? ""}
-            onChange={(e) =>
-              handleSeriesInputChange(
-                exercise.id,
-                params.row.id,
-                "repeticoes",
-                e.target.value,
-              )
-            }
-            sx={{
-              "& .MuiInputBase-input": {
-                color: colors.grey[100],
-                bgcolor: colors.grey[900],
-                borderRadius: 1.5,
-              },
-            }}
-          />
-        ),
-    },
-    {
-      field: "peso",
-      headerName: "Peso (kg)",
-      width: 290,
-      flex: 1,
-      sortable: false,
-      renderCell: (params: GridRenderCellParams) =>
-        params.row.isAddButtonRow ? null : (
-          <TextField
-            fullWidth
-            type="number"
-            size="small"
-            value={params.value ?? ""}
-            onChange={(e) =>
-              handleSeriesInputChange(
-                exercise.id,
-                params.row.id,
-                "peso",
-                e.target.value,
-              )
-            }
-            sx={{
-              "& .MuiInputBase-input": {
-                color: colors.grey[100],
-                bgcolor: colors.grey[900],
-                borderRadius: 1.5,
-              },
-            }}
-          />
-        ),
-    },
-    {
-      field: "status",
-      headerName: "Status",
-      width: 100,
-      flex: 0.5,
-      sortable: false,
-      align: "center",
-      headerAlign: "center",
-      renderCell: (params: GridRenderCellParams) =>
-        params.row.isAddButtonRow ? null : (
-          <IconButton
-            onClick={() =>
-              handleToggleSerieCompleted(exercise.id, params.row.id)
-            }
-          >
-            {params.row.completed ? (
-              <CheckCircleOutlineIcon sx={{ color: colors.greenAccent[500] }} />
-            ) : (
-              <RadioButtonUncheckedIcon sx={{ color: colors.grey[900] }} />
-            )}
-          </IconButton>
-        ),
-    },
-    {
-      field: "actions",
-      headerName: "Ações",
-      width: 100,
-      flex: 0.5,
-      sortable: false,
-      align: "center",
-      headerAlign: "center",
-      renderCell: (params: GridRenderCellParams) => {
-        if (params.row.isAddButtonRow) {
-          return (
-            <IconButton
-              aria-label="adicionar série"
-              onClick={() => handleAddSerie(exercise.id)}
-              sx={{
-                bgcolor: colors.greenAccent[500],
-                color: colors.grey[900],
-                "&:hover": { bgcolor: colors.greenAccent[400] },
-                width: 27,
-                height: 27,
-              }}
-            >
-              <AddIcon fontSize="small" />
-            </IconButton>
-          );
-        } else {
-          return (
-            <IconButton
-              onClick={() => handleRemoveSerie(exercise.id, params.row.id)}
-              size="small"
-            >
-              <DeleteIcon sx={{ color: colors.blueAccent[500] }} />
-            </IconButton>
-          );
-        }
-      },
-    },
-  ];
-
-  const paginationModel = { page: 0, pageSize: 6 };
-  const rows = [
-    ...series.map((serie, index) => ({
-      id: index,
-      peso: serie.peso,
-      repeticoes: serie.repeticoes,
-      completed: serie.completed,
-      isAddButtonRow: false,
-    })),
-    { id: series.length, isAddButtonRow: true },
-  ];
-
   return (
     <Box
       component="form"
       onSubmit={handleSubmit}
-      sx={{ px: 1.5, color: colors.grey[900], bgcolor: colors.primary[500] }}
+      sx={{
+        bgcolor: colors.primary[500],
+        height: "100vh", 
+        display: "flex",
+        flexDirection: "column",
+        overflow: "hidden", 
+      }}
     >
-      {submitMessage && (
-        <Alert severity={submitMessage.type} sx={{ mb: 1, width: "97%" }}>
-          {submitMessage.text}
-        </Alert>
-      )}
       <Box
-        key={exercise.id}
-        sx={{ width: "97%", bgcolor: colors.primary[500] }}
+        sx={{
+          flex: 1,
+          px: 1,
+          display: "flex",
+          flexDirection: "column",
+          overflow: "hidden", 
+        }}
       >
-        <Box
+        <Paper
+          elevation={0}
           sx={{
+            flex: 1,
+            bgcolor: colors.primary[500],
+            borderRadius: "16px",
+            border: `2px solid ${colors.blueAccent[300]}`,
+            p: 1.5,
             display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            my: 2,
+            flexDirection: "column",
+            overflow: "hidden", 
+            mb: 0.5,
           }}
         >
-          <Typography variant="h5" sx={{ color: colors.grey[900] }}>
-            {exercise.name} - ({exercise.muscleGroup})
-          </Typography>
-          <Button
-            variant="contained"
-            size="medium"
-            sx={{ bgcolor: colors.blueAccent[400] }}
-          >
-            Ver Imagem
-          </Button>
-        </Box>
-        {exercise.time > 0 && (
-          <Box sx={{ mb: 2, display: "flex", alignItems: "center", gap: 2 }}>
-            <Typography sx={{ color: colors.grey[900], fontWeight: "bold" }}>
-              Tempo de Cardio (min):
-            </Typography>
-            <TextField
-              type="number"
-              size="small"
-              value={cardioTimes[exercise.id] ?? ""}
-              onChange={(e) =>
-                handleCardioTimeChange(exercise.id, e.target.value)
-              }
-              sx={{
-                width: 100,
-                "& .MuiInputBase-input": {
-                  color: colors.grey[100],
-                  bgcolor: colors.grey[900],
-                  borderRadius: 1.5,
-                },
-              }}
-            />
-          </Box>
-        )}
-        <Box
-          sx={{
-            height: "auto",
-            width: "100%",
-            mt: 2,
-            bgcolor: colors.primary[600],
-            "& .MuiDataGrid-columnHeader": {
-              backgroundColor: colors.blueAccent[300],
-            },
-            "& .MuiDataGrid-columnHeaderTitle": {
-              color: colors.grey[900],
-              fontWeight: "bold",
-              fontSize: "0.9rem",
-            },
-            "& .MuiDataGrid-footerContainer": {
-              borderTop: "none",
-              backgroundColor: colors.blueAccent[300],
-              color: colors.grey[900],
-              fontWeight: "bold",
-            },
-            "& .MuiTablePagination-root": {
-              color: colors.grey[900],
-              fontWeight: "bold",
-            },
-          }}
-        >
-          <DataGrid
-            rows={rows}
-            columns={columns}
-            initialState={{ pagination: { paginationModel } }}
-            pageSizeOptions={[6, 10]}
-            rowHeight={48}
-            sx={{
-              width: "100%",
-              color: colors.grey[100],
-              "& .MuiDataGrid-cell": {
-                borderBottom: `1px solid ${colors.grey[700]}`,
-                display: "flex",
-                alignItems: "center",
-              },
-              "& .MuiDataGrid-columnHeaderText": {
-                color: colors.grey[900],
-              },
-            }}
-          />
-        </Box>
-        <Box
-          sx={{
-            display: "flex",
-            justifyContent: "space-between",
-            alignItems: "center",
-            mt: 2,
-            gap: 4,
-          }}
-        >
-          <Box>
-            <Button color="error" variant="contained" onClick={handleExit}>
-              Cancelar
-            </Button>
-          </Box>
-          <Box sx={{ display: "flex", gap: 4 }}>
+          <Box sx={{ mb: 1, flexShrink: 0 }}>
+            <Box sx={{ display: "flex", alignItems: "center", mb: 0.5 }}>
+              <IconButton
+                onClick={onTrainingFinished}
+                size="small"
+                sx={{
+                  color: colors.primary[900],
+                  bgcolor: colors.primary[600],
+                  borderRadius: "8px",
+                  p: 0.6,
+                  mr: 1,
+                  "&:hover": { bgcolor: colors.primary[400], color: "#fff" },
+                }}
+              >
+                <ArrowBackIcon sx={{ fontSize: 18 }} />
+              </IconButton>
+
+              <Box sx={{ flex: 1, textAlign: "center" }}>
+                <Typography
+                  variant="caption"
+                  sx={{
+                    color: colors.blueAccent[300],
+                    fontWeight: "900",
+                    fontSize: "0.7rem",
+                    textTransform: "uppercase",
+                    letterSpacing: 1.2,
+                  }}
+                >
+                  {exercise.muscleGroup}
+                </Typography>
+                <Typography
+                  variant="h5"
+                  sx={{
+                    fontWeight: "900",
+                    color: "#fff",
+                    textTransform: "uppercase",
+                    letterSpacing: 1,
+                    mb: 0.2,
+                  }}
+                >
+                  {exercise.name}
+                </Typography>
+              </Box>
+
+              <Box sx={{ width: 34 }} />
+            </Box>
+
             <Box
-              display="flex"
-              justifyContent="flex-end"
-              alignItems="center"
-              gap={2}
+              sx={{
+                mt: 0.5,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                gap: 0,
+              }}
             >
-              {currentExerciseIndex > 0 && (
-                <Button
-                  type="button"
-                  variant="contained"
-                  onClick={handlePrevious}
-                  sx={{
-                    bgcolor: colors.blueAccent[400],
-                    ":hover": { bgcolor: colors.blueAccent[500] },
-                  }}
+              <Typography
+                variant="caption"
+                sx={{
+                  color: colors.primary[900],
+                  fontWeight: "900",
+                  fontSize: "0.6rem",
+                  textTransform: "uppercase",
+                }}
+              >
+                Tempo de Descanso
+              </Typography>
+              <Box
+                sx={{
+                  bgcolor: colors.primary[600],
+                  px: 2.5,
+                  py: 0.6,
+                  borderRadius: "12px",
+                  border: `2px solid ${colors.blueAccent[600]}`,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1.5,
+                  cursor: "pointer",
+                }}
+              >
+                <Typography
+                  variant="body1"
+                  sx={{ fontWeight: "900", color: "#fff" }}
                 >
-                  Exercício Anterior
-                </Button>
-              )}
-              {currentExerciseIndex < totalExercises - 1 ? (
-                <Button
-                  type="button"
-                  variant="contained"
-                  onClick={handleNext}
-                  sx={{
-                    bgcolor: colors.blueAccent[400],
-                    ":hover": { bgcolor: colors.blueAccent[500] },
-                  }}
+                  3:00
+                </Typography>
+                <Box
+                  component="span"
+                  sx={{ fontSize: "0.7rem", color: colors.blueAccent[300] }}
                 >
-                  Próximo Exercício
-                </Button>
-              ) : (
-                <Button
-                  type="submit"
-                  variant="contained"
-                  disabled={loading}
-                  sx={{
-                    bgcolor: colors.greenAccent[500],
-                    ":hover": { bgcolor: colors.greenAccent[700] },
-                  }}
-                >
-                  {loading ? (
-                    <CircularProgress size={24} sx={{ color: "#fff" }} />
-                  ) : (
-                    "Finalizar Treino"
-                  )}
-                </Button>
-              )}
+                  ▼
+                </Box>
+              </Box>
             </Box>
           </Box>
+
+          <Box
+            sx={{
+              flex: 1,
+              overflowY: "auto",
+              px: 0.5,
+              mt: 1,
+              "&::-webkit-scrollbar": { width: "6px" },
+              "&::-webkit-scrollbar-track": { bgcolor: "transparent" },
+              "&::-webkit-scrollbar-thumb": {
+                bgcolor: colors.primary[400],
+                borderRadius: "10px",
+                "&:hover": { bgcolor: colors.primary[300] },
+              },
+            }}
+          >
+            <Box sx={{ display: "flex", mb: 1, px: 1, gap: 1.5 }}>
+              <Typography
+                variant="caption"
+                sx={{
+                  width: 35,
+                  color: colors.primary[900],
+                  fontWeight: "900",
+                  textAlign: "center",
+                  fontSize: "0.75rem",
+                  letterSpacing: 1,
+                }}
+              >
+                SET
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  flex: 1,
+                  textAlign: "center",
+                  color: colors.primary[900],
+                  fontWeight: "900",
+                  fontSize: "0.75rem",
+                  letterSpacing: 1,
+                }}
+              >
+                ANTERIOR
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  flex: 1,
+                  textAlign: "center",
+                  color: colors.primary[900],
+                  fontWeight: "900",
+                  fontSize: "0.75rem",
+                  letterSpacing: 1,
+                }}
+              >
+                KG
+              </Typography>
+              <Typography
+                variant="caption"
+                sx={{
+                  flex: 1,
+                  textAlign: "center",
+                  color: colors.primary[900],
+                  fontWeight: "900",
+                  fontSize: "0.75rem",
+                  letterSpacing: 1,
+                }}
+              >
+                REPS
+              </Typography>
+              <Box sx={{ width: 88 }} />
+            </Box>
+
+            <Box sx={{ display: "flex", flexDirection: "column", gap: 2 }}>
+              {series.map((serie, index) => (
+                <Box
+                  key={index}
+                  sx={{
+                    display: "flex",
+                    alignItems: "center",
+                    py: 0.5,
+                    px: 1,
+                    gap: 1.5,
+                    bgcolor: serie.completed
+                      ? `${colors.blueAccent[200]}`
+                      : colors.primary[600],
+                    borderRadius: "16px",
+                    border: `2px solid ${serie.completed ? colors.blueAccent[100] : colors.blueAccent[500]}`,
+                    transition: "all 0.3s ease",
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      width: 35,
+                      fontWeight: "900",
+                      color: "#fff",
+                      fontSize: "0.95rem",
+                      textAlign: "center",
+                    }}
+                  >
+                    {index + 1}
+                  </Typography>
+
+                  <Typography
+                    variant="body2"
+                    sx={{
+                      flex: 1,
+                      textAlign: "center",
+                      color: colors.primary[900],
+                      fontWeight: "900",
+                      fontSize: "0.9rem",
+                    }}
+                  >
+                    {getPreviousSetInfo(exercise.id, index).split("kg")[0] ||
+                      "-"}
+                  </Typography>
+
+                  <Box
+                    sx={{ flex: 1, display: "flex", justifyContent: "center" }}
+                  >
+                    <TextField
+                      variant="outlined"
+                      size="small"
+                      placeholder="-"
+                      value={serie.peso ?? ""}
+                      onChange={(e) =>
+                        handleSeriesInputChange(
+                          exercise.id,
+                          index,
+                          "peso",
+                          e.target.value,
+                        )
+                      }
+                      sx={{
+                        width: "100%",
+                        maxWidth: 80,
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: "10px",
+                          bgcolor: colors.primary[500],
+                          height: 40,
+                          "& fieldset": { border: "none" },
+                          "& input": {
+                            textAlign: "center",
+                            fontWeight: "900",
+                            color: colors.primary[900],
+                            p: 0,
+                            fontSize: "1rem",
+                          },
+                        },
+                      }}
+                    />
+                  </Box>
+
+                  <Box
+                    sx={{ flex: 1, display: "flex", justifyContent: "center" }}
+                  >
+                    <TextField
+                      variant="outlined"
+                      size="small"
+                      placeholder="-"
+                      value={serie.repeticoes ?? ""}
+                      onChange={(e) =>
+                        handleSeriesInputChange(
+                          exercise.id,
+                          index,
+                          "repeticoes",
+                          e.target.value,
+                        )
+                      }
+                      sx={{
+                        width: "100%",
+                        maxWidth: 80,
+                        "& .MuiOutlinedInput-root": {
+                          borderRadius: "10px",
+                          bgcolor: colors.primary[500],
+                          height: 40,
+                          "& fieldset": { border: "none" },
+                          "& input": {
+                            textAlign: "center",
+                            fontWeight: "900",
+                            color: colors.primary[900],
+                            p: 0,
+                            fontSize: "1rem",
+                          },
+                        },
+                      }}
+                    />
+                  </Box>
+
+                  <Box sx={{ display: "flex", gap: 1 }}>
+                    <IconButton
+                      size="small"
+                      onClick={() => handleRemoveSerie(exercise.id, index)}
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: "10px",
+                        bgcolor: colors.primary[500],
+                        color: colors.primary[900],
+                        "&:hover": {
+                          bgcolor: "#ff444422",
+                          color: "#ff4444",
+                        },
+                      }}
+                    >
+                      <DeleteIcon sx={{ fontSize: "1.2rem" }} />
+                    </IconButton>
+
+                    <IconButton
+                      onClick={() =>
+                        handleToggleSerieCompleted(exercise.id, index)
+                      }
+                      sx={{
+                        width: 40,
+                        height: 40,
+                        borderRadius: "10px",
+                        bgcolor: serie.completed
+                          ? colors.blueAccent[500]
+                          : colors.primary[500],
+                        color: "#fff",
+                        transition: "all 0.2s cubic-bezier(0.4, 0, 0.2, 1)",
+                        "&:hover": {
+                          bgcolor: serie.completed
+                            ? colors.blueAccent[600]
+                            : colors.primary[400],
+                        },
+                      }}
+                    >
+                      <CheckCircleOutlineIcon sx={{ fontSize: "1.4rem" }} />
+                    </IconButton>
+                  </Box>
+                </Box>
+              ))}
+            </Box>
+          </Box>
+
+          <Button
+            fullWidth
+            startIcon={<AddIcon />}
+            onClick={() => handleAddSerie(exercise.id)}
+            sx={{
+              mt: 0.5,
+              py: 0.4,
+              bgcolor: colors.primary[600],
+              color: "#fff",
+              textTransform: "none",
+              fontWeight: "900",
+              borderRadius: "14px",
+              fontSize: "0.9rem",
+              "&:hover": { bgcolor: colors.primary[400] },
+              border: `1px dashed ${colors.primary[300]}`,
+            }}
+          >
+            Adicionar série
+          </Button>
+        </Paper>
+      </Box>
+
+      <Box sx={{ px: 2, pb: 1.5, flexShrink: 0 }}>
+        <Box sx={{ display: "flex", gap: 1, mb: 1.5 }}>
+          {Array.from({ length: totalExercises }).map((_, i) => (
+            <Box
+              key={i}
+              sx={{
+                height: 5,
+                flex: 1,
+                bgcolor:
+                  i < currentExerciseIndex
+                    ? colors.blueAccent[400]
+                    : colors.primary[600],
+                borderRadius: "2.5px",
+              }}
+            />
+          ))}
+        </Box>
+
+        <Box sx={{ display: "flex", gap: 1.5 }}>
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={handlePrevious}
+            disabled={currentExerciseIndex === 0}
+            sx={{
+              bgcolor: colors.primary[600],
+              color: "#fff",
+              py: 1.8,
+              borderRadius: "14px",
+              fontWeight: "900",
+              fontSize: "0.9rem",
+              textTransform: "none",
+              border: `1px solid ${colors.primary[400]}`,
+              "&:hover": { bgcolor: colors.primary[500] },
+            }}
+          >
+            Anterior
+          </Button>
+
+          <Button
+            variant="contained"
+            fullWidth
+            onClick={
+              currentExerciseIndex === totalExercises - 1
+                ? () => handleSubmit()
+                : handleNext
+            }
+            sx={{
+              bgcolor: colors.blueAccent[400],
+              color: "#fff",
+              py: 1.8,
+              borderRadius: "14px",
+              fontWeight: "900",
+              fontSize: "0.95rem",
+              textTransform: "none",
+              boxShadow: "0 4px 15px rgba(0,0,0,0.3)",
+              "&:hover": { bgcolor: colors.blueAccent[500] },
+            }}
+          >
+            {currentExerciseIndex === totalExercises - 1 ? (
+              <Box sx={{ display: "flex", alignItems: "center", gap: 1 }}>
+                <CheckCircleOutlineIcon sx={{ fontSize: 20 }} />
+                Completar atividade
+              </Box>
+            ) : (
+              "Próximo exercício"
+            )}
+          </Button>
         </Box>
       </Box>
     </Box>
