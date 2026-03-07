@@ -12,7 +12,7 @@ import {
 } from "@mui/material";
 import { useNextTraining } from "../../../../services/querrys/useNextTraining"; // Seu hook existente
 import { tokens } from "../../../../tema";
-import { FaDumbbell, FaClock, FaCalendarAlt } from "react-icons/fa";
+import { FaDumbbell, FaClock, FaCalendarAlt, FaListUl } from "react-icons/fa";
 import img from "../../../../img/supino.jpg";
 import TrainingSessionPage from "./TrainingSessionPage/TrainingSessionPage";
 
@@ -170,7 +170,7 @@ const Treinos: React.FC<TreinosProps> = ({ onSessionStateChange }) => {
         color: "#fff",
         p: { xs: 1, md: 2 },
         bgcolor: "transparent",
-        height: "100vh",
+        height: "100%",
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
@@ -178,28 +178,18 @@ const Treinos: React.FC<TreinosProps> = ({ onSessionStateChange }) => {
     >
       <CssBaseline />
 
-      <Box sx={{ mb: 1, flexShrink: 0 }}>
+      <Box sx={{ mb: 1.5, flexShrink: 0 }}>
         <Typography
-          variant="h5"
+          variant="h6"
           sx={{
             fontWeight: "900",
-            color: "#fff",
-            mb: 0.2,
-            fontSize: { xs: "1.2rem", md: "1.4rem" },
+            color: colors.primary[700],
+            fontSize: { xs: "0.8rem", md: "0.9rem" },
+            textTransform: "uppercase",
+            letterSpacing: 1.5,
           }}
         >
           Próxima Rotina
-        </Typography>
-        <Typography
-          variant="body2"
-          sx={{
-            color: colors.primary[900],
-            fontWeight: "900",
-            letterSpacing: 1,
-            fontSize: "0.65rem",
-          }}
-        >
-          PREPARE SEU CORPO PARA O DESAFIO DE HOJE.
         </Typography>
       </Box>
 
@@ -229,26 +219,28 @@ const Treinos: React.FC<TreinosProps> = ({ onSessionStateChange }) => {
         >
           <Box>
             <Typography
-              variant="h5"
+              variant="h3"
               sx={{
                 fontWeight: "900",
                 color: "#fff",
                 textTransform: "uppercase",
                 letterSpacing: 1,
+                fontSize: { xs: "1.5rem", md: "2rem" },
               }}
             >
               {nextTraining.name}
             </Typography>
             <Typography
-              variant="caption"
+              variant="subtitle2"
               sx={{
-                color: colors.primary[900],
+                color: colors.primary[800],
                 fontWeight: "700",
                 letterSpacing: 0.5,
-                mt: 0.1,
+                mt: 0.5,
+                fontSize: "0.85rem",
               }}
             >
-              PREPARE SEU CORPO PARA O DESAFIO
+              {nextTraining.description || "PREPARE SEU CORPO PARA O DESAFIO"}
             </Typography>
           </Box>
         </Box>
@@ -274,32 +266,23 @@ const Treinos: React.FC<TreinosProps> = ({ onSessionStateChange }) => {
         >
           {/* Main Content (Left) */}
           <Box sx={{ flex: 1.2 }}>
-            <Typography
-              sx={{
-                color: "#fff",
-                mb: 3,
-                lineHeight: 1.6,
-                fontSize: "0.95rem",
-                fontWeight: "600",
-              }}
-            >
-              {nextTraining.description}
-            </Typography>
-
             <Box sx={{ mb: 2 }}>
               <Typography
                 variant="caption"
                 sx={{
                   color: colors.primary[900],
                   fontWeight: "900",
-                  mb: 1,
-                  display: "block",
+                  mb: 1.5,
+                  display: "flex",
+                  alignItems: "center",
+                  gap: 1,
                   textTransform: "uppercase",
                   letterSpacing: 2,
-                  fontSize: "0.65rem",
+                  fontSize: "0.75rem",
                 }}
               >
-                Lista de Exercícios:
+                <FaListUl size={14} />
+                Lista de Exercícios
               </Typography>
               <Box sx={{ display: "flex", flexDirection: "column", gap: 0.7 }}>
                 {nextTraining.exercises.map((ex: any, i: number) => (

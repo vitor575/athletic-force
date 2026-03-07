@@ -254,8 +254,8 @@ const TrainingSessionPage: React.FC<TrainingSessionPageProps> = ({
       onSubmit={handleSubmit}
       sx={{
         bgcolor: colors.primary[500],
-        height: "100vh",
-        width: "70vw",
+        height: "100%",
+        width: "100%",
         display: "flex",
         flexDirection: "column",
         overflow: "hidden",
