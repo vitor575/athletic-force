@@ -82,7 +82,7 @@ const ModalLogin: React.FC<ModalLoginProps> = ({ open, onClose }) => {
           sx={{
             pb: 1,
             borderBottom: `2px solid ${colors.blueAccent[400]}`,
-            color: colors.grey[100],
+            color: colors.primary[900],
             fontWeight: "bold",
           }}
         >
@@ -135,7 +135,7 @@ const ModalLogin: React.FC<ModalLoginProps> = ({ open, onClose }) => {
           onChange={(e) => setEmail(e.target.value)}
           sx={{
             "& .MuiInputBase-input": { color: "white" },
-            "& .MuiInputLabel-root": { color: colors.grey[400] },
+            "& .MuiInputLabel-root": { color: colors.grey[900] },
           }}
         />
 
@@ -150,7 +150,7 @@ const ModalLogin: React.FC<ModalLoginProps> = ({ open, onClose }) => {
           onChange={(e) => setSenha(e.target.value)}
           sx={{
             "& .MuiInputBase-input": { color: "white" },
-            "& .MuiInputLabel-root": { color: colors.grey[400] },
+            "& .MuiInputLabel-root": { color: colors.grey[900] },
           }}
         />
 

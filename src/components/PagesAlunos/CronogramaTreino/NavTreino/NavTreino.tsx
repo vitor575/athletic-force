@@ -4,14 +4,13 @@ import {
   ListItem,
   ListItemButton,
   ListItemText,
-  Paper,
   Box,
   IconButton,
   Typography,
   useTheme,
   Drawer,
 } from "@mui/material";
-import { Link, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import {
   FaDumbbell,
   FaCalendarAlt,
@@ -42,7 +41,7 @@ const TreinoNav = ({
 }: TreinoNavProps) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const [selected, setSelected] = useState("cronograma");
+  const [selected, setSelected] = useState("treinos");
   const [isTraining, setIsTraining] = useState(false);
   const [time, setTime] = useState(0);
   const intervalRef = useRef<any>(null);
@@ -92,7 +91,7 @@ const TreinoNav = ({
         onClick={() => {
           setSelected(key);
           setSelectedSection(key);
-          if (setMobileOpen) setMobileOpen(false); // Close on selection on mobile
+          if (setMobileOpen) setMobileOpen(false);
         }}
         sx={{
           color: "#fff",
@@ -164,7 +163,7 @@ const TreinoNav = ({
             <Box
               component="img"
               src={Logo}
-              sx={{ width: "45px", filter: "brightness(0) invert(1)" }}
+              sx={{ width: "45px", objectFit: "contain", border: `1px solid ${colors.blueAccent[400]}`, borderRadius: "4px" }}
             />
           )}
           {!mobileOpen && (
@@ -245,7 +244,6 @@ const TreinoNav = ({
         </List>
       </Box>
 
-      {/* Bottom Profile Section (Hevy style) */}
       <Box sx={{ p: 2, borderTop: `1px solid ${colors.primary[600]}` }}>
         <Box
           sx={{
@@ -281,7 +279,7 @@ const TreinoNav = ({
                 </Typography>
                 <Typography
                   variant="caption"
-                  sx={{ color: colors.blueAccent[200], fontSize: "0.7rem" }}
+                  sx={{ color: colors.blueAccent[900], fontSize: "0.7rem" }}
                 >
                   Aluno
                 </Typography>
@@ -307,7 +305,6 @@ const TreinoNav = ({
 
   return (
     <>
-      {/* Mobile Drawer */}
       <Drawer
         variant="temporary"
         open={mobileOpen}
@@ -325,7 +322,6 @@ const TreinoNav = ({
         {drawerContent}
       </Drawer>
 
-      {/* Desktop Persistent Sidebar */}
       <Box
         sx={{
           display: { xs: "none", md: "block" },

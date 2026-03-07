@@ -1,9 +1,17 @@
-import { Box, useTheme, Fab, Modal, Typography } from "@mui/material";
+import {
+  Box,
+  useTheme,
+  Fab,
+  Modal,
+  Typography,
+  IconButton,
+} from "@mui/material";
 import { useState } from "react";
 import PersonIcon from "@mui/icons-material/Person";
 import LockIcon from "@mui/icons-material/Lock";
 import { tokens } from "../../tema";
 import NavTreino from "./CronogramaTreino/NavTreino/NavTreino";
+import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import Treinos from "./CronogramaTreino/Treinos/Treinos";
 import Calendario from "./CronogramaTreino/Calendario/Calendario";
 import PerfilAluno from "./ConfigClientPage/PerfilAluno/PerfilAluno";
@@ -35,7 +43,6 @@ const ConfigClientPage = () => {
               bgcolor: colors.primary[500],
             }}
           >
-            {/* Settings Secondary Sidebar */}
             <Box
               sx={{
                 width: 220,
@@ -130,12 +137,17 @@ const ConfigClientPage = () => {
       flexDirection="column"
       sx={{
         bgcolor: colors.primary[500],
-        height: "100vh",
+        height: "100dvh",
         overflow: "hidden",
         position: "relative",
       }}
     >
-      <Box display="flex" flex={1}>
+      <Box
+        display="flex"
+        flexDirection={{ xs: "column", md: "row" }}
+        flex={1}
+        sx={{ height: "100%" }}
+      >
         <NavTreino
           setSelectedSection={setSelectedSection}
           setIsCollapsed={setIsCollapsed}
@@ -144,15 +156,62 @@ const ConfigClientPage = () => {
           setMobileOpen={setMobileOpen}
         />
 
+        {/* Topbar para Mobile */}
+        <Box
+          sx={{
+            display: { xs: "flex", md: "none" },
+            alignItems: "center",
+            justifyContent: "space-between",
+            p: 2,
+            bgcolor: colors.primary[500],
+            borderBottom: `1px solid ${colors.primary[600]}`,
+            flexShrink: 0,
+            width: "100%",
+            zIndex: 1000,
+          }}
+        >
+          <IconButton
+            onClick={() => setMobileOpen(true)}
+            sx={{ color: "#fff" }}
+          >
+            <MenuOutlinedIcon />
+          </IconButton>
+
+          <Typography
+            variant="h6"
+            sx={{
+              fontWeight: "900",
+              color: "#fff",
+              textTransform: "uppercase",
+              letterSpacing: 1,
+            }}
+          >
+            {selectedSection === "treinos"
+              ? "Treinos"
+              : selectedSection === "calendario"
+                ? "Calendário"
+                : "Configurações"}
+          </Typography>
+
+          {/* Espaçador invisível para manter o título centralizado via space-between */}
+          <Box sx={{ width: 40 }} />
+        </Box>
+
         <Box
           flex={1}
           display="flex"
           flexDirection="column"
+          alignItems="center"
           padding={0}
           position="relative"
-          sx={{ overflow: "hidden", height: "100%" }}
+          sx={{
+            overflow: "hidden",
+            height: { xs: "calc(100vh - 65px)", md: "100%" },
+          }}
         >
-          {renderContent()}
+          <Box sx={{ width: "100%", maxWidth: "1200px", height: "100%" }}>
+            {renderContent()}
+          </Box>
 
           {/* Botão Redondo */}
           <Fab
